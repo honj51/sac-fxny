@@ -1,0 +1,5 @@
+D:\XNYSource\SACSIS.root\SACSIS\SAC.Helper\bin\Debug\SAC.Helper.dll
+D:\XNYSource\SACSIS.root\SACSIS\SAC.Helper\bin\Debug\SAC.Helper.pdb
+D:\XNYSource\SACSIS.root\SACSIS\SAC.Helper\obj\Debug\ResolveAssemblyReference.cache
+D:\XNYSource\SACSIS.root\SACSIS\SAC.Helper\obj\Debug\SAC.Helper.dll
+D:\XNYSource\SACSIS.root\SACSIS\SAC.Helper\obj\Debug\SAC.Helper.pdb

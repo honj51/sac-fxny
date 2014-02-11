@@ -1,0 +1,11 @@
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\obj\Debug\ResolveAssemblyReference.cache
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\bin\SACSIS.dll
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\bin\SACSIS.pdb
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\bin\BLL.dll
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\bin\DAL.dll
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\bin\SAC.Helper.dll
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\bin\BLL.pdb
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\bin\DAL.pdb
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\bin\SAC.Helper.pdb
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\obj\Debug\SACSIS.dll
+D:\XNYSource\SACSIS.root\SACSIS\SACSIS\obj\Debug\SACSIS.pdb

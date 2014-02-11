@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rquuest>
+  <parment id="10001" name="总公司" pId="0" fullname="总公司" />
+  <parment id="10002" name="玫瑰营公司" pId="10001" fullname="玫瑰营公司" /> 
+</rquuest>

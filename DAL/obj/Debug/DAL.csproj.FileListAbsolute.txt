@@ -1,0 +1,9 @@
+D:\XNYSource\SACSIS.root\SACSIS\DAL\bin\Debug\DAL.dll
+D:\XNYSource\SACSIS.root\SACSIS\DAL\bin\Debug\DAL.pdb
+D:\XNYSource\SACSIS.root\SACSIS\DAL\bin\Debug\SAC.Helper.dll
+D:\XNYSource\SACSIS.root\SACSIS\DAL\bin\Debug\SAC.Helper.pdb
+D:\XNYSource\SACSIS.root\SACSIS\DAL\obj\Debug\ResolveAssemblyReference.cache
+D:\XNYSource\SACSIS.root\SACSIS\DAL\obj\Debug\DAL.dll
+D:\XNYSource\SACSIS.root\SACSIS\DAL\obj\Debug\DAL.pdb
+D:\XNYSource\SACSIS.root\SACSIS\DAL\obj\Debug\Interop.PiLink.dll
+D:\XNYSource\SACSIS.root\SACSIS\DAL\obj\Debug\DAL.csproj.ResolveComReference.cache

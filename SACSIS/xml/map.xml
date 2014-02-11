@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rquuest>
+  <parment id="10001" name="福新公司" pId="0" fullname="总公司" type="风电" x="" y=""/>
+  <parment id="10002" name="玫瑰营公司" pId="10001" fullname="玫瑰营公司" type="风电"  x="" y=""/>
+  <parment id="MGYYQ-YQ" name="玫瑰营一期" pId="10002" fullname="玫瑰营公司"  type="风电" x="41.046213888889" y="113.39663333333"/>
+  <parment id="MGYEQ-EQ" name="玫瑰营二期" pId="10002" fullname="玫瑰营公司"  type="风电" x="41.046213888889" y="113.47663333333"/>
+  <parment id="SDFDC-QB" name="三胜风场" pId="10002" fullname="玫瑰营公司"  type="风电" x="41.5812" y="113.5943"/>
+  <parment id="FLDFDC-QB" name="富丽达风场" pId="10002" fullname="玫瑰营公司"  type="风电" x="41.1618020" y="113.3210650"/>
+</rquuest>
