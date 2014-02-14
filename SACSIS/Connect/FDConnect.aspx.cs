@@ -32,10 +32,12 @@ namespace SACSIS.Connect
             string tag = string.Empty;
             //标题
             string name =string.Empty;//(或各区域)
+            //区域名
             string area = string.Empty;
+            //场站名
             string periodName = string.Empty;
+            //机组id
             string idKey = string.Empty;
-            //返回地址
             if (!string.IsNullOrEmpty(Request["tag"]))
             {
                 tag = Request["tag"].ToString();
@@ -72,8 +74,8 @@ namespace SACSIS.Connect
             {
                 idKey = Request["idKey"].ToString();
             }
-            url = ".."+Request.Url.AbsolutePath;
-
+            //返回路径
+            url = Request.UrlReferrer.AbsoluteUri;
             string para = Request["para"];
             if (!string.IsNullOrEmpty(para))
             {
