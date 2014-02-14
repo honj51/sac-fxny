@@ -106,7 +106,7 @@
                 area = $(t).attr("area");
             }
             //加载数据
-            window.location.href = "../Connect/FDConnect.aspx?tag=2&type=" + type + "&area=" + area;
+            window.location.href = "../Connect/FDConnect.aspx?tag=2&type=" + type + "&area=" + area + "&periodName=" + periodName;
         }
         //弹出风机的信息图
         function tc(a) {

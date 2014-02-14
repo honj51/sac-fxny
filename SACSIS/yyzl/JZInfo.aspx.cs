@@ -177,7 +177,7 @@ namespace SACSIS
                     //double rowspan = Math.Ceiling((double)dtUnits.Rows.Count / double.Parse(colrow.ToString()));
 
                     //出力合并行
-                    str += "<td style='text-align:left' rowspan=\"" + rowspans + "\"><a type='3' area='" + dtNames.Rows[jj][0].ToString() + "' href='#' onclick='next(this)'>" + dtNames.Rows[jj][0].ToString() + "</a></td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion[dtNames.Rows[jj][0].ToString()], 3) + "</td>";
+                    str += "<td style='text-align:left' rowspan=\"" + rowspans + "\"><a type='3' area='" + dtNames.Rows[jj]["T_AREA"].ToString() + "' href='#' onclick='next(this)'>" + dtNames.Rows[jj][0].ToString() + "</a></td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion[dtNames.Rows[jj][0].ToString()], 3) + "</td>";
 
 
 
