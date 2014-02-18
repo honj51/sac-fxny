@@ -21,9 +21,21 @@ function gets(j, t, y, v) {
             }
         },
         plotOptions: {
+            spline: {
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                marker: {
+                    enabled: false
+                }
+            },
+
             series: {
                 marker: {
-                    radius: 1,  //曲线点半径，默认是4
+                    radius: 0.5,  //曲线点半径，默认是4
                     symbol: 'circle' //曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                 },
                 cursor: 'pointer'
@@ -92,6 +104,7 @@ function display(t,y,v) {
             }
         },
         plotOptions: {
+         
             series: {
                 marker: {
                     radius: 1,  //曲线点半径，默认是4

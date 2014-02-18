@@ -314,10 +314,10 @@
                         },
                         plotOptions: {
                             spline: {
-                                lineWidth: 2,
+                                lineWidth: 0.5,
                                 states: {
                                     hover: {
-                                        lineWidth: 3
+                                        lineWidth: 0.5
                                     }
                                 },
                                 marker: {
@@ -459,10 +459,10 @@
                         },
                         plotOptions: {
                             spline: {
-                                lineWidth: 2,
+                                lineWidth: 0.5,
                                 states: {
                                     hover: {
-                                        lineWidth: 3
+                                        lineWidth: 0.5
                                     }
                                 },
                                 marker: {
@@ -603,10 +603,10 @@
                         },
                         plotOptions: {
                             spline: {
-                                lineWidth: 2,
+                                lineWidth: 0.5,
                                 states: {
                                     hover: {
-                                        lineWidth: 3
+                                        lineWidth: 0.5
                                     }
                                 },
                                 marker: {
@@ -808,10 +808,10 @@
                 },
                 plotOptions: {
                     spline: {
-                        lineWidth: 2,
+                        lineWidth: 0.5,
                         states: {
                             hover: {
-                                lineWidth: 3
+                                lineWidth: 0.5
                             }
                         },
                         marker: {
@@ -960,10 +960,10 @@
                 },
                 plotOptions: {
                     spline: {
-                        lineWidth: 2,
+                        lineWidth: 0.5,
                         states: {
                             hover: {
-                                lineWidth: 3
+                                lineWidth: 0.5
                             }
                         },
                         marker: {
@@ -1112,10 +1112,10 @@
                 },
                 plotOptions: {
                     spline: {
-                        lineWidth: 2,
+                        lineWidth: 0.5,
                         states: {
                             hover: {
-                                lineWidth: 3
+                                lineWidth: 0.5
                             }
                         },
                         marker: {
