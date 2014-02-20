@@ -10,22 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{835805E4-6A5D-4252-BD22-B30388ABF37A}"
 EndProject
 Global
-	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 5
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = BLL\\BLL.csproj
-		SccProjectName1 = \u0022$/SACSIS.root/SACSIS/BLL\u0022,\u0020ILEAAAAA
-		SccLocalPath1 = BLL
-		SccProjectUniqueName2 = DAL\\DAL.csproj
-		SccProjectName2 = \u0022$/SACSIS.root/SACSIS/DAL\u0022,\u0020WLEAAAAA
-		SccLocalPath2 = DAL
-		SccProjectUniqueName3 = SAC.Helper\\SAC.Helper.csproj
-		SccProjectName3 = \u0022$/SACSIS.root/SACSIS/SAC.Helper\u0022,\u0020MNEAAAAA
-		SccLocalPath3 = SAC.Helper
-		SccProjectUniqueName4 = SACSIS\\SACSIS.csproj
-		SccProjectName4 = \u0022$/SACSIS.root/SACSIS/SACSIS\u0022,\u0020WNEAAAAA
-		SccLocalPath4 = SACSIS
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

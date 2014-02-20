@@ -13,10 +13,14 @@
     <RootNamespace>SACSIS</RootNamespace>
     <AssemblyName>SACSIS</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -37,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=3.5.40412.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.JScript" />
     <Reference Include="Newtonsoft.Json">
@@ -97,6 +102,7 @@
     <Content Include="FdConnect.aspx" />
     <Content Include="Form\AllProjectTable.aspx" />
     <Content Include="Form\CZMAP.aspx" />
+    <Content Include="Form\ElectrifiedRate.aspx" />
     <Content Include="Form\FLDMAP.aspx" />
     <Content Include="Form\GoogleMapWin.aspx" />
     <Content Include="Form\Map.aspx" />
@@ -952,6 +958,7 @@
     </Compile>
     <Compile Include="FdConnect.aspx.cs">
       <DependentUpon>FdConnect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FdConnect.aspx.designer.cs">
       <DependentUpon>FdConnect.aspx</DependentUpon>
@@ -969,6 +976,13 @@
     </Compile>
     <Compile Include="Form\CZMAP.aspx.designer.cs">
       <DependentUpon>CZMAP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ElectrifiedRate.aspx.cs">
+      <DependentUpon>ElectrifiedRate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\ElectrifiedRate.aspx.designer.cs">
+      <DependentUpon>ElectrifiedRate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\FLDMAP.aspx.cs">
       <DependentUpon>FLDMAP.aspx</DependentUpon>
