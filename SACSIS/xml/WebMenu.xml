@@ -5,9 +5,9 @@
 
   <parment id="10001" name="生产总览" pId="0" order="0" visible="1" owner=",1,2," FileName="../MainConnect.aspx" />
   <parment id="10002" name="场站总览" pId="0" order="0" visible="1" owner=",1,2," FileName="../Form/AllProjectTable.aspx" />
-  <parment id="10003" name="场站网络监测" pId="0" order="0" visible="1" owner=",1,2," FileName="../PDI/WLJC.aspx" />
-  <parment id="10004" name="通电率报表" pId="0" order="0" visible="1" owner=",1,2," FileName="../PDI/WLJC.aspx" />
-
+  <parment id="10003" name="场站网络监测" pId="0" order="0" visible="1" owner=",1,2," FileName="../PDI/WLJC.aspx" >
+  <parment id="10004" name="通断率报表" pId="0" order="0" visible="1" owner=",1,2," FileName="../PDI/WLJC.aspx" />
+  </parment>
   <parment id="1" name="风电" pId="00" order="1" visible="1" owner=",1,2," FileName="" />
   <parment id="2" name="光伏" pId="00" order="2" visible="1" owner=",1,2," FileName="../yyzl/JZInfo.aspx?dataType=tyn" />
   <parment id="3" name="水电" pId="00" order="3" visible="1" owner=",1,2," FileName="../yyzl/JZInfo.aspx?dataType=sd" />
