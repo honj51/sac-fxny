@@ -1862,16 +1862,18 @@
                     $("#txt_" + (i + 1)).val(list[i].ID);
                     $("#sp_" + (i + 1)).attr("url", list[i].URL);
                     //表示全公司
-                    if (list[i].PID == "0") {
-                        $("#img_" + (i + 1)).css("display", "none");
-                        //if (id == 10001 || id == 10002 || id == 10003) {
-                        //                            $("#dv_1_1").css("display", "none");
-                        //                            $("#dv_2_1").css("display", "none");
-                        //                            $("#dv_3_1").css("display", "none");
-                        //}
+//                    if (list[i].PID == "0") {
+//                        $("#img_" + (i + 1)).css("display", "none");
+//                        //if (id == 10001 || id == 10002 || id == 10003) {
+//                        //                            $("#dv_1_1").css("display", "none");
+//                        //                            $("#dv_2_1").css("display", "none");
+//                        //                            $("#dv_3_1").css("display", "none");
+//                        //}
+//                        tag = 1;
+                    if (list[i].PID == "10001" || list[i].PID == "10002" || list[i].PID == "10004" || list[i].PID == "10005") {
                         tag = 1;
-
-                    }
+                        }
+//                    }
                     $("#dv_" + (i + 1)).show();
                 }
             }, 'json');
