@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SAC.DBOperations;
 using System.Collections;
+using System.Data;
+using BLL;
 
 namespace SACSIS.Form
 {
@@ -13,6 +15,7 @@ namespace SACSIS.Form
     {
         DBLink dl = new DBLink();
         string errMsg = "";
+        PointBLL pbll = new PointBLL();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,6 +34,7 @@ namespace SACSIS.Form
         /// </summary>
         public void init()
         {
+            #region  各产业装机容量比率
             //获得各产业装机容量
             double FDRL = GetRl("2", "FDRL");
             double HDRL = GetRl("2", "HDRL");
@@ -86,9 +90,71 @@ namespace SACSIS.Form
 
             //装机比率
             string zjBl = Newtonsoft.Json.JsonConvert.SerializeObject(listData);
+            #endregion
+
+            #region 年发电量比率
+
+            // 年发电量 产业年发电量
+            double FDYDL = GetDlFh("'风电'", "YEARDL", "");
+            double HDYDL = GetDlFh("'火电'", "YEARDL", "");
+            double SDYDL = GetDlFh("'水电'", "YEARDL", "");
+            double TYNYDL = GetDlFh("'太阳能'", "YEARDL", "");
+            double FBSYDL = GetDlFh("'分布式'", "YEARDL", "");
+            double SRZYDL = GetDlFh("'生物质'", "YEARDL", "");
+
+            listData = new ArrayList();
+            htData = new Hashtable();
+
+            //风电
+            htData.Add("y", FDYDL);
+            htData.Add("name", "风电");
+            htData.Add("color", "#058DC7");
+            listData.Add(htData);
+
+            //火电
+            htData = new Hashtable();
+            htData.Add("y", HDYDL);
+            htData.Add("name", "火电");
+            htData.Add("color", "#50B432");
+            listData.Add(htData);
+
+            //水电
+            htData = new Hashtable();
+            htData.Add("y", SDYDL);
+            htData.Add("name", "水电");
+            htData.Add("color", "#ED561B");
+            listData.Add(htData);
+
+            //太阳能
+            htData = new Hashtable();
+            htData.Add("y", TYNYDL);
+            htData.Add("name", "太阳能");
+            htData.Add("color", "#DDDF00");
+            listData.Add(htData);
+
+            //分布式
+            htData = new Hashtable();
+            htData.Add("y", FBSYDL);
+            htData.Add("name", "分布式");
+            htData.Add("color", "#24CBE5");
+            listData.Add(htData);
+
+            //生物质
+            htData = new Hashtable();
+            htData.Add("y", SRZYDL);
+            htData.Add("name", "生物质");
+            htData.Add("color", "#64E572");
+            listData.Add(htData);
+
+            //发电量比率
+            string fdlBl = Newtonsoft.Json.JsonConvert.SerializeObject(listData);
+
+            #endregion
+
             object obj = new
             {
-                zjBl = zjBl
+                zjBl = zjBl,
+                fdlBl = fdlBl
             };
             string result = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
             Response.Write(result);
@@ -123,5 +189,129 @@ namespace SACSIS.Form
             else
                 return double.Parse(obj.ToString());
         }
+
+        //根据产业获得总电量和负荷
+        private double GetDlFh(string cye, string cName, string time)
+        {
+            string sql = string.Empty;
+            string searchTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
+            string[] zfh = new string[] { "HDXN:00CC0001" };
+            if (time != "")
+                searchTime = time;
+
+            sql = "SELECT DISTINCT " + cName + " FROM ADMINISTRATOR.T_INFO_UNIT where data_type in (" + cye + ")";
+            DataTable dt = dl.RunDataTable(sql, out errMsg);
+            string[] tags = new string[dt.Rows.Count];
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                tags[i] = dt.Rows[i][0].ToString();
+            }
+
+            double[] tagValues = null;
+            if (cye == "'总负荷'")
+                tagValues = pbll.GetPointVal(zfh, searchTime);
+            else
+                tagValues = GetPointVal(tags, searchTime);
+
+            if (tagValues.Length < 1)
+                return 0;
+            return Math.Round(tagValues.Where(a => a > 0).Sum(), 2);
+        }
+
+        public double[] GetPointVal(string[] points, string time)
+        {
+            string[] kw = new string[] { "XCHP.1.00CE30017", "HTXL.00CE30001", "KLFD:1.00CE30001", "BEJP:00CE30001", "XCH2:00CC0001", "XCHP.3.00CE30019", "BERP.1.00CE30001" };
+            string[] mw = new string[] { "LNTL:00CC0001", "DBHL:00CC0001", "JSGY.1.00CC0001", "SXGL:1.00CE30001", "CCFD:00CE30001", "MGYP:00CE30001", "MGYP:00CC0001", "SYFD:00CE30001", "NMSP:00CE30001", "JJFD:00CE30001", "NTWP:00CE30001" };
+            string[] wkw = new string[] { "DAYQ:00CE30001", "DAEQ:00CE30001", "JYGP:00CE30001", "GZFD:1.00CE30001", "YMFD:1.00CE30001", "AKSP:1.00CE30001", "ZSCB:00CE30001", "FLDP:00CE30001", "DBCP:00CE30001", "QLGS:00CE30001", "HNJP:00CC0001", "HNEQ:00CE30001", "TLEQ:00CE30001", "JTFP:1.00CE30001", "YLEQ:00CE30001", "NMQT:00CE30001", "QSFD:00CE30001", "GLSQ:00CC0001" };
+            double[] val = new double[points.Length];
+            double v = 0;
+            DataTable dtPoints = dl.RunDataTable("SELECT T_POINT,T_VALUE FROM ADMINISTRATOR.T_INFO_VALUE", out errMsg);
+            DataRow[] drPoint = null;
+            for (int i = 0; i < points.Length; i++)
+            {
+                drPoint = dtPoints.Select("T_POINT='" + points[i] + "'");
+                if (drPoint.Count() < 1)
+                    v = 0;
+                else
+                    v = double.Parse(drPoint[0]["T_VALUE"].ToString());
+
+                if (v == -100000)
+                    v = 0;
+
+
+                if (kw.Contains(points[i]))
+                    v = v / 1000;
+                //if (mw.Contains(points[i]))
+                //    v = v / 10000;
+                if (wkw.Contains(points[i]))
+                    v = v * 10;
+
+                if (points[i] == "BERP.1.00CE30001")
+                    v = v / 1000;
+
+                v = getDouble(v, 2);
+
+                val[i] = v;
+            }
+            return val;
+        }
+
+        #region 四舍五入
+        /// <summary>
+        /// 四舍五入
+        /// </summary>
+        /// <param name="result">要转换的数值</param>
+        /// <param name="num">保留位数</param>
+        /// <returns></returns>
+        public double getDouble(double result, int num)
+        {
+            string res = result.ToString();
+            string results = "";
+            int index = res.IndexOf('.');
+
+            if (res.Length - index == num + 1)
+                return Convert.ToDouble(res);
+            else
+            {
+                if (index > 0)
+                {
+                    index += num;
+                    res = res + "000000000000000000";
+                    res = res.Remove(0, index + 1);
+                    results = result + "000000000000000000";
+                    results = results.ToString().Substring(0, index + 1);
+                    res = res.Substring(0, 1);
+
+                    string point = "0.";
+
+                    for (int count = 0; count < num - 1; count++)
+                    {
+                        point += "0";
+                    }
+                    point += "1";
+
+
+                    if (Convert.ToInt32(res) > 4)
+                    {
+                        results = (Convert.ToDouble(results) + Convert.ToDouble(point)).ToString();
+                        res = results;
+                    }
+                    else
+                    {
+                        res = results;
+                    }
+                }
+                else
+                {
+                    res += ".";
+                    for (int i = 0; i < num; i++)
+                    {
+                        res += "0";
+                    }
+                }
+                return Convert.ToDouble(res);
+            }
+        }
+        #endregion
     }
 }

@@ -180,71 +180,58 @@
                         }
                     });
 
-                    //                    //发电量比率
-                    //                    $('#DivFDLBL').highcharts({
-                    //                        chart: {
-                    //                            plotBackgroundColor: null,
-                    //                            plotBorderWidth: null,
-                    //                            plotShadow: false,
-                    //                            margin: [5, 80, 5, 5]
-                    //                        },
-                    //                        title: {
-                    //                            align: 'left',
-                    //                            text: '机组状态',
-                    //                            style:
-                    //                        {
-                    //                            color: '#3E576F',
-                    //                            fontSize: '14px',
-                    //                            fontFamily: '微软雅黑'
-                    //                        }
-                    //                        },
-                    //                        tooltip: {
-                    //                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
-                    //                            percentageDecimals: 1
-                    //                        },
-                    //                        plotOptions: {
-                    //                            pie: {
-                    //                                allowPointSelect: true,
-                    //                                cursor: 'pointer',
-                    //                                dataLabels: {
-                    //                                    enabled: false
-                    //                                },
-                    //                                showInLegend: true
-                    //                            }
-                    //                        },
-                    //                        series: [{
-                    //                            type: 'pie',
-                    //                            name: '台数占比',
-                    //                            data: [{
-                    //                                y: json.mgy1yxts + json.mgy2yxts + json.fldyxts + json.ssyxts,
-                    //                                name: '运行',
-                    //                                color: '#0BAD00'
-                    //                            }, {
-                    //                                y: json.mgy1tjts + json.mgy2tjts + json.fldtjts + json.sstjts,
-                    //                                name: '停机',
-                    //                                color: '#CCCF00'
-                    //                            }, {
-                    //                                y: json.mgy1zts + json.mgy2zts + json.fldzts + json.sszts - json.mgy1yxts - json.mgy2yxts - json.fldyxts - json.ssyxts - json.mgy1tjts - json.mgy2tjts - json.fldtjts - json.sstjts,
-                    //                                name: '故障',
-                    //                                color: 'red'
-                    //                            }
-                    //                        ]
-                    //                        }],
-                    //                        exporting: {
-                    //                            enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
-                    //                        },
-                    //                        legend: {
-                    //                            layout: 'vertical',
-                    //                            align: 'right',
-                    //                            itemStyle: {
-                    //                                cursor: 'pointer',
-                    //                                color: 'black',
-                    //                                fontSize: '14px',
-                    //                                fontFamily: '微软雅黑'
-                    //                            },
-                    //                            verticalAlign: 'middle'
-                    //                        }
-                    //                    });
+                                        //发电量比率
+                                        $('#DivFDLBL').highcharts({
+                                            chart: {
+                                                plotBackgroundColor: null,
+                                                plotBorderWidth: null,
+                                                plotShadow: false,
+                                                margin: [5, 80, 5, 5]
+                                            },
+                                            title: {
+                                                align: 'left',
+                                                text: '发电量比率',
+                                                style:
+                                            {
+                                                color: '#3E576F',
+                                                fontSize: '14px',
+                                                fontFamily: '微软雅黑'
+                                            }
+                                            },
+                                            tooltip: {
+                                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br />发电量:<b>{point.y}<b>',
+                                                percentageDecimals: 1
+                                            },
+                                            plotOptions: {
+                                                pie: {
+                                                    allowPointSelect: true,
+                                                    cursor: 'pointer',
+                                                    dataLabels: {
+                                                        enabled: false
+                                                    },
+                                                    showInLegend: true
+                                                }
+                                            },
+                                            series: [{
+                                                type: 'pie',
+                                                name: '发电量比率',
+                                                data: $.parseJSON(data.fdlBl)
+                                            }],
+                                            exporting: {
+                                                enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+                                            },
+                                            legend: {
+                                                layout: 'vertical',
+                                                align: 'right',
+                                                itemStyle: {
+                                                    cursor: 'pointer',
+                                                    color: 'black',
+                                                    fontSize: '14px',
+                                                    fontFamily: '微软雅黑'
+                                                },
+                                                verticalAlign: 'middle'
+                                            }
+                                        });
                 }
             })
         }
