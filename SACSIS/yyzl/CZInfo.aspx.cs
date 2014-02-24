@@ -47,7 +47,8 @@ namespace SACSIS
         /// </summary>
         private void LoadData()
         {
-            sql = @"select * from ADMINISTRATOR.T_BASE_ORG";
+            //sql = @"select * from ADMINISTRATOR.T_BASE_ORG";
+            sql = @"select * from ADMINISTRATOR.T_BASE_COMPANY";
             DataTable dt = dl.RunDataTable(sql, out errMsg);
 
             //把信息加载到czInfo类中
@@ -94,61 +95,75 @@ namespace SACSIS
             htmlTable.Append("<table cellSpacing='0' cellPadding='0' width ='1200px'  border='1'>");
             //标题行
            // string strTitle = @"<tr><td rowspan='2' style='width:130px'>风电场</td><td colspan='2' style='width:60px'>装机情况</td><td colspan='4' >出力情况</td><td colspan='10' >电量情况</td><td colspan='8'>机组运行状态</td></tr>  <tr><td style='width:60px'>装机容量</td><td style='width:60px'>机型</td><td style='width:60px'>风速</td><td style='width:60px'>功率</td><td style='width:120px'>出力率</td><td style='width:60px'>限负荷</td><td style='width:60px'>日电量</td>    <td style='width:60px'>日等效利用小时</td>    <td style='width:60px'>月电量</td>    <td style='width:60px'>月计划</td>    <td style='width:120px'>月完成率</td>    <td style='width:60px'>月等效利用小时</td>    <td style='width:60px'>年累计</td>    <td style='width:60px'>年计划</td>    <td style='width:120px'>年完成率</td>    <td style='width:60px'>年等效利用小时</td>    <td style='width:60px'>总台数</td>    <td style='width:60px'>运行</td>    <td style='width:60px'>计划检修</td>    <td style='width:60px'>故障</td><td style='width:60px'>待机</td><td style='width:120px'>机组故障率</td><td style='width:60px'>机组状态排名</td><td style='width:60px'>出力率排名</td>  </tr> ";
-            string strTitle = @"<tr><td rowspan='2' style='width:130px'>风电场</td><td colspan='2' style='width:60px'>装机情况</td><td colspan='4' >出力情况</td><td colspan='10' >电量情况</td><td colspan='8'>机组运行状态</td></tr>  <tr><td style='width:60px'>装机容量</td><td style='width:60px'>机型</td><td style='width:60px'>风速</td><td style='width:60px'>功率</td><td style='width:110px'>出力率</td> <td style='width:60px'>日电量</td>    <td style='width:60px'>日等效利用小时</td>    <td style='width:60px'>月电量</td>    <td style='width:60px'>月计划</td>    <td style='width:110px'>月完成率</td>    <td style='width:60px'>月等效利用小时</td>    <td style='width:60px'>年累计</td>    <td style='width:60px'>年计划</td>    <td style='width:110px'>年完成率</td>    <td style='width:60px'>年等效利用小时</td>    <td style='width:60px'>总台数</td>    <td style='width:35px'>运行</td>  <td style='width:35px'>故障</td><td style='width:35px'>待机</td><td style='width:60px'>出力率排名</td>  </tr> ";
+            string strTitle = @"<tr><td rowspan='2' style='width:80px'>区域</td><td rowspan='2' style='width:100px'>风电场</td><td colspan='2' style='width:60px'>装机情况</td><td colspan='4' >出力情况</td><td colspan='10' >电量情况</td><td colspan='8'>机组运行状态</td></tr>  <tr><td style='width:60px'>装机容量</td><td style='width:60px'>机型</td><td style='width:40px'>风速</td><td style='width:40px'>功率</td><td style='width:110px'>出力率</td> <td style='width:40px'>日电量</td>    <td style='width:40px'>日等效利用小时</td>    <td style='width:40px'>月电量</td>    <td style='width:60px'>月计划</td>    <td style='width:110px'>月完成率</td>    <td style='width:40px'>月等效利用小时</td>    <td style='width:40px'>年累计</td>    <td style='width:40px'>年计划</td>    <td style='width:110px'>年完成率</td>    <td style='width:40px'>年等效利用小时</td>    <td style='width:40px'>总台数</td>    <td style='width:35px'>运行</td>  <td style='width:35px'>故障</td><td style='width:35px'>待机</td><td style='width:60px'>出力率排名</td>  </tr> ";
 
             string strTr = "";
-
+            //区域数
+            List<string> areaName = czxxList.Select(d => d.区域).Distinct().ToList();
+            List<czInfo> tmp = czxxList;
             _cll = new double[czxxList.Count];
             _ywcl = new double[czxxList.Count];
             _nwcl = new double[czxxList.Count];
             _jzgzl = new double[czxxList.Count];
-            for (int z = 0; z < czxxList.Count; z++)
-            { 
-                //onMouseOver="this.className='over';" onMouseOut="this.className='out';"
-                strTr += "<tr style='display:inline;' T_ORGID='" + czxxList[z].T_ORGID + "'";
-                if (czxxList[z].T_PERIODID != null)
+            foreach (string area in areaName)
+            {
+                czxxList = tmp.Where(t => t.区域 == area).ToList();
+                for (int z = 0; z < czxxList.Count; z++)
                 {
-                    strTr += "T_PERIODID='" + czxxList[z].T_PERIODID + "'>";
-                    strTr += "<td style='text-align:left;'>&nbsp;" + czxxList[z].风电场 + "</td>";
-                }
-                else
-                {
-                    // strTr += " T_PERIODID='' onclick='HidenShowTr(this)' onMouseOver='MouseAct(this,1);' onMouseOut='MouseAct(this,2);'>";
-                    strTr += " T_PERIODID='' onclick='HidenShowTr(this)'>";
-                    strTr += "<td style='text-align:left;'><img id='" + czxxList[z].T_ORGID+ "_img' src='../img/bg10.png'>&nbsp;" + czxxList[z].风电场 + "</td>";
-                }
+                    //onMouseOver="this.className='over';" onMouseOut="this.className='out';"
+                    strTr += "<tr style='display:inline;' T_ORGID='" + czxxList[z].T_ORGID + "'";
+                  
+                    if (czxxList[z].T_PERIODID != null)
+                    {
+                        strTr += "T_PERIODID='" + czxxList[z].T_PERIODID + "'>";
+                        if (z == 0)
+                        {
+                            strTr += "<td style='text-align:left;' rowspan='" + czxxList.Count + "'>&nbsp;" + area + "</td>";
+                        }
+                        strTr += "<td style='text-align:left;'>&nbsp;" + czxxList[z].风电场 + "</td>";
+                    }
+                    else
+                    {
+                        // strTr += " T_PERIODID='' onclick='HidenShowTr(this)' onMouseOver='MouseAct(this,1);' onMouseOut='MouseAct(this,2);'>";
+                        strTr += " T_PERIODID='' onclick='HidenShowTr(this)'>";
+                        if (z == 0)
+                        {
+                            strTr += "<td style='text-align:left;' rowspan='"+czxxList.Count+"'>&nbsp;" + area + "</td>";
+                        }
+                        strTr += "<td style='text-align:left;'><img id='" + czxxList[z].T_ORGID + "_img' src='../img/bg10.png'>&nbsp;" + czxxList[z].风电场 + "</td>";
+                    }
 
-                strTr += "<td>" + czxxList[z].装机容量 + "</td>";
-                strTr += "<td>" + czxxList[z].机型 + "</td>";
-                strTr += "<td>" + czxxList[z].风速 + "</td>";
-                strTr += "<td>" + czxxList[z].功率 + "</td>";
-                _cll[z] = czxxList[z].出力率;
-                strTr += "<td><div id='cll_" + z + "'></div></td>";
-                //strTr += "<td>" + czxxList[z].限负荷 + "</td>";
-                strTr += "<td>" + czxxList[z].日电量 + "</td>";
-                strTr += "<td>" + czxxList[z].日等效利用小时 + "</td>";
-                strTr += "<td>" + czxxList[z].月电量 + "</td>";
-                strTr += "<td>" + czxxList[z].月计划 + "</td>";
-                _ywcl[z] = czxxList[z].月完成率;
-                strTr += "<td><div id='ywcl_" + z + "'></div></td>";
-                strTr += "<td>" + czxxList[z].月等效利用小时 + "</td>";
-                strTr += "<td>" + czxxList[z].年电量 + "</td>";
-                strTr += "<td>" + czxxList[z].年计划 + "</td>";
-                _nwcl[z] = czxxList[z].年完成率;
-                strTr += "<td><div id='nwcl_" + z + "'></div></td>";
-                strTr += "<td>" + czxxList[z].年等效利用小时 + "</td>";
-                strTr += "<td>" + czxxList[z].总台数 + "</td>";
-                strTr += "<td>" + czxxList[z].运行 + "</td>";
-                //strTr += "<td>" + czxxList[z].计划检修 + "</td>";
-                strTr += "<td>" + czxxList[z].故障 + "</td>";
-                strTr += "<td>" + czxxList[z].待机 + "</td>";
-                //_jzgzl[z] = czxxList[z].机组故障率;
-                //strTr += "<td><div id='jzgzl_" + z + "'></div></td>";
-                //strTr += "<td>" + czxxList[z].机组状态排名 + "</td>";
-                strTr += "<td>" + czxxList[z].出力率排名 + "</td>";
-                strTr += "</tr>";
+                    strTr += "<td>" + czxxList[z].装机容量 + "</td>";
+                    strTr += "<td>" + czxxList[z].机型 + "</td>";
+                    strTr += "<td>" + czxxList[z].风速 + "</td>";
+                    strTr += "<td>" + czxxList[z].功率 + "</td>";
+                    _cll[z] = czxxList[z].出力率;
+                    strTr += "<td><div id='cll_" + z + "'></div></td>";
+                    //strTr += "<td>" + czxxList[z].限负荷 + "</td>";
+                    strTr += "<td>" + czxxList[z].日电量 + "</td>";
+                    strTr += "<td>" + czxxList[z].日等效利用小时 + "</td>";
+                    strTr += "<td>" + czxxList[z].月电量 + "</td>";
+                    strTr += "<td>" + czxxList[z].月计划 + "</td>";
+                    _ywcl[z] = czxxList[z].月完成率;
+                    strTr += "<td><div id='ywcl_" + z + "'></div></td>";
+                    strTr += "<td>" + czxxList[z].月等效利用小时 + "</td>";
+                    strTr += "<td>" + czxxList[z].年电量 + "</td>";
+                    strTr += "<td>" + czxxList[z].年计划 + "</td>";
+                    _nwcl[z] = czxxList[z].年完成率;
+                    strTr += "<td><div id='nwcl_" + z + "'></div></td>";
+                    strTr += "<td>" + czxxList[z].年等效利用小时 + "</td>";
+                    strTr += "<td>" + czxxList[z].总台数 + "</td>";
+                    strTr += "<td>" + czxxList[z].运行 + "</td>";
+                    //strTr += "<td>" + czxxList[z].计划检修 + "</td>";
+                    strTr += "<td>" + czxxList[z].故障 + "</td>";
+                    strTr += "<td>" + czxxList[z].待机 + "</td>";
+                    //_jzgzl[z] = czxxList[z].机组故障率;
+                    //strTr += "<td><div id='jzgzl_" + z + "'></div></td>";
+                    //strTr += "<td>" + czxxList[z].机组状态排名 + "</td>";
+                    strTr += "<td>" + czxxList[z].出力率排名 + "</td>";
+                    strTr += "</tr>";
+                }
             }
-
             string strEnd = "<tr><td>备注</td><td  colspan='24' style='text-align:left'>单位：功率(MW),风速(M/S),功率(KWh),率(%)</td></tr>";
             htmlTable.Append(strTitle);
             htmlTable.Append(strTr);
@@ -275,56 +290,70 @@ namespace SACSIS
         /// 获得场站信息
         /// </summary>
         /// <param name="dt"></param>
-        private void GetCZInfo(DataTable dt)
+        private void GetCZInfo(DataTable dtArea)
         {
             DataTable Sdt = null;
-
-            for (int a = 0; a < dt.Rows.Count; a++)
+            DataTable dtOrg = null;
+            //循环区域
+            for (int area = 0; area < dtArea.Rows.Count; area++)
             {
-                czInfo c = new czInfo();
-                Sdt = dl.RunDataTable("select * from ADMINISTRATOR.T_BASE_PERIOD where T_ORGID='" + dt.Rows[a]["T_ORGID"] + "'", out errMsg);
+                dtOrg = dl.RunDataTable("select * from ADMINISTRATOR.T_BASE_ORG where T_COMID='" + dtArea.Rows[area]["T_COMID"] + "'", out errMsg);
 
-                if (Sdt.Rows.Count > 0)
+                //循环场站
+                for (int a = 0; a < dtOrg.Rows.Count; a++)
                 {
-                    if (Sdt.Rows.Count > 1)
+                    czInfo c = new czInfo();
+                    Sdt = dl.RunDataTable("select * from ADMINISTRATOR.T_BASE_PERIOD where T_ORGID='" + dtOrg.Rows[a]["T_ORGID"] + "'", out errMsg);
+
+                    if (Sdt.Rows.Count > 0)
                     {
-                        c.T_ORGID = dt.Rows[a]["T_ORGID"].ToString();
-                        c.风电场 = dt.Rows[a]["T_ORGDESC"].ToString();
-                        GetStr(dt.Rows[a]["T_ORGID"].ToString(), "1", c);
-                        for (int b = 0; b < Sdt.Rows.Count; b++)
+                        if (Sdt.Rows.Count > 1)
                         {
-                            c = new czInfo();
-                            c.T_ORGID = dt.Rows[a]["T_ORGID"].ToString();
-                            c.T_PERIODID = Sdt.Rows[b]["T_PERIODID"].ToString();
-                            c.风电场 = Sdt.Rows[b]["T_PERIODDESC"].ToString();
-                            GetStr(Sdt.Rows[b]["T_PERIODID"].ToString(), "2", c);
+                            c.区域 = dtArea.Rows[area]["T_COMDESC"].ToString();
+                            c.T_ORGID = dtOrg.Rows[a]["T_ORGID"].ToString();
+                            c.风电场 = dtOrg.Rows[a]["T_ORGDESC"].ToString();
+                            GetStr(dtOrg.Rows[a]["T_ORGID"].ToString(), "1", c);
+                            for (int b = 0; b < Sdt.Rows.Count; b++)
+                            {
+                                c = new czInfo();
+                                c.区域 = dtArea.Rows[area]["T_COMDESC"].ToString();
+                                c.T_ORGID = dtOrg.Rows[a]["T_ORGID"].ToString();
+                                c.T_PERIODID = Sdt.Rows[b]["T_PERIODID"].ToString();
+                                c.风电场 = Sdt.Rows[b]["T_PERIODDESC"].ToString();
+                                GetStr(Sdt.Rows[b]["T_PERIODID"].ToString(), "2", c);
+                            }
+                        }
+                        else
+                        {
+                            if (Sdt.Rows[0]["T_PERIODDESC"].ToString() == "全部")
+                            {
+                                //取组织机构描述
+                                c = new czInfo();
+                                c.区域 = dtArea.Rows[area]["T_COMDESC"].ToString();
+                                c.T_ORGID = dtOrg.Rows[a]["T_ORGID"].ToString();
+                                c.风电场 = dtOrg.Rows[a]["T_ORGDESC"].ToString();
+                                GetStr(dtOrg.Rows[a]["T_ORGID"].ToString(), "1", c);
+                            }
+                            else
+                            {
+                                //取场站描述
+                                c = new czInfo();
+                                c.区域 = dtArea.Rows[area]["T_COMDESC"].ToString();
+                                c.T_ORGID = dtOrg.Rows[a]["T_ORGID"].ToString();
+                                c.T_PERIODID = Sdt.Rows[0]["T_PERIODID"].ToString();
+                                c.风电场 = Sdt.Rows[0]["T_PERIODDESC"].ToString();
+                                GetStr(Sdt.Rows[0]["T_PERIODID"].ToString(), "2", c);
+                            }
                         }
                     }
                     else
                     {
-                        if (Sdt.Rows[0]["T_PERIODDESC"].ToString() == "全部")
-                        {
-                            c = new czInfo();
-                            c.T_ORGID = dt.Rows[a]["T_ORGID"].ToString();
-                            c.风电场 = dt.Rows[a]["T_ORGDESC"].ToString();
-                            GetStr(dt.Rows[a]["T_ORGID"].ToString(), "1", c);
-                        }
-                        else
-                        {
-                            c = new czInfo();
-                            c.T_ORGID = dt.Rows[a]["T_ORGID"].ToString();
-                            c.T_PERIODID = Sdt.Rows[0]["T_PERIODID"].ToString();
-                            c.风电场 = Sdt.Rows[0]["T_PERIODDESC"].ToString();
-                            GetStr(Sdt.Rows[0]["T_PERIODID"].ToString(), "2", c);
-                        }
+                        c = new czInfo();
+                        c.区域 = dtArea.Rows[area]["T_COMDESC"].ToString();
+                        c.T_ORGID = dtOrg.Rows[a]["T_ORGID"].ToString();
+                        c.风电场 = dtOrg.Rows[a]["T_ORGDESC"].ToString();
+                        GetStr(dtOrg.Rows[a]["T_ORGID"].ToString(), "1", c);
                     }
-                }
-                else
-                {
-                    c = new czInfo();
-                    c.T_ORGID = dt.Rows[a]["T_ORGID"].ToString();
-                    c.风电场 = dt.Rows[a]["T_ORGDESC"].ToString();
-                    GetStr(dt.Rows[a]["T_ORGID"].ToString(), "1", c);
                 }
             }
         }

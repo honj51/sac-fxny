@@ -10,6 +10,7 @@ namespace SACSIS
         public string T_ORGID { get; set; }
         public string T_PERIODID { get; set; }
 
+        public string 区域 { get; set; }
         public string 风电场 { get; set; }
         public double 装机容量 { get; set; }
         public string 机型 { get; set; }

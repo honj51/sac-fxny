@@ -91,7 +91,7 @@
             //隐藏二级行
             trs.each(function (i, o) {
                 if (o.getAttribute("T_PERIODID") != "") {
-                    if (o.getAttribute("style") == "display: inline;")
+                    if (o.getAttribute("style") == "display:inline;")
                         o.setAttribute("style", "display:none;");
                     else
                         o.setAttribute("style", "display:inline;");
@@ -160,7 +160,7 @@
 </head>
 <body>
     <form id="form1">
-    <div style="width:1200px; border:1px">
+    <div style="width:1000px; border:1px">
         <div id="Div1" style="width: 20%; float: left; text-align:left">
             
         </div>
@@ -178,7 +178,7 @@
         </div>
     </div>
    <%-- <a id="btnPrint" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="Print()">打&nbsp;&nbsp;印</a>--%>
-    <div id="tabId">
+    <div id="tabId" style=" width:100%; ">
     <div id="loading" style="margin-top: 150px; text-align: center;">
             <img src="../img/loading.gif" alt="" /><br />
             正在加载，请稍后... ...

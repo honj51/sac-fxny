@@ -105,6 +105,7 @@
     <Content Include="Form\ElectrifiedRate.aspx" />
     <Content Include="Form\FLDMAP.aspx" />
     <Content Include="Form\GoogleMapWin.aspx" />
+    <Content Include="Form\InstalledPowerRatio.aspx" />
     <Content Include="Form\Map.aspx" />
     <Content Include="Form\UpData.aspx" />
     <Content Include="HDPage.aspx" />
@@ -997,6 +998,13 @@
     </Compile>
     <Compile Include="Form\GoogleMapWin.aspx.designer.cs">
       <DependentUpon>GoogleMapWin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\InstalledPowerRatio.aspx.cs">
+      <DependentUpon>InstalledPowerRatio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\InstalledPowerRatio.aspx.designer.cs">
+      <DependentUpon>InstalledPowerRatio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\Map.aspx.cs">
       <DependentUpon>Map.aspx</DependentUpon>

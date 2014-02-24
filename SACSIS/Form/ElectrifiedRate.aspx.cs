@@ -28,5 +28,14 @@ namespace SACSIS.Form
         {
 
         }
+
+        /// <summary>
+        /// 绑定区域
+        /// 创建：白飞跃 日期：2014-02-19
+        /// </summary>
+        public void BindArea()
+        { 
+        
+        }
     }
 }
