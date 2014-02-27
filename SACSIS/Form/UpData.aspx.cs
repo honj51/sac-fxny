@@ -891,10 +891,10 @@ namespace SACSIS.Form
                     DataRow[] drOrg = null;
                     columns = "";
                     org = "";
-                    //获取指标参数
+                    //获取指标参数(维护几列数据：各场站的属性：容量，在建容量)
                     dr = dt.Select("T_PARATYPE='0'");
 
-                    //获取    组织维度参数
+                    //获取组织维度参数（维护几行：各场站）
                     drOrg = dt.Select("T_PARATYPE='2'");
 
                     st.Append("<table class=\"admintable\">");
