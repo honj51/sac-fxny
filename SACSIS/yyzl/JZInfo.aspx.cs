@@ -147,8 +147,15 @@ namespace SACSIS
                     }
                 }
                 //}
-                str += "<tr><td style='text-align:left' rowspan=\"" + areaRows + "\"><a type='2' href='#' onclick='next(this)'>"+ dtArea.Rows[a]["T_AREA"].ToString() + "</a></td>";
-
+                //风电的区域，场站 可以跳转
+                if (cyTye == "fd")
+                {
+                    str += "<tr><td style='text-align:left' rowspan=\"" + areaRows + "\"><a type='2' href='#' onclick='next(this)'>" + dtArea.Rows[a]["T_AREA"].ToString() + "</a></td>";
+                }
+                else
+                {
+                    str += "<tr><td style='text-align:left' rowspan=\"" + areaRows + "\">" + dtArea.Rows[a]["T_AREA"].ToString() + "</td>";
+                }
 
                 sql = "select DISTINCT PERIOD_NAME,PERIOD_TAG,T_ORDER,T_AREA,UNIT_FACTORY from (select * from ADMINISTRATOR.T_INFO_UNIT  " + dataType + " and T_AREA='" + dtArea.Rows[a][0].ToString() + "')  order by T_AREA,T_ORDER";
                 DataTable dtNames = dl.RunDataTable(sql, out errMsg);
@@ -177,8 +184,14 @@ namespace SACSIS
                     //double rowspan = Math.Ceiling((double)dtUnits.Rows.Count / double.Parse(colrow.ToString()));
 
                     //出力合并行
-                    str += "<td style='text-align:left' rowspan=\"" + rowspans + "\"><a type='3' area='" + dtNames.Rows[jj]["T_AREA"].ToString() + "' href='#' onclick='next(this)'>" + dtNames.Rows[jj][0].ToString() + "</a></td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion[dtNames.Rows[jj][0].ToString()], 3) + "</td>";
-
+                    if (cyTye == "fd")
+                    {
+                        str += "<td style='text-align:left' rowspan=\"" + rowspans + "\"><a type='3' area='" + dtNames.Rows[jj]["T_AREA"].ToString() + "' href='#' onclick='next(this)'>" + dtNames.Rows[jj][0].ToString() + "</a></td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion[dtNames.Rows[jj][0].ToString()], 3) + "</td>";
+                    }
+                    else
+                    {
+                        str += "<td style='text-align:left' rowspan=\"" + rowspans + "\">" + dtNames.Rows[jj][0].ToString() + "</td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion[dtNames.Rows[jj][0].ToString()], 3) + "</td>";
+                    }
 
 
 
@@ -244,50 +257,58 @@ namespace SACSIS
                                     }
                                     else
                                     {
-                                        //风速
-                                        double value = PointValues[dtType.Rows[k - 1]["T_WINDTAG"].ToString()];
-
-                                        if (id.Contains(dtType.Rows[k - 1]["ID_KEY"].ToString()))
+                                        //风电
+                                        if (cyTye == "fd")
                                         {
-                                            if (value <= 3)
+                                            //风速
+                                            double value = PointValues[dtType.Rows[k - 1]["T_WINDTAG"].ToString()];
+                                            //是否是标杆风机
+                                            if (id.Contains(dtType.Rows[k - 1]["ID_KEY"].ToString()))
                                             {
-                                                str += "<td  style='width:41px;color:Red;background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a> </td></tr>";
+                                                if (value <= 3)
+                                                {
+                                                    str += "<td  style='width:41px;color:Red;background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a> </td></tr>";
 
+                                                }
+                                                else if (value >= 3 && value <= 12)
+                                                {
+                                                    str += "<td  style='width:41px;color:Red;background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                }
+                                                else if (value > 12 && value <= 25)
+                                                {
+                                                    str += "<td  style='width:41px;color:Red;background-color: #64C45C;'   title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                }
+                                                else if (value > 25)
+                                                {
+                                                    str += "<td  style='width:41px;color:Red;background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                }
+                                                //str += "<td  style='width:41px;color:Red;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td></tr>";
                                             }
-                                            else if (value >= 3 && value <= 12)
+                                            else
                                             {
-                                                str += "<td  style='width:41px;color:Red;background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
-                                            }                                                                         
-                                            else if (value > 12 && value <= 25)                                       
-                                            {
-                                                str += "<td  style='width:41px;color:Red;background-color: #64C45C;'   title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
-                                            }                                                                         
-                                            else if (value > 25)                                                      
-                                            {
-                                                str += "<td  style='width:41px;color:Red;background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                if (value <= 3)
+                                                {
+                                                    str += "<td  style='width:41px; background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+
+                                                }
+                                                else if (value >= 3 && value <= 12)
+                                                {
+                                                    str += "<td  style='width:41px; background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                }
+                                                else if (value > 12 && value <= 25)
+                                                {
+                                                    str += "<td  style='width:41px; background-color: #64C45C;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                }
+                                                else if (value > 25)
+                                                {
+                                                    str += "<td  style='width:41px; background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                }
+                                                //str += "<td  style='width:41px;'>#" + dtType.Rows[k - 1]["UNIT_ID"].ToString() + "</td></tr>";
                                             }
-                                            //str += "<td  style='width:41px;color:Red;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td></tr>";
                                         }
                                         else
                                         {
-                                            if (value <= 3)
-                                            {
-                                                str += "<td  style='width:41px; background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
-                                                                                                                                                                                                                                                                  
-                                            }                                                                                                                                                                                                                     
-                                            else if (value >= 3 && value <= 12)                                                                                                                                                                                   
-                                            {
-                                                str += "<td  style='width:41px; background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
-                                            }                                                                                                                                                                                                                     
-                                            else if (value > 12 && value <= 25)                                                                                                                                                                                   
-                                            {
-                                                str += "<td  style='width:41px; background-color: #64C45C;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
-                                            }                                                                                                                                                                                                                     
-                                            else if (value > 25)                                                                                                                                                                                                  
-                                            {
-                                                str += "<td  style='width:41px; background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
-                                            }
-                                            //str += "<td  style='width:41px;'>#" + dtType.Rows[k - 1]["UNIT_ID"].ToString() + "</td></tr>";
+                                            str += "<td  style='width:41px; ' >#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td></tr>";
                                         }
                                         if (PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] < 0)
                                             str2 += "<td style='background-color: yellow;text-align:right'>" + PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] + "</td></tr>";
@@ -309,51 +330,59 @@ namespace SACSIS
                                     }
                                     else
                                     {
-                                        //风速
-                                        double value = PointValues[dtType.Rows[k - 1]["T_WINDTAG"].ToString()];
-
-                                        if (id.Contains(dtType.Rows[k - 1]["ID_KEY"].ToString()))
+                                          //风电
+                                        if (cyTye == "fd")
                                         {
-                                            if (value <= 3)
-                                            {
-                                                str += "<td  style='width:41px;color:Red;background-color: #B3D6FD;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
-                                                                                                                                                                                                                                                                          
-                                            }                                                                                                                                                                                                                             
-                                            else if (value >= 3 && value <= 12)                                                                                                                                                                                           
-                                            {
-                                                str += "<td  style='width:41px;color:Red;background-color: #ACE066;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
-                                            }                                                                                                                                                                                                                             
-                                            else if (value > 12 && value <= 25)                                                                                                                                                                                           
-                                            {
-                                                str += "<td  style='width:41px;color:Red;background-color: #64C45C;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
-                                            }                                                                                                                                                                                                                             
-                                            else if (value > 25)                                                                                                                                                                                                          
-                                            {
-                                                str += "<td  style='width:41px;color:Red;background-color: #9C7DC1;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
-                                            }
-                                            //str += "<td  style='width:41px;color:Red;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td>";
+                                            //风速
+                                            double value = PointValues[dtType.Rows[k - 1]["T_WINDTAG"].ToString()];
 
+                                            if (id.Contains(dtType.Rows[k - 1]["ID_KEY"].ToString()))
+                                            {
+                                                if (value <= 3)
+                                                {
+                                                    str += "<td  style='width:41px;color:Red;background-color: #B3D6FD;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+
+                                                }
+                                                else if (value >= 3 && value <= 12)
+                                                {
+                                                    str += "<td  style='width:41px;color:Red;background-color: #ACE066;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                }
+                                                else if (value > 12 && value <= 25)
+                                                {
+                                                    str += "<td  style='width:41px;color:Red;background-color: #64C45C;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                }
+                                                else if (value > 25)
+                                                {
+                                                    str += "<td  style='width:41px;color:Red;background-color: #9C7DC1;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                }
+                                                //str += "<td  style='width:41px;color:Red;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td>";
+
+                                            }
+                                            else
+                                            {
+                                                if (value <= 3)
+                                                {
+                                                    str += "<td  style='width:41px; background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+
+                                                }
+                                                else if (value >= 3 && value <= 12)
+                                                {
+                                                    str += "<td  style='width:41px; background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                }
+                                                else if (value > 12 && value <= 25)
+                                                {
+                                                    str += "<td  style='width:41px; background-color: #64C45C;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                }
+                                                else if (value > 25)
+                                                {
+                                                    str += "<td  style='width:41px; background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                }
+                                                //str += "<td  style='width:41px;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td>";
+                                            }
                                         }
                                         else
                                         {
-                                            if (value <= 3)
-                                            {
-                                                str += "<td  style='width:41px; background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
-                                                                                                                                                                                                                                                                  
-                                            }                                                                                                                                                                                                                     
-                                            else if (value >= 3 && value <= 12)                                                                                                                                                                                   
-                                            {
-                                                str += "<td  style='width:41px; background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
-                                            }                                                                                                                                                                                                                     
-                                            else if (value > 12 && value <= 25)                                                                                                                                                                                   
-                                            {
-                                                str += "<td  style='width:41px; background-color: #64C45C;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
-                                            }                                                                                                                                                                                                                     
-                                            else if (value > 25)                                                                                                                                                                                                  
-                                            {
-                                                str += "<td  style='width:41px; background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
-                                            }
-                                            //str += "<td  style='width:41px;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td>";
+                                            str += "<td  style='width:41px;' > #" + dtType.Rows[k - 1]["UNIT_ID"] + "</td>";
                                         }
                                         if (PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] < 0)
                                             str2 += "<td style='background-color: yellow;text-align:right'>" + PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] + "</td>";
