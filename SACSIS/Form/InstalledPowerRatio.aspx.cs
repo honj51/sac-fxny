@@ -8,6 +8,7 @@ using SAC.DBOperations;
 using System.Collections;
 using System.Data;
 using BLL;
+using System.ComponentModel;
 
 namespace SACSIS.Form
 {
@@ -151,10 +152,65 @@ namespace SACSIS.Form
 
             #endregion
 
+            #region 投产容量比率
+            //string[] colors = new string[9] { "#058DC7", "#50B432", "#ED561B", "#DDDF00", "#24CBE5", "#64E572", "#FF9655", "#FFF263", "#6AF9C4" };
+
+            List<TcRl> list = new List<TcRl>();
+            DataTable dt = new DataTable();
+            dt = GetTcRl("2", "FDRL");
+            double[] sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            TcRl sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            list.Add(sdRl);
+
+            dt = GetTcRl("2", "HDRL");
+            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            list.Add(sdRl);
+
+            dt = GetTcRl("2", "SDRL");
+            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            list.Add(sdRl);
+
+            dt = GetTcRl("2", "TYNRL");
+            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            list.Add(sdRl);
+
+            dt = GetTcRl("2", "FBSRL");
+            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            list.Add(sdRl);
+
+            dt = GetTcRl("2", "SWZRL");
+            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            list.Add(sdRl);
+
+            //投产情况比率
+            string tcRl = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            
+            //ArrayList sdArray = new ArrayList();
+            //Hashtable sdHt = new Hashtable();
+            //sdHt.Add("name","风电");
+            //sdHt = new Hashtable();
+            //sdHt.Add("categories", "['投产', '在建', '接入']");
+            //sdHt = new Hashtable();
+            //double[] sdArr = new double[3];
+            //sdArr[0]=  double.Parse(dt.Rows[0]["投产容量"].ToString());
+            //sdArr[1] = double.Parse(dt.Rows[0]["在建容量"].ToString());
+            //sdArr[2] = double.Parse(dt.Rows[0]["接入容量"].ToString());
+            //sdHt.Add("data", sdArr);
+            //sdHt = new Hashtable();
+            //sdHt.Add("color", colors[0]);
+
+            #endregion
+
             object obj = new
             {
                 zjBl = zjBl,
-                fdlBl = fdlBl
+                fdlBl = fdlBl,
+                tcRl = tcRl
             };
             string result = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
             Response.Write(result);
@@ -190,6 +246,7 @@ namespace SACSIS.Form
                 return double.Parse(obj.ToString());
         }
 
+
         //根据产业获得总电量和负荷
         private double GetDlFh(string cye, string cName, string time)
         {
@@ -216,6 +273,31 @@ namespace SACSIS.Form
             if (tagValues.Length < 1)
                 return 0;
             return Math.Round(tagValues.Where(a => a > 0).Sum(), 2);
+        }
+
+        /// <summary>
+        /// 获得投产容量,在建容量,接入容量
+        /// </summary>
+        /// <param name="typ">1风场 2工期 3全部</param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private DataTable GetTcRl(string typ, string id)
+        {
+            string sql = string.Empty;
+            DataTable dt = new DataTable();
+            if (typ == "1")
+                sql = @"SELECT SUM(INT(投产容量)) 投产容量,SUM(INT(在建容量)) 在建容量,SUM(INT(接入容量)) 接入容量 FROM            
+                (select t.T_ORGID T_PERIODID,(select p.T_ORGID from ADMINISTRATOR.T_BASE_PERIOD p where p.T_PERIODID=t.T_ORGID) T_ORGID,t.容量
+                from ADMINISTRATOR.T_INFO_RL t )
+                where T_ORGID='" + id + "'";
+            else if (typ == "2")
+                sql = "select SUM(INT(投产容量)) 投产容量,SUM(INT(在建容量)) 在建容量,SUM(INT(接入容量)) 接入容量 from ADMINISTRATOR.T_INFO_RL  where T_ORGID='" + id + "'";
+            else if (typ == "3")
+                sql = "select SUM(INT(投产容量)) 投产容量,SUM(INT(在建容量)) 在建容量,SUM(INT(接入容量)) 接入容量 from ADMINISTRATOR.T_INFO_RL where T_ORGID='FDRL'";
+            else if (typ == "all")
+                sql = "select SUM(INT(投产容量)) 投产容量,SUM(INT(在建容量)) 在建容量,SUM(INT(接入容量)) 接入容量 from ADMINISTRATOR.T_INFO_RL where T_ORGID in ('FDRL','HDRL','SDRL','TYNRL','FBSRL','SWZRL')";
+            dt = dl.RunDataTable(sql, out errMsg);
+            return dt;
         }
 
         public double[] GetPointVal(string[] points, string time)
@@ -313,5 +395,16 @@ namespace SACSIS.Form
             }
         }
         #endregion
+    }
+    
+    /// <summary>
+    /// 投产容量类
+    /// </summary>
+    public class TcRl
+    {
+        [Description("Y值")]
+        public double y { set; get; }
+        [Description("数据")]
+        public double[] data { set; get; }
     }
 }

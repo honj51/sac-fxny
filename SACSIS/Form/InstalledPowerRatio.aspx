@@ -1,18 +1,18 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InstalledPowerRatio.aspx.cs" Inherits="SACSIS.Form.InstalledPowerRatio" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InstalledPowerRatio.aspx.cs"
+    Inherits="SACSIS.Form.InstalledPowerRatio" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-      <script src="../Js/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="../Js/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="../Js/jquery.easyui.min.js" type="text/javascript"></script>
     <link href="../Js/jQueryEasyUI/themes/default/easyui.css" rel="stylesheet" type="text/css" />
     <link href="../Js/jQueryEasyUI/themes/icon.css" rel="stylesheet" type="text/css" />
     <script src="../Js/highcharts.js" type="text/javascript"></script>
     <script src="../Js/exporting.js" type="text/javascript"></script>
     <script type="text/javascript">
-     
+
         $(document).ready(function () {
             // $("#btn").click();
             inite();
@@ -180,75 +180,227 @@
                         }
                     });
 
-                                        //发电量比率
-                                        $('#DivFDLBL').highcharts({
-                                            chart: {
-                                                plotBackgroundColor: null,
-                                                plotBorderWidth: null,
-                                                plotShadow: false,
-                                                margin: [5, 80, 5, 5]
-                                            },
-                                            title: {
-                                                align: 'left',
-                                                text: '发电量比率',
-                                                style:
+                    //发电量比率
+                    $('#DivFDLBL').highcharts({
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            margin: [5, 80, 5, 5]
+                        },
+                        title: {
+                            align: 'left',
+                            text: '发电量比率',
+                            style:
                                             {
                                                 color: '#3E576F',
                                                 fontSize: '14px',
                                                 fontFamily: '微软雅黑'
                                             }
-                                            },
-                                            tooltip: {
-                                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br />发电量:<b>{point.y}<b>',
-                                                percentageDecimals: 1
-                                            },
-                                            plotOptions: {
-                                                pie: {
-                                                    allowPointSelect: true,
-                                                    cursor: 'pointer',
-                                                    dataLabels: {
-                                                        enabled: false
-                                                    },
-                                                    showInLegend: true
-                                                }
-                                            },
-                                            series: [{
-                                                type: 'pie',
-                                                name: '发电量比率',
-                                                data: $.parseJSON(data.fdlBl)
-                                            }],
-                                            exporting: {
-                                                enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
-                                            },
-                                            legend: {
-                                                layout: 'vertical',
-                                                align: 'right',
-                                                itemStyle: {
-                                                    cursor: 'pointer',
-                                                    color: 'black',
-                                                    fontSize: '14px',
-                                                    fontFamily: '微软雅黑'
-                                                },
-                                                verticalAlign: 'middle'
-                                            }
-                                        });
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br />发电量:<b>{point.y}<b>',
+                            percentageDecimals: 1
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: '发电量比率',
+                            data: $.parseJSON(data.fdlBl)
+                        }],
+                        exporting: {
+                            enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            itemStyle: {
+                                cursor: 'pointer',
+                                color: 'black',
+                                fontSize: '14px',
+                                fontFamily: '微软雅黑'
+                            },
+                            verticalAlign: 'middle'
+                        }
+                    });
+
+
+
+                    //投产比率
+                    alert($.parseJSON(data.tcRl)[0].data);
+                    var colors = Highcharts.getOptions().colors,
+            categories = ['风电', '火电', '水电', '太阳能', '分布式','生物质'],
+            name = 'Browser brands',
+            data = [{
+                y: $.parseJSON(data.tcRl)[0].y,
+                color: colors[0],
+                drilldown: {
+                    name: '风电',
+                    categories: ['风电投产', '风电在建', '风电接入'],
+                    data: $.parseJSON(data.tcRl)[0].data,
+                    color: colors[0]
+                }
+            }, {
+                y: $.parseJSON(data.tcRl)[1].y,
+                color: colors[1],
+                drilldown: {
+                    name: '火电',
+                    categories: ['火电投产', '火电在建', '火电接入'],
+                    data: $.parseJSON(data.tcRl)[1].data,
+                    color: colors[1]
+                }
+            }, {
+                y: $.parseJSON(data.tcRl)[2].y,
+                color: colors[2],
+                drilldown: {
+                    name: '水电',
+                    categories: ['水电投产', '水电在建', '水电接入'],
+                    data: $.parseJSON(data.tcRl)[2].data,
+                    color: colors[2]
+                }
+            }, {
+                y: $.parseJSON(data.tcRl)[3].y,
+                color: colors[3],
+                drilldown: {
+                    name: '太阳能',
+                    categories: ['太阳能投产', '太阳能在建', '太阳能接入'],
+                    data: $.parseJSON(data.tcRl)[3].data,
+                    color: colors[3]
+                }
+            }, {
+                y: $.parseJSON(data.tcRl)[4].y,
+                color: colors[4],
+                drilldown: {
+                    name: '分布式',
+                    categories: ['分布式投产', '分布式在建', '分布式接入'],
+                    data: $.parseJSON(data.tcRl)[4].data,
+                    color: colors[4]
+                }
+            }, {
+                y: $.parseJSON(data.tcRl)[5].y,
+                color: colors[5],
+                drilldown: {
+                    name: '生物质',
+                    categories: ['生物质投产', '生物质在建', '生物质接入'],
+                    data: $.parseJSON(data.tcRl)[5].data,
+                    color: colors[4]
+                }
+            }];
+
+
+                    // Build the data arrays
+                    var browserData = [];
+                    var versionsData = [];
+                    for (var i = 0; i < data.length; i++) {
+
+                        // add browser data
+                        browserData.push({
+                            name: categories[i],
+                            y: data[i].y,
+                            color: data[i].color
+                        });
+
+                        // add version data
+                        for (var j = 0; j < data[i].drilldown.data.length; j++) {
+                            var brightness = 0.2 - (j / data[i].drilldown.data.length) / 5;
+                            versionsData.push({
+                                name: data[i].drilldown.categories[j],
+                                y: data[i].drilldown.data[j],
+                                color: Highcharts.Color(data[i].color).brighten(brightness).get()
+                            });
+                        }
+                    }
+
+                    // Create the chart
+                    $('#DivTCBL').highcharts({
+                        chart: {
+                            type: 'pie'
+                        },
+                        title: {
+                            text: '投产情况比率'
+                        },
+                        yAxis: {
+                            title: {
+                                text: '值'
+                            }
+                        },
+                        //                        plotOptions: {
+                        //                            pie: {
+                        //                                shadow: true,
+                        //                                center: ['50%', '50%']
+                        //                            }
+                        //                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        tooltip: {
+                            valueSuffix: '',
+                            pointFormat: '值:<b>{point.y}<b><br />比例: <b>{point.percentage:.1f}%</b>',
+                            percentageDecimals: 1
+                        },
+                        series: [{
+                            name: '值',
+                            data: browserData,
+                            size: '60%',
+                            dataLabels: {
+                                formatter: function () {
+                                    return this.y > 5 ? this.point.name : null;
+                                },
+                                color: 'white',
+                                distance: -30
+                            }
+                        }, {
+                            name: '值',
+                            data: versionsData,
+                            size: '80%',
+                            innerSize: '60%',
+                            dataLabels: {
+                                                                formatter: function () {
+                                                                    // display only if larger than 1
+                                                                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '' : null;
+                                                                }
+                                //enabled:false
+                            }
+                        }]
+                    });
                 }
             })
         }
-   </script>
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
-       <div id="imgs" style="margin-top: 150px; text-align: center; display: none;">
+    <div id="imgs" style="margin-top: 150px; text-align: center; display: none;">
         <img id="imgId" alt="" src="../img/loading.gif" /><br />
         正在加载，请稍后......
     </div>
     <!--装机比率-->
-   <div id="DivZJBL" style="width: 320px; height: 180px; float: left; margin: 5px">
-   </div>
+    <div id="DivZJBL" style="width: 320px; height: 180px; float: left; margin: 5px">
+    </div>
     <!--发电量比率-->
-   <div id="DivFDLBL" style="width: 320px; height: 180px; float: left; margin: 5px">
-   </div>
+    <div id="DivFDLBL" style="width: 320px; height: 180px; float: left; margin: 5px">
+    </div>
+    <br />
+    <!--投产比率比率-->
+     <div id="DivTCBL" style="width: 700px; height: 380px; float: left; margin: 5px">
+    </div>
+
     </form>
 </body>
 </html>
