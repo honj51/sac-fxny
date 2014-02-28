@@ -129,10 +129,10 @@
                     //装机比率
                     $('#DivZJBL').highcharts({
                         chart: {
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
-                            plotShadow: false,
-                            margin: [5, 80, 5, 5]
+                            //plotBackgroundColor: null,
+                            //plotBorderWidth: null,
+                            plotShadow: true,
+                            margin: [5, 85, 5, 5]
                         },
                         title: {
                             align: 'left',
@@ -181,8 +181,8 @@
                     //发电量比率
                     $('#DivFDLBL').highcharts({
                         chart: {
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
+                           // plotBackgroundColor: null,
+                           // plotBorderWidth: null,
                             plotShadow: false,
                             margin: [5, 80, 5, 5]
                         },
@@ -318,7 +318,9 @@
                     // Create the chart
                     $('#DivTCBL').highcharts({
                         chart: {
-                            type: 'pie'
+                            type: 'pie',
+                            plotShadow: false
+
                         },
                         title: {
                             text: '投产情况比率'
