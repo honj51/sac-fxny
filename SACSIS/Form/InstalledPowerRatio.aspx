@@ -126,7 +126,6 @@
                 success: function (data) {
                     //alert("1");
                     $("#imgs").css("display", "none");
-                    alert(data.zjBl);
                     //装机比率
                     $('#DivZJBL').highcharts({
                         chart: {
@@ -179,7 +178,6 @@
                             verticalAlign: 'middle'
                         }
                     });
-
                     //发电量比率
                     $('#DivFDLBL').highcharts({
                         chart: {
@@ -233,68 +231,65 @@
                         }
                     });
 
-
-
                     //投产比率
-                    alert($.parseJSON(data.tcRl)[0].data);
-                    var colors = Highcharts.getOptions().colors,
-            categories = ['风电', '火电', '水电', '太阳能', '分布式','生物质'],
-            name = 'Browser brands',
-            data = [{
-                y: $.parseJSON(data.tcRl)[0].y,
-                color: colors[0],
-                drilldown: {
-                    name: '风电',
-                    categories: ['风电投产', '风电在建', '风电接入'],
-                    data: $.parseJSON(data.tcRl)[0].data,
-                    color: colors[0]
-                }
-            }, {
-                y: $.parseJSON(data.tcRl)[1].y,
-                color: colors[1],
-                drilldown: {
-                    name: '火电',
-                    categories: ['火电投产', '火电在建', '火电接入'],
-                    data: $.parseJSON(data.tcRl)[1].data,
-                    color: colors[1]
-                }
-            }, {
-                y: $.parseJSON(data.tcRl)[2].y,
-                color: colors[2],
-                drilldown: {
-                    name: '水电',
-                    categories: ['水电投产', '水电在建', '水电接入'],
-                    data: $.parseJSON(data.tcRl)[2].data,
-                    color: colors[2]
-                }
-            }, {
-                y: $.parseJSON(data.tcRl)[3].y,
-                color: colors[3],
-                drilldown: {
-                    name: '太阳能',
-                    categories: ['太阳能投产', '太阳能在建', '太阳能接入'],
-                    data: $.parseJSON(data.tcRl)[3].data,
-                    color: colors[3]
-                }
-            }, {
-                y: $.parseJSON(data.tcRl)[4].y,
-                color: colors[4],
-                drilldown: {
-                    name: '分布式',
-                    categories: ['分布式投产', '分布式在建', '分布式接入'],
-                    data: $.parseJSON(data.tcRl)[4].data,
-                    color: colors[4]
-                }
-            }, {
-                y: $.parseJSON(data.tcRl)[5].y,
-                color: colors[5],
-                drilldown: {
-                    name: '生物质',
-                    categories: ['生物质投产', '生物质在建', '生物质接入'],
-                    data: $.parseJSON(data.tcRl)[5].data,
-                    color: colors[4]
-                }
-            }];
+                    var colors = Highcharts.getOptions().colors;
+                    categories = ['风电', '火电', '水电', '太阳能', '分布式', '生物质'];
+                    name = 'Browser brands';
+                    data = [{
+                        y: $.parseJSON(data.tcRl)[0].y,
+                        color: colors[0],
+                        drilldown: {
+                            name: '风电',
+                            categories: ['风电投产', '风电在建', '风电接入'],
+                            data: $.parseJSON(data.tcRl)[0].data,
+                            color: colors[0]
+                        }
+                    }, {
+                        y: $.parseJSON(data.tcRl)[1].y,
+                        color: colors[1],
+                        drilldown: {
+                            name: '火电',
+                            categories: ['火电投产', '火电在建', '火电接入'],
+                            data: $.parseJSON(data.tcRl)[1].data,
+                            color: colors[1]
+                        }
+                    }, {
+                        y: $.parseJSON(data.tcRl)[2].y,
+                        color: colors[2],
+                        drilldown: {
+                            name: '水电',
+                            categories: ['水电投产', '水电在建', '水电接入'],
+                            data: $.parseJSON(data.tcRl)[2].data,
+                            color: colors[2]
+                        }
+                    }, {
+                        y: $.parseJSON(data.tcRl)[3].y,
+                        color: colors[3],
+                        drilldown: {
+                            name: '太阳能',
+                            categories: ['太阳能投产', '太阳能在建', '太阳能接入'],
+                            data: $.parseJSON(data.tcRl)[3].data,
+                            color: colors[3]
+                        }
+                    }, {
+                        y: $.parseJSON(data.tcRl)[4].y,
+                        color: colors[4],
+                        drilldown: {
+                            name: '分布式',
+                            categories: ['分布式投产', '分布式在建', '分布式接入'],
+                            data: $.parseJSON(data.tcRl)[4].data,
+                            color: colors[4]
+                        }
+                    }, {
+                        y: $.parseJSON(data.tcRl)[5].y,
+                        color: colors[5],
+                        drilldown: {
+                            name: '生物质',
+                            categories: ['生物质投产', '生物质在建', '生物质接入'],
+                            data: $.parseJSON(data.tcRl)[5].data,
+                            color: colors[4]
+                        }
+                    }];
 
 
                     // Build the data arrays
@@ -360,7 +355,7 @@
                             size: '60%',
                             dataLabels: {
                                 formatter: function () {
-                                    return this.y > 5 ? this.point.name : null;
+                                    return this.point.name;
                                 },
                                 color: 'white',
                                 distance: -30
@@ -371,10 +366,10 @@
                             size: '80%',
                             innerSize: '60%',
                             dataLabels: {
-                                                                formatter: function () {
-                                                                    // display only if larger than 1
-                                                                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '' : null;
-                                                                }
+                                formatter: function () {
+                                    // display only if larger than 1
+                                    return '<b>' + this.point.name + ':</b> ' + this.y + '';
+                                }
                                 //enabled:false
                             }
                         }]
@@ -390,17 +385,18 @@
         <img id="imgId" alt="" src="../img/loading.gif" /><br />
         正在加载，请稍后......
     </div>
+    <div style="width:100%"> 
     <!--装机比率-->
-    <div id="DivZJBL" style="width: 320px; height: 180px; float: left; margin: 5px">
+    <div id="DivZJBL" style="width: 350px; height: 180px; float: left; margin: 5px">
     </div>
     <!--发电量比率-->
-    <div id="DivFDLBL" style="width: 320px; height: 180px; float: left; margin: 5px">
+    <div id="DivFDLBL" style="width: 350px; height: 180px; float: left; margin: 5px">
     </div>
     <br />
     <!--投产比率比率-->
-     <div id="DivTCBL" style="width: 700px; height: 380px; float: left; margin: 5px">
+    <div id="DivTCBL" style="width: 700px; height: 400px; float: left; margin: 5px">
     </div>
-
+    </div>
     </form>
 </body>
 </html>
