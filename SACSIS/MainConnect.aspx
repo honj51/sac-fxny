@@ -7,16 +7,14 @@
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <link href="../Js/jQueryEasyUI/themes/default/easyui.css" rel="stylesheet" type="text/css" />
     <link href="../Js/jQueryEasyUI/themes/icon.css" rel="stylesheet" type="text/css" />
+    <script src="Js/jquery-1.9.1.js" type="text/javascript"></script>
     <script src="../Js/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="../Js/jquery.easyui.min.js" type="text/javascript"></script>
     <script src="../Js/highcharts.js" type="text/javascript"></script>
     <script src="../Js/highcharts-more.js" type="text/javascript"></script>
     <script src="../Js/exporting.js" type="text/javascript"></script>
     <style type="text/css">
-        body
-        {
-            font-family: 微软雅黑;
-        }
+        
         #tabId td
         {
             border: solid thin #6BA5BD;
@@ -27,8 +25,8 @@
         {
             display: block;
             width: 996px;
-            height: 765px;
-            background: url(img/map.jpg) no-repeat;
+            height: 650px;
+            background: url(img/map_1.jpg) no-repeat;
             position: relative;
             margin: 0 auto;
         }
@@ -49,7 +47,7 @@
         {
             display: block;
             width: 996px;
-            height: 765px;
+            height: 650px;
             position: absolute;
             left: 0;
             top: 0;
@@ -58,7 +56,7 @@
         }
         * html #title2
         {
-            height: 765px;
+            height: 650px;
         }
         /*IE6.0以下中显示*/
         
@@ -82,6 +80,146 @@
         {
             background: transparent url(img/lm.gif) no-repeat 0 0;
         }
+         body
+        {
+            height: 100%;
+            overflow: auto;
+            margin: 0px;
+            padding: 0px;
+            background-color: #f4f4f4;
+        }
+        map_all
+        {
+            height: 100%;
+            overflow: auto;
+            margin: 0px;
+            padding: 0px;
+            background-color: #f4f4f4;
+			background-image:url(img/map_bg_1.jpg);
+        }
+		.div_title
+		{
+			background-image:url(img/map_bg_2.jpg);
+			background-repeat:repeat-x;
+			height:31px;
+			color:#333333;
+			font-family:"微软雅黑";
+			font-size:19px;
+		}
+		.map
+		{
+			background-image:url(img/map_bg_1.jpg);
+			
+		}
+		.text_1
+		{
+			color:#333333;
+			font:Arial, Helvetica, sans-serif;
+			font-size:28px;
+			position: absolute; 
+			top: 38px; 
+			left: 20px;
+		}
+		.text_2
+		{
+			color:#0189ff;
+			font:"Arial Black", Gadget, sans-serif;
+			font-size:40px;
+			display:inline;
+			font-weight:bold;
+		}
+		.div_title_1
+		{
+			background-image:url(img/DataZL_title_1.jpg);
+			background-repeat:no-repeat;
+			background-color:#0568bd;
+			background-position:top left;
+			width:197px;
+			height:84px;
+			position: relative; display: block;
+		}
+		.div_title_2
+		{
+			background-image:url(img/DataZL_title_2.jpg);
+			background-repeat:no-repeat;
+			background-color:#0568bd;
+			background-position:top left;
+			width:192px;
+			height:84px;
+			position: relative; display: block;
+		}
+		.div_title_3
+		{
+			background-image:url(img/DataZL_title_3.jpg);
+			background-repeat:no-repeat;
+			background-color:#0568bd;
+			background-position:top left;
+			width:195px;
+			height:84px;
+			position: relative; display: block;
+		}
+		.div_title_4
+		{
+			background-image:url(img/DataZL_title_4.jpg);
+			background-repeat:no-repeat;
+			background-color:#0568bd;
+			background-position:top left;
+			width:195px;
+			height:84px;
+			position: relative; display: block;
+		}
+		.div_title_5
+		{
+			background-image:url(img/DataZL_title_5.jpg);
+			background-repeat:no-repeat;
+			background-color:#0568bd;
+			background-position:top left;
+			width:199px;
+			height:84px;
+			position: relative; display: block;
+		}
+		.div_title_6
+		{
+			background-color:#f4f4f4;
+			color:#333333;
+			font-family:"微软雅黑";    
+			font-size:22px;
+			height:27px;
+		}
+		.div_fg
+		{
+			background-image:url(img/DataZL_1.jpg);
+			background-repeat:no-repeat;
+			background-color:#0568bd;
+			width:4px;
+			height:84px;
+		}
+		.div_table_1
+		{
+			background-image:url(img/DataZL_2.jpg);
+			background-repeat:repeat-x;
+			color:#333333;
+			font-family:"微软雅黑";    
+			font-size:18px;
+			height:43px;
+		}
+		.div_table_2
+		{
+			background-image:url(img/DataZL_4.jpg);
+			background-repeat:repeat-x;
+			color:#333333;
+			font-family:"微软雅黑";    
+			font-size:30px;
+			height:56px;
+		}
+		.div_table_2_1
+		{
+			background-image:url(img/DataZL_4.jpg);
+			background-repeat:repeat-x;
+			height:56px;
+		}
+		
+		
     </style>
     <script type="text/javascript" language="javascript">
 
@@ -100,7 +238,7 @@
                 className: 'skies',
                 borderWidth: 0,
                 plotShadow: true,
-                plotBackgroundImage: 'img/skies.jpg',
+                //plotBackgroundImage: 'img/skies.jpg',
                 plotBackgroundColor: {
                     linearGradient: [0, 0, 250, 500],
                     stops: [
@@ -190,7 +328,7 @@
                     //json = eval("("+json+")");
                     var json = $.parseJSON(json);
                     //总容量 产业容量 
-                    $("#ZRL").html("装机容量</br><label>" + json.ZRL + "<label style='font-size:14px'>MW</label></label>");
+                    $("#ZRL").html("<label>" + json.ZRL + "</label>");
                     $("#HDRL").html(json.HDRL);
                     $("#FDRL").html(json.FDRL);
                     $("#SDRL").html(json.SDRL);
@@ -199,7 +337,7 @@
                     $("#SRZRL").html(json.SRZRL);
 
                     //总负荷 产业负荷
-                    $("#ZFH").html("有功功率</br><label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "<label style='font-size:14px'>MW</label></label>");
+                    $("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
                     //$("#FDFH").html(json.FDFH);
                     $("#HDFH").html(json.HDFH);
                     $("#SDFH").html(json.SDFH);
@@ -209,7 +347,7 @@
 
 
                     //日月电量
-                    $("#DDL").html("日发电量</br><label>" + (json.DDL + json.HDDDL + json.SDDDL).toFixed(2) + "<label style='font-size:14px'>万kWh</label></label>");
+                    $("#DDL").html("<label>" + (json.DDL + json.HDDDL + json.SDDDL).toFixed(2) + "</label>");
                     $("#FDDDL").html(json.FDDDL);
                     $("#HDDDL").html(json.HDDDL);
                     $("#SDDDL").html(json.SDDDL);
@@ -217,9 +355,9 @@
                     $("#FBSDDL").html(json.FBSDDL);
                     $("#SRZDDL").html(json.SRZDDL);
 
-                    $("#MDL").html("月发电量</br><label>" + ((json.MDL + json.HDMDL + json.SDMDL) / 10000).toFixed(2) + "<label style='font-size:14px'>亿kWh</label></label>");
+                    $("#MDL").html("<label>" + ((json.MDL + json.HDMDL + json.SDMDL) / 10000).toFixed(2) + "</label>");
 
-                    $("#YDL").html("年发电量</br><label>" + ((json.YDL + json.HDYDL + json.SDYDL) / 10000).toFixed(2) + "<label style='font-size:14px'>亿kWh</label></label>");
+                    $("#YDL").html("<label>" + ((json.YDL + json.HDYDL + json.SDYDL) / 10000).toFixed(2) + "</label>");
 
                     $("#hd_progressbar").progressbar({
                         value: json.HDWCL
@@ -375,78 +513,7 @@
                             min: 0,
                             minorGridLineWidth: 0,
                             gridLineWidth: 0,
-                            alternateGridColor: null,
-                            plotBands: [{ // Light air
-                                from: 0.3,
-                                to: 1.5,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Light breeze
-                                from: 1.5,
-                                to: 3.3,
-                                color: 'rgba(0, 0, 0, 0)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Gentle breeze
-                                from: 3.3,
-                                to: 5.5,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Moderate breeze
-                                from: 5.5,
-                                to: 8,
-                                color: 'rgba(0, 0, 0, 0)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Fresh breeze
-                                from: 8,
-                                to: 11,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Strong breeze
-                                from: 11,
-                                to: 14,
-                                color: 'rgba(0, 0, 0, 0)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // High wind
-                                from: 14,
-                                to: 15,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }]
+                            alternateGridColor: null 
                         },
                         tooltip: {
                             valueSuffix: ' MW',
@@ -476,12 +543,7 @@
                         , exporting: {
                             enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
                         }
-            ,
-                        navigation: {
-                            menuItemStyle: {
-                                fontSize: '10px'
-                            }
-                        }
+            
                     });
                 }
             });
@@ -519,78 +581,7 @@
                             min: 0,
                             minorGridLineWidth: 0,
                             gridLineWidth: 0,
-                            alternateGridColor: null,
-                            plotBands: [{ // Light air
-                                from: 0.3,
-                                to: 1.5,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Light breeze
-                                from: 1.5,
-                                to: 3.3,
-                                color: 'rgba(0, 0, 0, 0)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Gentle breeze
-                                from: 3.3,
-                                to: 5.5,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Moderate breeze
-                                from: 5.5,
-                                to: 8,
-                                color: 'rgba(0, 0, 0, 0)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Fresh breeze
-                                from: 8,
-                                to: 11,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // Strong breeze
-                                from: 11,
-                                to: 14,
-                                color: 'rgba(0, 0, 0, 0)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }, { // High wind
-                                from: 14,
-                                to: 15,
-                                color: 'rgba(68, 170, 213, 0.1)',
-                                label: {
-                                    text: '',
-                                    style: {
-                                        color: '#606060'
-                                    }
-                                }
-                            }]
+                            alternateGridColor: null 
                         },
                         tooltip: {
                             valueSuffix: ' MW',
@@ -724,78 +715,7 @@
                     min: 0,
                     minorGridLineWidth: 0,
                     gridLineWidth: 0,
-                    alternateGridColor: null,
-                    plotBands: [{ // Light air
-                        from: 0.3,
-                        to: 1.5,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Light breeze
-                        from: 1.5,
-                        to: 3.3,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Gentle breeze
-                        from: 3.3,
-                        to: 5.5,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Moderate breeze
-                        from: 5.5,
-                        to: 8,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Fresh breeze
-                        from: 8,
-                        to: 11,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Strong breeze
-                        from: 11,
-                        to: 14,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // High wind
-                        from: 14,
-                        to: 15,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }]
+                    alternateGridColor: null 
                 },
                 tooltip: {
                     valueSuffix: ' MW',
@@ -876,78 +796,7 @@
                     min: 0,
                     minorGridLineWidth: 0,
                     gridLineWidth: 0,
-                    alternateGridColor: null,
-                    plotBands: [{ // Light air
-                        from: 0.3,
-                        to: 1.5,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Light breeze
-                        from: 1.5,
-                        to: 3.3,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Gentle breeze
-                        from: 3.3,
-                        to: 5.5,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Moderate breeze
-                        from: 5.5,
-                        to: 8,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Fresh breeze
-                        from: 8,
-                        to: 11,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Strong breeze
-                        from: 11,
-                        to: 14,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // High wind
-                        from: 14,
-                        to: 15,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }]
+                    alternateGridColor: null 
                 },
                 tooltip: {
                     valueSuffix: ' MW',
@@ -1028,78 +877,8 @@
                     min: 0,
                     minorGridLineWidth: 0,
                     gridLineWidth: 0,
-                    alternateGridColor: null,
-                    plotBands: [{ // Light air
-                        from: 0.3,
-                        to: 1.5,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Light breeze
-                        from: 1.5,
-                        to: 3.3,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Gentle breeze
-                        from: 3.3,
-                        to: 5.5,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Moderate breeze
-                        from: 5.5,
-                        to: 8,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Fresh breeze
-                        from: 8,
-                        to: 11,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // Strong breeze
-                        from: 11,
-                        to: 14,
-                        color: 'rgba(0, 0, 0, 0)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }, { // High wind
-                        from: 14,
-                        to: 15,
-                        color: 'rgba(68, 170, 213, 0.1)',
-                        label: {
-                            text: '',
-                            style: {
-                                color: '#606060'
-                            }
-                        }
-                    }]
+                    alternateGridColor: null 
+                    
                 },
                 tooltip: {
                     valueSuffix: ' MW',
@@ -1154,16 +933,21 @@
             if (p == "map") {
                 $("#map").hide();
                 $("#top").show();
-                $("#box").show();
+                //$("#box").show();
                 $("#div1").height($("#div1").height() + 765);
-                $("#div2").height($("#div2").height() + 765);
+                //$("#div2").height($("#div2").height() + 765);
+                //$("#gmap").height($("#gmap").height() + 765);
+                $("#gmap").css("display","block");
             }
             if (p == "top") {
                 $("#top").hide();
                 $("#map").show();
-                $("#box").hide();
+               // $("#box").hide();
                 $("#div1").height($("#div1").height() - 765);
-                $("#div2").height($("#div2").height() - 765);
+                //$("#div2").height($("#div2").height() - 765);
+                //$("#gmap").height($("#gmap").height() - 765);
+                $("#gmap").css("display", "none");
+
             }
         }
     </script>
@@ -1171,7 +955,7 @@
 <body style="background-color: #F7F7FF">
     <a name="A0" id="A0"></a>
     <form id="form1" runat="server">
-    <div id="div1" style="width: 1000px; height: 600px; background-color: #023668; margin: 5px auto;">
+    <%--<div id="div1" style="width: 1000px; height: 600px; background-color: #023668; margin: 5px auto;">
         <div style="width: 990px; height: 60px; float: left; background-image: url(img/20131211142227.png);
             padding: 5px">
             <div id="ZRL" style="width: 190px; height: 60px; float: left; font-size: 22px; color: White;">
@@ -1290,8 +1074,90 @@
                 <div id="qt_progressbar" style="width: 280px; margin: auto">
                 </div>
             </div>
-        </div>
-        <div style="width: 1000px; height: 230px; float: left; margin-top: 1px">
+        </div>--%>
+        
+        <table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4">
+<tr><td><div>
+<table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#0568bd">
+<tr>
+<td class="div_title_1"><div class="text_1" id="ZRL">12345678</div></td>
+<td class="div_fg"></td>
+<td class="div_title_2"><div class="text_1" id="ZFH">12345678</div></td>
+<td class="div_fg"></td>
+<td class="div_title_3"><div class="text_1" id="ZDDL">1234567</div></td>
+<td class="div_fg"></td>
+<td class="div_title_4"><div class="text_1" id="MDL">1234567</div></td>
+<td class="div_fg"></td>
+<td class="div_title_5"><div class="text_1" id="YDL">1234567</div></td>
+</tr>
+</table></div>
+</td></tr>
+<tr><td><div>
+<table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+<tr>
+<td class="div_table_1"></td>
+<td class="div_table_1" align="center" valign="middle">装机容量</td>
+<td class="div_table_1" align="center" valign="middle">日发电量&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td class="div_table_1" align="center" valign="middle">实时负荷&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td class="div_table_1" align="center" valign="middle">计划完成率&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td class="div_table_2" align="center" valign="middle">火&nbsp;&nbsp;&nbsp;电</td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div id="hd_progressbar"></div></td>
+</tr>
+<tr>
+<td class="div_table_2" align="center" valign="middle">水&nbsp;&nbsp;&nbsp;电</td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div id="sd_progressbar"></div></td>
+</tr>
+<tr>
+<td class="div_table_2" align="center" valign="middle">风&nbsp;&nbsp;&nbsp;电</td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div id="fd_progressbar"></div></td>
+</tr>
+<tr>
+<td class="div_table_2" align="center" valign="middle">太阳能</td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div id="tyn_progressbar"></div></td>
+</tr>
+<tr>
+<td class="div_table_2" align="center" valign="middle">分布式</td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div id="fbs_progressbar"></div></td>
+</tr>
+<tr>
+<td class="div_table_2" align="center" valign="middle">其&nbsp;&nbsp;&nbsp;他</td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
+<td class="div_table_2_1" align="center" valign="middle"><div id="qt_progressbar"></div></td>
+</tr>
+</table>
+</div></td></tr>
+<tr><td><div>
+<table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4">
+<tr>
+<td colspan="3" style="background-image:url(img/DataZL_3.jpg); background-repeat:repeat-x; height:5px;"></td>
+</tr>
+<tr>
+<td colspan="3" align="left" valign="middle" class="div_title_6" >&nbsp;&nbsp;实时负荷</td>
+</tr>
+<tr>
+<td align="center" valign="middle" bgcolor="#f4f4f4"><div style="width:300px; height:200px;" id="container1"></div></td>
+<td align="center" valign="middle" bgcolor="#f4f4f4"><div style="width:300px; height:200px;" id="container2"></div></td>
+<td align="center" valign="middle" bgcolor="#f4f4f4"><div style="width:300px; height:200px;" id="container3"></div></td>
+<%--<div style="width: 1000px; height: 230px; float: left; margin-top: 1px">
             <div style="width: 1000px; height: 35px; float: left; background-image: url(img/20131211144004.png);
                 font-size: 19px; color: White; line-height: 30px">
                 &nbsp;负荷曲线
@@ -1304,114 +1170,171 @@
                 <div id="container3" style="width: 320px; height: 180px; float: left; margin: 5px">
                 </div>
             </div>
+        </div>--%>
+</tr>
+</table>
+</div></td></tr>
+</table>
+   <%-- <div id="div2" style="width: 100%; height: 100%; float: left;">--%>
+        <div  class="div_title" >
+            &nbsp;项目分布<a name="A1" id="A1">&nbsp;</a> <a id="top" href="#A0" onclick="Jump('top')"
+                style="display: none; float: right;">
+                <img style="position: relative; margin-top: 10px; margin-right: 5px; border: 0;"
+                    src="img/up.png" /></a><a id="map" href="#A1" onclick="Jump('map')" style="float: right;"><img
+                        style="position: relative; margin-top: 10px; margin-right: 5px; border: 0" src="img/down.png" /></a>
         </div>
-        <div id="div2" style="width: 1000px; height: 35px; float: left;">
-            <div style="width: 1000px; height: 35px; float: left; background-image: url(img/20131211144004.png);
-                font-size: 19px; color: White; line-height: 30px">
-                &nbsp;项目分布<a name="A1" id="A1">&nbsp;</a> <a id="top" href="#A0" onclick="Jump('top')"
-                    style="display: none; float: right;">
-                    <img style="position: relative; margin-top: 10px; margin-right: 5px; border: 0;"
-                        src="img/up.png" /></a><a id="map" href="#A1" onclick="Jump('map')" style="float: right;"><img
-                            style="position: relative; margin-top: 10px; margin-right: 5px; border: 0" src="img/down.png" /></a>
-            </div>
-            <div id="box" style="width: 1000px; height: 765px; float: left; position: relative;
-                display: none">
-                
-                <dl id="gmap" name="gmap">
-                    <dt><a href="#nogo" name="title2" id="title2" onfocus="this.blur()"></a></dt>
-                    <dd>
-                        <a href="ProvinceConnect.aspx" id="lmg" title="内蒙古" href="#" onfocus="this.blur()">
-                        </a>
-                    </dd>
-                </dl>
-                <div style="position: absolute; width: 250px; height: 279px; top: 356px; left: 815px;">
-                    <table style="color: White">
-                        <tr>
-                            <td>
-                                <img src="img/火电图标.png" />
-                            </td>
-                            <td>
-                                火电
-                            </td>
-                            <td align="left"> <div style="width: 85px; height: 20px; float: left; border-radius: 5px;background-color:#AFDFF8;
-                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px"> <div id="hdss_progressbar" style="width:80px; margin: auto">
-                </div>
-            </div></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/水电图标.png" />
-                            </td>
-                            <td>
-                                水电
-                            </td>
-                             <td align="left"> <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color:#AFDFF8;
-                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px"> <div id="sdss_progressbar" style="width:80px; margin: auto">
-                </div>
-            </div></td>
-                        </tr>
-                        <tr>
-                            <td>
+        
+        <div  id="gmap"  style="display:none;">
+        <div id="box" style="width: 100%; height: 100%; float: left; position: relative;">
+            <dl name="gmap">
+                <dt><a href="#nogo" name="title2" id="title2" onfocus="this.blur()"></a></dt>
+                <dd>
+                    <a href="ProvinceConnect.aspx" id="lmg" title="内蒙古" href="#" onfocus="this.blur()">
+                    </a>
+                </dd>
+            </dl>
+            <div style="position: absolute; width: 250px; height: 279px; top: 295px; left: 910px;">
+                <table style="color: White">
+                    <tr>
+                        <td align="left">
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
+                                <div id="hdss_progressbar" style="width: 80px; margin: auto">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
+                                <div id="sdss_progressbar" style="width: 80px; margin: auto">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <%--   <td>
                                 <a href="Connect/FDConnect.aspx?tag=1">
-                                    <img style="border: 0" src="img/风电图标.png" /></a>
-                            </td>
-                            <td>
-                                风电
-                            </td>
-                             <td align="left"> <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color:#AFDFF8;
-                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px"> <div id="fdss_progressbar" style="width:80px; margin: auto">
-                </div>
-            </div></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/分布式图标.png" />
-                            </td>
-                            <td>
-                                分布式
-                            </td>
-                             <td align="left"> <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  background-color:#AFDFF8;
-                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px"> <div id="fbsss_progressbar" style="width:80px; margin: auto">
-                </div>
-            </div></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/太阳能图标.png" />
-                            </td>
-                            <td>
-                                太阳能
-                            </td>
-                             <td align="left"> <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  background-color:#AFDFF8;
-                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px"> <div id="tynss_progressbar" style="width:80px; margin: auto">
-                </div>
-            </div></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/生物质图标.png" />
-                            </td>
-                            <td>
-                                生物质
-                            </td>
-                             <td align="left"> <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color:#AFDFF8; 
-                text-align: left; font-size: 12px;   padding-top: 2px"> <div id="srzss_progressbar" style="width:80px; margin: auto">
-                </div>
-            </div></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="img/核能图标.png" />
-                            </td>
-                            <td>
-                                核能
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                                     </a>
+                            </td>--%>
+                        <td align="left">
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
+                                <div id="fdss_progressbar" style="width: 80px; margin: auto">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
+                                <div id="fbsss_progressbar" style="width: 80px; margin: auto">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
+                                <div id="tynss_progressbar" style="width: 80px; margin: auto">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                                text-align: left; font-size: 12px; padding-top: 2px">
+                                <div id="srzss_progressbar" style="width: 80px; margin: auto">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
-    </div>
+        </div>
+    <%--</div>--%>
+     
     </form>
 </body>
 </html>
