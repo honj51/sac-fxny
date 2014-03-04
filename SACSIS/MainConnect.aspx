@@ -24,7 +24,7 @@
         #gmap
         {
             display: block;
-            width: 996px;
+            width: 1300px;
             height: 650px;
             background: url(img/map_1.jpg) no-repeat;
             position: relative;
@@ -46,7 +46,7 @@
         a#title2, a#title2:visited
         {
             display: block;
-            width: 996px;
+            width: 1000px;
             height: 650px;
             position: absolute;
             left: 0;
@@ -1084,7 +1084,7 @@
 <td class="div_fg"></td>
 <td class="div_title_2"><div class="text_1" id="ZFH">12345678</div></td>
 <td class="div_fg"></td>
-<td class="div_title_3"><div class="text_1" id="ZDDL">1234567</div></td>
+<td class="div_title_3"><div class="text_1" id="DDL">1234567</div></td>
 <td class="div_fg"></td>
 <td class="div_title_4"><div class="text_1" id="MDL">1234567</div></td>
 <td class="div_fg"></td>
@@ -1106,42 +1106,42 @@
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div id="hd_progressbar"></div></td>
+<td class="div_table_2_1" align="left"  ><div id="hd_progressbar"></div></td>
 </tr>
 <tr>
 <td class="div_table_2" align="center" valign="middle">水&nbsp;&nbsp;&nbsp;电</td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div id="sd_progressbar"></div></td>
+<td class="div_table_2_1" align="left"  ><div id="sd_progressbar"></div></td>
 </tr>
 <tr>
 <td class="div_table_2" align="center" valign="middle">风&nbsp;&nbsp;&nbsp;电</td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div id="fd_progressbar"></div></td>
+<td class="div_table_2_1" align="left"  ><div id="fd_progressbar"></div></td>
 </tr>
 <tr>
 <td class="div_table_2" align="center" valign="middle">太阳能</td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div id="tyn_progressbar"></div></td>
+<td class="div_table_2_1" align="left"  ><div id="tyn_progressbar"></div></td>
 </tr>
 <tr>
 <td class="div_table_2" align="center" valign="middle">分布式</td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div id="fbs_progressbar"></div></td>
+<td class="div_table_2_1" align="left"  ><div id="fbs_progressbar"></div></td>
 </tr>
 <tr>
 <td class="div_table_2" align="center" valign="middle">其&nbsp;&nbsp;&nbsp;他</td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
 <td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div id="qt_progressbar"></div></td>
+<td class="div_table_2_1" align="left"  ><div id="qt_progressbar"></div></td>
 </tr>
 </table>
 </div></td></tr>
@@ -1188,6 +1188,7 @@
         <div id="box" style="width: 100%; height: 100%; float: left; position: relative;">
             <dl name="gmap">
                 <dt><a href="#nogo" name="title2" id="title2" onfocus="this.blur()"></a></dt>
+
                 <dd>
                     <a href="ProvinceConnect.aspx" id="lmg" title="内蒙古" href="#" onfocus="this.blur()">
                     </a>
