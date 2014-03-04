@@ -60,7 +60,7 @@
         /*IE6.0以下中显示*/
         
         /*内蒙古*/
-        a#lmg
+     a#lmg
         {
             display: block;
             width: 341px;
@@ -68,8 +68,8 @@
             padding-top: 302px;
             overflow: hidden;
             position: absolute;
-            left: 363px;
-            top: 40px;
+            left: 322px;
+            top: 17px;
         }
         * html #lmg
         {
