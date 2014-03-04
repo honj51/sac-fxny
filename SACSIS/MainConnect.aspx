@@ -1554,8 +1554,7 @@
                     </tr>
                     <tr>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; 
-                                text-align: left; font-size: 12px; padding-top: 2px">
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; text-align: left; font-size: 12px; padding-top: 2px">
                                 <div id="srzss_progressbar" style="width: 80px; margin: auto">
                                 </div>
                             </div>
