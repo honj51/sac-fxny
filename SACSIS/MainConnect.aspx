@@ -1431,7 +1431,8 @@
                 src="img/up.png" /></a><a id="map" href="#A1" onclick="Jump('map')" style="float: right;"><img
                     style="position: relative; margin-top: 10px; margin-right: 5px; border: 0" src="img/down.png" /></a>
     </div>
-    <div id="gmap" style="display: none;">
+    <div class="map">
+    <div id="gmap" style="display: none; width:100%;">
         <div id="box" style="width: 100%; height: 100%; float: left; position: relative;">
             <dl name="gmap">
                 <dt><a href="#nogo" name="title2" id="title2" onfocus="this.blur()"></a></dt>
@@ -1440,11 +1441,11 @@
                     </a>
                 </dd>
             </dl>
-            <div style="position: absolute; width: 250px; height: 279px; top: 295px; left: 910px;">
+            <div style="position: absolute; width: 250px; height: 279px; top: 46%; left: 69%;">
                 <table style="color: White">
                     <tr>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  
                                 text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
                                 <div id="hdss_progressbar" style="width: 80px; margin: auto">
                                 </div>
@@ -1465,7 +1466,7 @@
                     </tr>
                     <tr>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; 
                                 text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
                                 <div id="sdss_progressbar" style="width: 80px; margin: auto">
                                 </div>
@@ -1490,7 +1491,7 @@
                                      </a>
                             </td>--%>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  
                                 text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
                                 <div id="fdss_progressbar" style="width: 80px; margin: auto">
                                 </div>
@@ -1511,7 +1512,7 @@
                     </tr>
                     <tr>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; 
                                 text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
                                 <div id="fbsss_progressbar" style="width: 80px; margin: auto">
                                 </div>
@@ -1532,7 +1533,7 @@
                     </tr>
                     <tr>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  
                                 text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
                                 <div id="tynss_progressbar" style="width: 80px; margin: auto">
                                 </div>
@@ -1553,7 +1554,7 @@
                     </tr>
                     <tr>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; background-color: #AFDFF8;
+                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; 
                                 text-align: left; font-size: 12px; padding-top: 2px">
                                 <div id="srzss_progressbar" style="width: 80px; margin: auto">
                                 </div>
@@ -1579,6 +1580,7 @@
                 </table>
             </div>
         </div>
+    </div>
     </div>
     <%--</div>--%>
     </form>
