@@ -409,8 +409,15 @@
 //                    color: '#3E576F'
 //                }
 //            }
-//        };
-
+        //        };
+        //处理字符串
+        function ControlString(tmp) {
+            var tmpString = tmp.toString();
+            for (var i = tmp.toString().length; i < 7; i++) {
+                tmpString = "&nbsp;" + tmpString;
+            }
+            return tmpString;
+        }
         function load() {
 
             //alert(1);
@@ -429,28 +436,28 @@
                     $("#HDRL").html(json.HDRL);
                     $("#FDRL").html(json.FDRL);
                     $("#SDRL").html(json.SDRL);
-                    $("#TYNRL").html(json.TYNRL);
-                    $("#FBSRL").html(json.FBSRL);
-                    $("#SRZRL").html(json.SRZRL);
+                    $("#TYNRL").html("&nbsp;" + json.TYNRL);
+                    $("#FBSRL").html("&nbsp;" + json.FBSRL);
+                    $("#SRZRL").html("&nbsp;&nbsp;" + json.SRZRL);
 
                     //总负荷 产业负荷
                     $("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
                     //$("#FDFH").html(json.FDFH);
-                    $("#HDFH").html(json.HDFH);
-                    $("#SDFH").html(json.SDFH);
-                    $("#TYNFH").html(json.TYNFH);
-                    $("#FBSFH").html(json.FBSFH);
-                    $("#SRZFH").html(json.SRZFH);
+                    $("#HDFH").html(ControlString(json.HDFH));
+                    $("#SDFH").html(ControlString(json.SDFH));
+                    $("#TYNFH").html(ControlString(json.TYNFH));
+                    $("#FBSFH").html(ControlString(json.FBSFH));
+                    $("#SRZFH").html(ControlString(json.SRZFH));
 
 
-                    //日月电量
+                    //日发电量
                     $("#DDL").html("<label>" + (json.DDL + json.HDDDL + json.SDDDL).toFixed(2) + "</label>");
-                    $("#FDDDL").html(json.FDDDL);
-                    $("#HDDDL").html(json.HDDDL);
-                    $("#SDDDL").html(json.SDDDL);
-                    $("#TYNDDL").html(json.TYNDDL);
-                    $("#FBSDDL").html(json.FBSDDL);
-                    $("#SRZDDL").html(json.SRZDDL);
+                    $("#FDDDL").html(ControlString(json.FDDDL));
+                    $("#HDDDL").html(ControlString(json.HDDDL));
+                    $("#SDDDL").html(ControlString(json.SDDDL));
+                    $("#TYNDDL").html(ControlString(json.TYNDDL));
+                    $("#FBSDDL").html(ControlString(json.FBSDDL));
+                    $("#SRZDDL").html(ControlString(json.SRZDDL));
 
                     $("#MDL").html("<label>" + ((json.MDL + json.HDMDL + json.SDMDL) / 10000).toFixed(2) + "</label>");
 
@@ -1396,11 +1403,11 @@
                         </tr>
                         <tr>
                             <td colspan="3" bgcolor="#f4f4f4">
-                                <div style="width: 350px; height: 200px; float:left; margin-left:20px;" id="container1">
+                                <div style="width: 30%; height: 200px; float:left; margin-left:1%;" id="container1">
                                 </div>
-                                <div style="width: 350px; height: 200px;float:left;  margin-left:30px; margin-right:30px;" id="container2">
+                                <div style="width: 30%; height: 200px;float:left;  margin-left:3%; margin-right:3%;" id="container2">
                                 </div>
-                                <div style="width: 350px; height: 200px;float:left;" id="container3">
+                                <div style="width: 30%; height: 200px;float:left;" id="container3">
                                 </div>
                             </td>
                             <%--<div style="width: 1000px; height: 230px; float: left; margin-top: 1px">
@@ -1441,39 +1448,45 @@
                     </a>
                 </dd>
             </dl>
-            <div style="position: absolute; width: 250px; height: 279px; top: 46%; left: 69%;">
+            <div style="position:absolute; width: 30%; height: 279px; margin-top:21%; margin-left:69%;">
                 <table style="color: White">
                     <tr>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  
-                                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
-                                <div id="hdss_progressbar" style="width: 80px; margin: auto">
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px; 
+                          <div style="width: 85px; height: 20px; float: left; border-radius: 5px; 
                                 text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
                                 <div id="sdss_progressbar" style="width: 80px; margin: auto">
                                 </div>
                             </div>
+                            
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                         <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  
+                                text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
+                                <div id="fdss_progressbar" style="width: 80px; margin: auto">
+                                </div>
+                            </div>
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                     <tr>
                         <td>
                         </td>
                     </tr>
@@ -1491,9 +1504,9 @@
                                      </a>
                             </td>--%>
                         <td align="left">
-                            <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  
+                           <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  
                                 text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
-                                <div id="fdss_progressbar" style="width: 80px; margin: auto">
+                                <div id="hdss_progressbar" style="width: 80px; margin: auto">
                                 </div>
                             </div>
                         </td>

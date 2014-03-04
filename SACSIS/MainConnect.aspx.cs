@@ -71,7 +71,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            HDFH=Math.Round(tmp/count,3);
+            HDFH=Math.Round(tmp/count,2);
             tmp=0;
             count=0;
              
@@ -84,7 +84,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            SDFH=Math.Round(tmp/count,3);
+            SDFH=Math.Round(tmp/count,2);
             tmp=0;
             count=0;
             
@@ -96,7 +96,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            FDFH = Math.Round(tmp / count, 3);
+            FDFH = Math.Round(tmp / count, 2);
             tmp=0;
             count=0;
 
@@ -108,7 +108,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            TYNFH = Math.Round(tmp / count, 3);
+            TYNFH = Math.Round(tmp / count, 2);
             tmp=0;
             count=0;
 
@@ -120,7 +120,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            FBSFH = Math.Round(tmp / count, 3);
+            FBSFH = Math.Round(tmp / count, 2);
             tmp = 0;
             count = 0;
 
@@ -132,7 +132,7 @@ namespace WebApplication2
                 tmp += double.Parse(value.ToString());
                 count++;
             }
-            SRZFH = Math.Round(tmp / count, 3);
+            SRZFH = Math.Round(tmp / count, 2);
              
 
             double ZFH = pbll.GetPointVal(new string[] { "HDXN:00CC0001" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0]*10;
