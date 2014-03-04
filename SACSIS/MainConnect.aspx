@@ -14,7 +14,6 @@
     <script src="../Js/highcharts-more.js" type="text/javascript"></script>
     <script src="../Js/exporting.js" type="text/javascript"></script>
     <style type="text/css">
-        
         #tabId td
         {
             border: solid thin #6BA5BD;
@@ -80,7 +79,7 @@
         {
             background: transparent url(img/lm.gif) no-repeat 0 0;
         }
-         body
+        body
         {
             height: 100%;
             overflow: auto;
@@ -95,131 +94,133 @@
             margin: 0px;
             padding: 0px;
             background-color: #f4f4f4;
-			background-image:url(img/map_bg_1.jpg);
+            background-image: url(img/map_bg_1.jpg);
         }
-		.div_title
-		{
-			background-image:url(img/map_bg_2.jpg);
-			background-repeat:repeat-x;
-			height:31px;
-			color:#333333;
-			font-family:"微软雅黑";
-			font-size:19px;
-		}
-		.map
-		{
-			background-image:url(img/map_bg_1.jpg);
-			
-		}
-		.text_1
-		{
-			color:#333333;
-			font:Arial, Helvetica, sans-serif;
-			font-size:28px;
-			position: absolute; 
-			top: 38px; 
-			left: 20px;
-		}
-		.text_2
-		{
-			color:#0189ff;
-			font:"Arial Black", Gadget, sans-serif;
-			font-size:40px;
-			display:inline;
-			font-weight:bold;
-		}
-		.div_title_1
-		{
-			background-image:url(img/DataZL_title_1.jpg);
-			background-repeat:no-repeat;
-			background-color:#0568bd;
-			background-position:top left;
-			width:197px;
-			height:84px;
-			position: relative; display: block;
-		}
-		.div_title_2
-		{
-			background-image:url(img/DataZL_title_2.jpg);
-			background-repeat:no-repeat;
-			background-color:#0568bd;
-			background-position:top left;
-			width:192px;
-			height:84px;
-			position: relative; display: block;
-		}
-		.div_title_3
-		{
-			background-image:url(img/DataZL_title_3.jpg);
-			background-repeat:no-repeat;
-			background-color:#0568bd;
-			background-position:top left;
-			width:195px;
-			height:84px;
-			position: relative; display: block;
-		}
-		.div_title_4
-		{
-			background-image:url(img/DataZL_title_4.jpg);
-			background-repeat:no-repeat;
-			background-color:#0568bd;
-			background-position:top left;
-			width:195px;
-			height:84px;
-			position: relative; display: block;
-		}
-		.div_title_5
-		{
-			background-image:url(img/DataZL_title_5.jpg);
-			background-repeat:no-repeat;
-			background-color:#0568bd;
-			background-position:top left;
-			width:199px;
-			height:84px;
-			position: relative; display: block;
-		}
-		.div_title_6
-		{
-			background-color:#f4f4f4;
-			color:#333333;
-			font-family:"微软雅黑";    
-			font-size:22px;
-			height:27px;
-		}
-		.div_fg
-		{
-			background-image:url(img/DataZL_1.jpg);
-			background-repeat:no-repeat;
-			background-color:#0568bd;
-			width:4px;
-			height:84px;
-		}
-		.div_table_1
-		{
-			background-image:url(img/DataZL_2.jpg);
-			background-repeat:repeat-x;
-			color:#333333;
-			font-family:"微软雅黑";    
-			font-size:18px;
-			height:43px;
-		}
-		.div_table_2
-		{
-			background-image:url(img/DataZL_4.jpg);
-			background-repeat:repeat-x;
-			color:#333333;
-			font-family:"微软雅黑";    
-			font-size:30px;
-			height:56px;
-		}
-		.div_table_2_1
-		{
-			background-image:url(img/DataZL_4.jpg);
-			background-repeat:repeat-x;
-			height:56px;
-		}
-		
-		
+        .div_title
+        {
+            background-image: url(img/map_bg_2.jpg);
+            background-repeat: repeat-x;
+            height: 31px;
+            color: #333333;
+            font-family: "微软雅黑";
+            font-size: 19px;
+        }
+        .map
+        {
+            background-image: url(img/map_bg_1.jpg);
+        }
+        .text_1
+        {
+            color: #333333;
+            font: Arial, Helvetica, sans-serif;
+            font-size: 28px;
+            position: absolute;
+            top: 38px;
+            left: 20px;
+        }
+        .text_2
+        {
+            color: #0189ff;
+            font: "Arial Black" , Gadget, sans-serif;
+            font-size: 40px;
+            display: inline;
+            font-weight: bold;
+        }
+        .div_title_1
+        {
+            background-image: url(img/DataZL_title_1.jpg);
+            background-repeat: no-repeat;
+            background-color: #0568bd;
+            background-position: top left;
+            width: 197px;
+            height: 84px;
+            position: relative;
+            display: block;
+        }
+        .div_title_2
+        {
+            background-image: url(img/DataZL_title_2.jpg);
+            background-repeat: no-repeat;
+            background-color: #0568bd;
+            background-position: top left;
+            width: 192px;
+            height: 84px;
+            position: relative;
+            display: block;
+        }
+        .div_title_3
+        {
+            background-image: url(img/DataZL_title_3.jpg);
+            background-repeat: no-repeat;
+            background-color: #0568bd;
+            background-position: top left;
+            width: 195px;
+            height: 84px;
+            position: relative;
+            display: block;
+        }
+        .div_title_4
+        {
+            background-image: url(img/DataZL_title_4.jpg);
+            background-repeat: no-repeat;
+            background-color: #0568bd;
+            background-position: top left;
+            width: 195px;
+            height: 84px;
+            position: relative;
+            display: block;
+        }
+        .div_title_5
+        {
+            background-image: url(img/DataZL_title_5.jpg);
+            background-repeat: no-repeat;
+            background-color: #0568bd;
+            background-position: top left;
+            width: 199px;
+            height: 84px;
+            position: relative;
+            display: block;
+        }
+        .div_title_6
+        {
+            background-color: #f4f4f4;
+            color: #333333;
+            font-family: "微软雅黑";
+            font-size: 22px;
+            height: 27px;
+        }
+        .div_fg
+        {
+            background-image: url(img/DataZL_1.jpg);
+            background-repeat: no-repeat;
+            background-color: #0568bd;
+            width: 4px;
+            height: 84px;
+        }
+        .div_table_1
+        {
+            background-image: url(img/DataZL_2.jpg);
+            background-repeat: repeat-x;
+            color: #333333;
+            font-family: "微软雅黑";
+            font-size: 18px;
+            height: 43px;
+        }
+        .div_table_2
+        {
+            background-image: url(img/DataZL_4.jpg);
+            background-repeat: repeat-x;
+            color: #333333;
+            font-family: "微软雅黑";
+            font-size: 30px;
+            height: 56px;
+        }
+        .div_table_2_1
+        {
+            background-image: url(img/DataZL_4.jpg);
+            background-repeat: repeat-x;
+            height: 56px;
+        }
     </style>
     <script type="text/javascript" language="javascript">
 
@@ -233,86 +234,182 @@
 
         });
         Highcharts.theme = {
-            colors: ["#514F78", "#42A07B", "#9B5E4A", "#72727F", "#1F949A", "#82914E", "#86777F", "#42A07B"],
+            colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
             chart: {
-                className: 'skies',
-                borderWidth: 0,
-                plotShadow: true,
-                //plotBackgroundImage: 'img/skies.jpg',
-                plotBackgroundColor: {
-                    linearGradient: [0, 0, 250, 500],
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
                     stops: [
-            [0, 'rgba(255, 255, 255, 1)'],
-            [1, 'rgba(255, 255, 255, 0)']
+            [0, 'rgb(255, 255, 255)'],
+            [1, 'rgb(240, 240, 255)']
          ]
                 },
+                borderWidth: 1,
+                plotBackgroundColor: 'rgba(255, 255, 255, .9)',
+                plotShadow: true,
                 plotBorderWidth: 1
             },
             title: {
                 style: {
-                    color: '#3E576F',
-                    font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                    color: '#000',
+                    font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
                 }
             },
             subtitle: {
                 style: {
-                    color: '#6D869F',
-                    font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                    color: '#666666',
+                    font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
                 }
             },
             xAxis: {
-                gridLineWidth: 0,
-                lineColor: '#C0D0E0',
-                tickColor: '#C0D0E0',
+                gridLineWidth: 1,
+                lineColor: '#000',
+                tickColor: '#000',
                 labels: {
                     style: {
-                        color: '#666',
-                        fontWeight: 'bold'
+                        color: '#000',
+                        font: '11px Trebuchet MS, Verdana, sans-serif'
                     }
                 },
                 title: {
                     style: {
-                        color: '#666',
-                        font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                        color: '#333',
+                        fontWeight: 'bold',
+                        fontSize: '10px',
+                        fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+
                     }
                 }
             },
             yAxis: {
-                alternateGridColor: 'rgba(255, 255, 255, .5)',
-                lineColor: '#C0D0E0',
-                tickColor: '#C0D0E0',
+                minorTickInterval: 'auto',
+                lineColor: '#000',
+                lineWidth: 1,
                 tickWidth: 1,
+                tickColor: '#000',
                 labels: {
                     style: {
-                        color: '#666',
-                        fontWeight: 'bold'
+                        color: '#000',
+                        font: '11px Trebuchet MS, Verdana, sans-serif'
                     }
                 },
                 title: {
                     style: {
-                        color: '#666',
-                        font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                        color: '#333',
+                        fontWeight: 'bold',
+                        fontSize: '10px',
+                        fontFamily: 'Trebuchet MS, Verdana, sans-serif'
                     }
                 }
             },
             legend: {
                 itemStyle: {
                     font: '9pt Trebuchet MS, Verdana, sans-serif',
-                    color: '#3E576F'
+                    color: 'black'
+
                 },
                 itemHoverStyle: {
-                    color: 'black'
+                    color: '#039'
                 },
                 itemHiddenStyle: {
-                    color: 'silver'
+                    color: 'gray'
                 }
             },
             labels: {
                 style: {
-                    color: '#3E576F'
+                    color: '#99b'
+                }
+            },
+
+            navigation: {
+                buttonOptions: {
+                    theme: {
+                        stroke: '#CCCCCC'
+                    }
                 }
             }
         };
+
+//        Highcharts.theme = {
+//            colors: ["#058dc7", "#50b432", "#ed561b", "#72727F", "#1F949A", "#82914E", "#86777F", "#42A07B"],
+//            chart: {
+//                className: 'skies',
+//                borderWidth: 2,
+//                plotShadow: false,
+//                //plotBackgroundImage: 'img/skies.jpg',
+////                plotBackgroundColor: {
+////                    linearGradient: [0, 0, 250, 500],
+////                    stops: [
+////            [0, 'rgba(255, 255, 255, 1)'],
+////            [1, 'rgba(255, 255, 255, 0)']
+////         ]
+////                },
+//                plotBorderWidth: 2
+//            },
+//            title: {
+//                style: {
+//                    color: '#3E576F',
+//                    font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+//                }
+//            },
+//            subtitle: {
+//                style: {
+//                    color: '#6D869F',
+//                    font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+//                }
+//            },
+//            xAxis: {
+//                gridLineWidth: 0,
+//                lineColor: '#C0D0E0',
+//                tickColor: '#C0D0E0',
+//                labels: {
+//                    style: {
+//                        color: '#666',
+//                        fontWeight: 'bold'
+//                    }
+//                },
+//                title: {
+//                    style: {
+//                        color: '#666',
+//                        font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+//                    }
+//                }
+//            },
+//            yAxis: {
+//                alternateGridColor: 'rgba(255, 255, 255, .5)',
+//                lineColor: '#C0D0E0',
+//                tickColor: '#C0D0E0',
+//                tickWidth: 1,
+//                labels: {
+//                    style: {
+//                        color: '#666',
+//                        fontWeight: 'bold'
+//                    }
+//                },
+//                title: {
+//                    style: {
+//                        color: '#666',
+//                        font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+//                    }
+//                }
+//            },
+//            legend: {
+//                itemStyle: {
+//                    font: '9pt Trebuchet MS, Verdana, sans-serif',
+//                    color: '#3E576F'
+//                },
+//                itemHoverStyle: {
+//                    color: 'black'
+//                },
+//                itemHiddenStyle: {
+//                    color: 'silver'
+//                }
+//            },
+//            labels: {
+//                style: {
+//                    color: '#3E576F'
+//                }
+//            }
+//        };
 
         function load() {
 
@@ -422,7 +519,7 @@
                             text: ''
                         },
                         colors: [
-                '#32E1FC', '#0E91C9', '#023668'
+                '#058dc7', '#50b432', '#ed561b'
                 ],
                         xAxis: {
                             type: 'datetime',
@@ -436,10 +533,7 @@
                             title: {
                                 text: ''
                             },
-                            min: 0,
-                            minorGridLineWidth: 0,
-                            gridLineWidth: 0,
-                            alternateGridColor: null 
+                            min: 0 
                         },
                         tooltip: {
                             valueSuffix: ' MW',
@@ -496,7 +590,7 @@
                             text: ''
                         },
                         colors: [
-                '#32E1FC', '#0E91C9', '#023668'
+                '#058dc7', '#50b432', '#ed561b'
                 ],
                         xAxis: {
                             type: 'datetime',
@@ -510,10 +604,7 @@
                             title: {
                                 text: ''
                             },
-                            min: 0,
-                            minorGridLineWidth: 0,
-                            gridLineWidth: 0,
-                            alternateGridColor: null 
+                            min: 0 
                         },
                         tooltip: {
                             valueSuffix: ' MW',
@@ -543,7 +634,7 @@
                         , exporting: {
                             enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
                         }
-            
+
                     });
                 }
             });
@@ -564,7 +655,7 @@
                             text: ''
                         },
                         colors: [
-                '#2F7FD8', '#0E91C9', '#023668'
+                '#058dc7', '#50b432', '#ed561b'
                 ],
                         xAxis: {
                             type: 'datetime',
@@ -578,10 +669,7 @@
                             title: {
                                 text: ''
                             },
-                            min: 0,
-                            minorGridLineWidth: 0,
-                            gridLineWidth: 0,
-                            alternateGridColor: null 
+                            min: 0 
                         },
                         tooltip: {
                             valueSuffix: ' MW',
@@ -673,7 +761,7 @@
             })
             $("#sdss_progressbar").progressbar({
                 value: 0
-            }) 
+            })
             $("#fdss_progressbar").progressbar({
                 value: 0
             })
@@ -682,7 +770,7 @@
             })
             $("#tynss_progressbar").progressbar({
                 value: 0
-            }) 
+            })
             $("#srzss_progressbar").progressbar({
                 value: 0
             })
@@ -698,7 +786,7 @@
                     text: ''
                 },
                 colors: [
-                '#32E1FC', '#0E91C9', '#023668'
+                '#058dc7', '#50b432', '#ed561b'
                 ],
                 xAxis: {
                     type: 'datetime',
@@ -712,10 +800,7 @@
                     title: {
                         text: ''
                     },
-                    min: 0,
-                    minorGridLineWidth: 0,
-                    gridLineWidth: 0,
-                    alternateGridColor: null 
+                    min: 0
                 },
                 tooltip: {
                     valueSuffix: ' MW',
@@ -779,7 +864,7 @@
                     text: ''
                 },
                 colors: [
-                '#32E1FC', '#0E91C9', '#023668'
+                '#058dc7', '#50b432', '#ed561b'
                 ],
                 xAxis: {
                     type: 'datetime',
@@ -793,10 +878,7 @@
                     title: {
                         text: ''
                     },
-                    min: 0,
-                    minorGridLineWidth: 0,
-                    gridLineWidth: 0,
-                    alternateGridColor: null 
+                    min: 0 
                 },
                 tooltip: {
                     valueSuffix: ' MW',
@@ -860,7 +942,7 @@
                     text: ''
                 },
                 colors: [
-                '#2F7FD8', '#0E91C9', '#023668'
+                '#058dc7', '#50b432', '#ed561b'
                 ],
                 xAxis: {
                     type: 'datetime',
@@ -874,11 +956,8 @@
                     title: {
                         text: ''
                     },
-                    min: 0,
-                    minorGridLineWidth: 0,
-                    gridLineWidth: 0,
-                    alternateGridColor: null 
-                    
+                    min: 0 
+
                 },
                 tooltip: {
                     valueSuffix: ' MW',
@@ -937,12 +1016,12 @@
                 $("#div1").height($("#div1").height() + 765);
                 //$("#div2").height($("#div2").height() + 765);
                 //$("#gmap").height($("#gmap").height() + 765);
-                $("#gmap").css("display","block");
+                $("#gmap").css("display", "block");
             }
             if (p == "top") {
                 $("#top").hide();
                 $("#map").show();
-               // $("#box").hide();
+                // $("#box").hide();
                 $("#div1").height($("#div1").height() - 765);
                 //$("#div2").height($("#div2").height() - 765);
                 //$("#gmap").height($("#gmap").height() - 765);
@@ -1075,89 +1154,256 @@
                 </div>
             </div>
         </div>--%>
-        
-        <table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4">
-<tr><td><div>
-<table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#0568bd">
-<tr>
-<td class="div_title_1"><div class="text_1" id="ZRL">12345678</div></td>
-<td class="div_fg"></td>
-<td class="div_title_2"><div class="text_1" id="ZFH">12345678</div></td>
-<td class="div_fg"></td>
-<td class="div_title_3"><div class="text_1" id="DDL">1234567</div></td>
-<td class="div_fg"></td>
-<td class="div_title_4"><div class="text_1" id="MDL">1234567</div></td>
-<td class="div_fg"></td>
-<td class="div_title_5"><div class="text_1" id="YDL">1234567</div></td>
-</tr>
-</table></div>
-</td></tr>
-<tr><td><div>
-<table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
-<tr>
-<td class="div_table_1"></td>
-<td class="div_table_1" align="center" valign="middle">装机容量</td>
-<td class="div_table_1" align="center" valign="middle">日发电量&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td class="div_table_1" align="center" valign="middle">实时负荷&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td class="div_table_1" align="center" valign="middle">计划完成率&nbsp;&nbsp;&nbsp;&nbsp;</td>
-</tr>
-<tr>
-<td class="div_table_2" align="center" valign="middle">火&nbsp;&nbsp;&nbsp;电</td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="HDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="left"  ><div id="hd_progressbar"></div></td>
-</tr>
-<tr>
-<td class="div_table_2" align="center" valign="middle">水&nbsp;&nbsp;&nbsp;电</td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="left"  ><div id="sd_progressbar"></div></td>
-</tr>
-<tr>
-<td class="div_table_2" align="center" valign="middle">风&nbsp;&nbsp;&nbsp;电</td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FDFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="left"  ><div id="fd_progressbar"></div></td>
-</tr>
-<tr>
-<td class="div_table_2" align="center" valign="middle">太阳能</td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="TYNFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="left"  ><div id="tyn_progressbar"></div></td>
-</tr>
-<tr>
-<td class="div_table_2" align="center" valign="middle">分布式</td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="FBSFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="left"  ><div id="fbs_progressbar"></div></td>
-</tr>
-<tr>
-<td class="div_table_2" align="center" valign="middle">其&nbsp;&nbsp;&nbsp;他</td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZRL">123456</div><div style="display:inline"><img src="img/DataZL_mw.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZDDL">123456</div><div style="display:inline"><img src="img/DataZL_wkwh.jpg" /></div></td>
-<td class="div_table_2_1" align="center" valign="middle"><div class="text_2" id="SRZFH">123456</div><div style="display:inline"><img src="img/DataZL_wkw.jpg" /></div></td>
-<td class="div_table_2_1" align="left"  ><div id="qt_progressbar"></div></td>
-</tr>
-</table>
-</div></td></tr>
-<tr><td><div>
-<table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4">
-<tr>
-<td colspan="3" style="background-image:url(img/DataZL_3.jpg); background-repeat:repeat-x; height:5px;"></td>
-</tr>
-<tr>
-<td colspan="3" align="left" valign="middle" class="div_title_6" >&nbsp;&nbsp;实时负荷</td>
-</tr>
-<tr>
-<td align="center" valign="middle" bgcolor="#f4f4f4"><div style="width:300px; height:200px;" id="container1"></div></td>
-<td align="center" valign="middle" bgcolor="#f4f4f4"><div style="width:300px; height:200px;" id="container2"></div></td>
-<td align="center" valign="middle" bgcolor="#f4f4f4"><div style="width:300px; height:200px;" id="container3"></div></td>
-<%--<div style="width: 1000px; height: 230px; float: left; margin-top: 1px">
+    <table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4">
+        <tr>
+            <td>
+                <div>
+                    <table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#0568bd">
+                        <tr>
+                            <td class="div_title_1">
+                                <div class="text_1" id="ZRL">
+                                    12345678</div>
+                            </td>
+                            <td class="div_fg">
+                            </td>
+                            <td class="div_title_2">
+                                <div class="text_1" id="ZFH">
+                                    12345678</div>
+                            </td>
+                            <td class="div_fg">
+                            </td>
+                            <td class="div_title_3">
+                                <div class="text_1" id="DDL">
+                                    1234567</div>
+                            </td>
+                            <td class="div_fg">
+                            </td>
+                            <td class="div_title_4">
+                                <div class="text_1" id="MDL">
+                                    1234567</div>
+                            </td>
+                            <td class="div_fg">
+                            </td>
+                            <td class="div_title_5">
+                                <div class="text_1" id="YDL">
+                                    1234567</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+                        <tr>
+                            <td class="div_table_1">
+                            </td>
+                            <td class="div_table_1" align="center" valign="middle">
+                                装机容量
+                            </td>
+                            <td class="div_table_1" align="center" valign="middle">
+                                日发电量&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td class="div_table_1" align="center" valign="middle">
+                                实时负荷&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td class="div_table_1" align="center" valign="middle">
+                                计划完成率&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="div_table_2" align="center" valign="middle">
+                                火&nbsp;&nbsp;&nbsp;电
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="HDRL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_mw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="HDDDL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkwh.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="HDFH">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="left">
+                                <div id="hd_progressbar">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="div_table_2" align="center" valign="middle">
+                                水&nbsp;&nbsp;&nbsp;电
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="SDRL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_mw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="SDDDL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkwh.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="SDFH">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="left">
+                                <div id="sd_progressbar">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="div_table_2" align="center" valign="middle">
+                                风&nbsp;&nbsp;&nbsp;电
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="FDRL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_mw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="FDDDL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkwh.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="FDFH">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="left">
+                                <div id="fd_progressbar">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="div_table_2" align="center" valign="middle">
+                                太阳能
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="TYNRL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_mw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="TYNDDL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkwh.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="TYNFH">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="left">
+                                <div id="tyn_progressbar">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="div_table_2" align="center" valign="middle">
+                                分布式
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="FBSRL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_mw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="FBSDDL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkwh.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="FBSFH">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="left">
+                                <div id="fbs_progressbar">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="div_table_2" align="center" valign="middle">
+                                其&nbsp;&nbsp;&nbsp;他
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="SRZRL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_mw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="SRZDDL">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkwh.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="center" valign="middle">
+                                <div class="text_2" id="SRZFH">
+                                    123456</div>
+                                <div style="display: inline">
+                                    <img src="img/DataZL_wkw.jpg" /></div>
+                            </td>
+                            <td class="div_table_2_1" align="left">
+                                <div id="qt_progressbar">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <table height="100%" width="100%" style="background-color: #f4f4f4" border="0" cellpadding="0"
+                        cellspacing="0" bgcolor="#f4f4f4">
+                        <tr>
+                            <td colspan="3" style="background-image: url(img/DataZL_3.jpg); background-repeat: repeat-x;
+                                height: 5px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="left" valign="middle" class="div_title_6">
+                                &nbsp;&nbsp;实时负荷
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" bgcolor="#f4f4f4">
+                                <div style="width: 350px; height: 200px; float:left; margin-left:20px;" id="container1">
+                                </div>
+                                <div style="width: 350px; height: 200px;float:left;  margin-left:30px; margin-right:30px;" id="container2">
+                                </div>
+                                <div style="width: 350px; height: 200px;float:left;" id="container3">
+                                </div>
+                            </td>
+                            <%--<div style="width: 1000px; height: 230px; float: left; margin-top: 1px">
             <div style="width: 1000px; height: 35px; float: left; background-image: url(img/20131211144004.png);
                 font-size: 19px; color: White; line-height: 30px">
                 &nbsp;负荷曲线
@@ -1171,24 +1417,24 @@
                 </div>
             </div>
         </div>--%>
-</tr>
-</table>
-</div></td></tr>
-</table>
-   <%-- <div id="div2" style="width: 100%; height: 100%; float: left;">--%>
-        <div  class="div_title" >
-            &nbsp;项目分布<a name="A1" id="A1">&nbsp;</a> <a id="top" href="#A0" onclick="Jump('top')"
-                style="display: none; float: right;">
-                <img style="position: relative; margin-top: 10px; margin-right: 5px; border: 0;"
-                    src="img/up.png" /></a><a id="map" href="#A1" onclick="Jump('map')" style="float: right;"><img
-                        style="position: relative; margin-top: 10px; margin-right: 5px; border: 0" src="img/down.png" /></a>
-        </div>
-        
-        <div  id="gmap"  style="display:none;">
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <%-- <div id="div2" style="width: 100%; height: 100%; float: left;">--%>
+    <div class="div_title">
+        &nbsp;项目分布<a name="A1" id="A1">&nbsp;</a> <a id="top" href="#A0" onclick="Jump('top')"
+            style="display: none; float: right;">
+            <img style="position: relative; margin-top: 10px; margin-right: 5px; border: 0;"
+                src="img/up.png" /></a><a id="map" href="#A1" onclick="Jump('map')" style="float: right;"><img
+                    style="position: relative; margin-top: 10px; margin-right: 5px; border: 0" src="img/down.png" /></a>
+    </div>
+    <div id="gmap" style="display: none;">
         <div id="box" style="width: 100%; height: 100%; float: left; position: relative;">
             <dl name="gmap">
                 <dt><a href="#nogo" name="title2" id="title2" onfocus="this.blur()"></a></dt>
-
                 <dd>
                     <a href="ProvinceConnect.aspx" id="lmg" title="内蒙古" href="#" onfocus="this.blur()">
                     </a>
@@ -1333,9 +1579,8 @@
                 </table>
             </div>
         </div>
-        </div>
+    </div>
     <%--</div>--%>
-     
     </form>
 </body>
 </html>
