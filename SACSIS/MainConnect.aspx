@@ -728,7 +728,7 @@
                 success: function (json) {
                     //json = eval("("+json+")");
                     var json = $.parseJSON(json);
-                    $("#FDFH").html(json.FDFH);
+                    $("#FDFH").html(ControlString(json.FDFH));
 
                 },
                 error: function (x, e) {
