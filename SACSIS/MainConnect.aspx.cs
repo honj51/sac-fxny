@@ -53,12 +53,88 @@ namespace WebApplication2
 
             //总负荷 产业负荷
             //double FDFH = GetDlFh("'风电'", "PERIOD_TAG","");
-            double FDFH=GetFDFHValueByTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
-            double HDFH = GetDlFh("'火电'", "PERIOD_TAG", "");
-            double SDFH = GetDlFh("'水电'", "PERIOD_TAG", "");
-            double TYNFH = GetDlFh("'太阳能'", "PERIOD_TAG", "");
-            double FBSFH = GetDlFh("'分布式'", "PERIOD_TAG", "");
-            double SRZFH = GetDlFh("'生物质'", "PERIOD_TAG", "");
+            //double FDFH=GetFDFHValueByTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            //double HDFH =  GetDlFh("'火电'", "PERIOD_TAG", "");
+            //double SDFH =  GetDlFh("'水电'", "PERIOD_TAG", "");
+            //double TYNFH = GetDlFh("'太阳能'", "PERIOD_TAG", "");
+            //double FBSFH = GetDlFh("'分布式'", "PERIOD_TAG", "");
+            //double SRZFH = GetDlFh("'生物质'", "PERIOD_TAG", "");
+            ArrayList fh=new ArrayList();
+            double tmp=0;
+            int count=0;
+
+            //火电
+            double HDFH =0;
+            fh =GetChartsValues("'火电'");
+            foreach(var value in fh)
+            {
+                tmp+= double.Parse(value.ToString());
+                count++;
+            }
+            HDFH=Math.Round(tmp/count,3);
+            tmp=0;
+            count=0;
+             
+           
+            //水电
+            double SDFH=0;
+            fh =GetChartsValues("'水电'");
+            foreach(var value in fh)
+            {
+                tmp+= double.Parse(value.ToString());
+                count++;
+            }
+            SDFH=Math.Round(tmp/count,3);
+            tmp=0;
+            count=0;
+            
+            //风电
+            double FDFH = 0;
+            fh =GetChartsValues("'风电'");
+            foreach(var value in fh)
+            {
+                tmp+= double.Parse(value.ToString());
+                count++;
+            }
+            FDFH = Math.Round(tmp / count, 3);
+            tmp=0;
+            count=0;
+
+            //太阳能
+            double TYNFH = 0;
+            fh =GetChartsValues("'太阳能'");
+            foreach(var value in fh)
+            {
+                tmp+= double.Parse(value.ToString());
+                count++;
+            }
+            TYNFH = Math.Round(tmp / count, 3);
+            tmp=0;
+            count=0;
+
+            //分布式
+            double FBSFH = 0;
+            fh =GetChartsValues("'分布式'");
+            foreach(var value in fh)
+            {
+                tmp+= double.Parse(value.ToString());
+                count++;
+            }
+            FBSFH = Math.Round(tmp / count, 3);
+            tmp = 0;
+            count = 0;
+
+            //生物质
+            double SRZFH = 0;
+            fh = GetChartsValues("'生物质'");
+            foreach (var value in fh)
+            {
+                tmp += double.Parse(value.ToString());
+                count++;
+            }
+            SRZFH = Math.Round(tmp / count, 3);
+             
+
             double ZFH = pbll.GetPointVal(new string[] { "HDXN:00CC0001" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0]*10;
             ZFH = Math.Round(ZFH,2);
 

@@ -1207,7 +1207,7 @@
                                 日发电量&nbsp;&nbsp;&nbsp;&nbsp;
                             </td>
                             <td class="div_table_1" align="center" valign="middle">
-                                实时负荷&nbsp;&nbsp;&nbsp;&nbsp;
+                                日均负荷&nbsp;&nbsp;&nbsp;&nbsp;
                             </td>
                             <td class="div_table_1" align="center" valign="middle">
                                 计划完成率&nbsp;&nbsp;&nbsp;&nbsp;
