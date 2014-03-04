@@ -65,7 +65,7 @@ namespace WebApplication2
 
             //火电
             double HDFH =0;
-            fh =GetChartsValues("'火电'");
+            fh =Session["hd"]==null? GetChartsValues("'火电'"):(ArrayList)Session["hd"];
             foreach(var value in fh)
             {
                 tmp+= double.Parse(value.ToString());
@@ -78,7 +78,7 @@ namespace WebApplication2
            
             //水电
             double SDFH=0;
-            fh =GetChartsValues("'水电'");
+            fh =Session["sd"]==null? GetChartsValues("'水电'"):(ArrayList)Session["sd"];
             foreach(var value in fh)
             {
                 tmp+= double.Parse(value.ToString());
@@ -90,7 +90,7 @@ namespace WebApplication2
             
             //风电
             double FDFH = 0;
-            fh =GetChartsValues("'风电'");
+            fh =Session["fd"]==null?GetChartsValues("'风电'"): (ArrayList)Session["fd"];
             foreach(var value in fh)
             {
                 tmp+= double.Parse(value.ToString());
@@ -102,7 +102,7 @@ namespace WebApplication2
 
             //太阳能
             double TYNFH = 0;
-            fh =GetChartsValues("'太阳能'");
+            fh =Session["tyn"]==null?GetChartsValues("'太阳能'"):(ArrayList)Session["tyn"];
             foreach(var value in fh)
             {
                 tmp+= double.Parse(value.ToString());
@@ -114,7 +114,7 @@ namespace WebApplication2
 
             //分布式
             double FBSFH = 0;
-            fh =GetChartsValues("'分布式'");
+            fh =Session["fbs"]==null?GetChartsValues("'分布式'"):(ArrayList)Session["fbs"];
             foreach(var value in fh)
             {
                 tmp+= double.Parse(value.ToString());
@@ -126,7 +126,7 @@ namespace WebApplication2
 
             //生物质
             double SRZFH = 0;
-            fh = GetChartsValues("'生物质'");
+            fh = Session["swz"]==null?GetChartsValues("'生物质'"):(ArrayList)Session["swz"];
             foreach (var value in fh)
             {
                 tmp += double.Parse(value.ToString());
@@ -246,20 +246,30 @@ namespace WebApplication2
         {
             List<Hashtable> listData = new List<Hashtable>();
             
+            //缓存数据供日均负荷使用
+            ArrayList tmpSession = new ArrayList();
             Hashtable ht = new Hashtable();
 
             if (chartNum == "1")
             {
                 ht.Add("name", "火电");
-                ht.Add("data", GetChartsValues("'火电'"));
+                tmpSession=GetChartsValues("'火电'");
+                Session["hd"] = tmpSession;
+                ht.Add("data", tmpSession);
+
                 listData.Add(ht);
                 ht = new Hashtable();
                 ht.Add("name", "风电");
-                ht.Add("data", GetChartsValues("'风电'"));
+                tmpSession=GetChartsValues("'风电'");
+                ht.Add("data", tmpSession);
+                Session["fd"] = tmpSession;
                 listData.Add(ht);
                 ht = new Hashtable();
                 ht.Add("name", "水电");
-                ht.Add("data", GetChartsValues("'水电'"));
+                tmpSession = GetChartsValues("'水电'");
+                ht.Add("data",tmpSession );
+                Session["sd"] = tmpSession;
+
                 listData.Add(ht);
             }
 
@@ -267,15 +277,24 @@ namespace WebApplication2
             {
                 ht = new Hashtable();
                 ht.Add("name", "分布式");
-                ht.Add("data", GetChartsValues("'分布式'"));
+                tmpSession=GetChartsValues("'分布式'");
+                ht.Add("data", tmpSession);
+                Session["fbs"] = tmpSession;
+                
                 listData.Add(ht);
                 ht = new Hashtable();
                 ht.Add("name", "太阳能");
-                ht.Add("data", GetChartsValues("'太阳能'"));
+                tmpSession = GetChartsValues("'太阳能'");
+                ht.Add("data", tmpSession);
+                Session["tyn"] = tmpSession;
+
                 listData.Add(ht);
                 ht = new Hashtable();
                 ht.Add("name", "生物质");
-                ht.Add("data", GetChartsValues("'生物质'"));
+                tmpSession = GetChartsValues("'生物质'");
+                ht.Add("data", tmpSession);
+                Session["swz"] = tmpSession;
+
                 listData.Add(ht);
             }
 
