@@ -71,7 +71,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            HDFH=Math.Round(tmp/count,2);
+            HDFH=Math.Round((tmp/count)/10,2);
             tmp=0;
             count=0;
              
@@ -84,7 +84,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            SDFH=Math.Round(tmp/count,2);
+            SDFH=Math.Round((tmp/count)/10,2);
             tmp=0;
             count=0;
             
@@ -96,7 +96,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            FDFH = Math.Round(tmp / count, 2);
+            FDFH = Math.Round((tmp / count)/10, 2);
             tmp=0;
             count=0;
 
@@ -108,7 +108,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            TYNFH = Math.Round(tmp / count, 2);
+            TYNFH = Math.Round((tmp / count)/10, 2);
             tmp=0;
             count=0;
 
@@ -120,7 +120,7 @@ namespace WebApplication2
                 tmp+= double.Parse(value.ToString());
                 count++;
             }
-            FBSFH = Math.Round(tmp / count, 2);
+            FBSFH = Math.Round((tmp / count)/10, 2);
             tmp = 0;
             count = 0;
 
@@ -132,7 +132,7 @@ namespace WebApplication2
                 tmp += double.Parse(value.ToString());
                 count++;
             }
-            SRZFH = Math.Round(tmp / count, 2);
+            SRZFH = Math.Round((tmp / count)/10, 2);
              
 
             double ZFH = pbll.GetPointVal(new string[] { "HDXN:00CC0001" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0]*10;
@@ -342,14 +342,14 @@ namespace WebApplication2
             DateTime stime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
             DateTime etime = DateTime.Now;
             TimeSpan ts = etime - stime; ;
-            int span = ts.Hours;
+            int span = (ts.Hours)*2;
 
             for (int i = 0; i <= span; i++)
             {
                 if (cy == "'总负荷'")
-                    arrData.Add(Math.Round(GetDlFh1(cy, "PERIOD_TAG", stime.AddHours(i).ToString("yyyy-MM-dd HH:mm:00"))*10 + GetDlFh1("'水电'", "PERIOD_TAG", stime.AddHours(i).ToString("yyyy-MM-dd HH:mm:00")) + GetDlFh1("'火电'", "PERIOD_TAG", stime.AddHours(i).ToString("yyyy-MM-dd HH:mm:00")),3));
+                    arrData.Add(Math.Round(GetDlFh1(cy, "PERIOD_TAG", stime.AddHours(i*0.5).ToString("yyyy-MM-dd HH:mm:00"))*10 + GetDlFh1("'水电'", "PERIOD_TAG", stime.AddHours(i).ToString("yyyy-MM-dd HH:mm:00")) + GetDlFh1("'火电'", "PERIOD_TAG", stime.AddHours(i).ToString("yyyy-MM-dd HH:mm:00")),3));
                 else
-                    arrData.Add(Math.Round(GetDlFh1(cy, "PERIOD_TAG", stime.AddHours(i).ToString("yyyy-MM-dd HH:mm:00")),3));
+                    arrData.Add(Math.Round(GetDlFh1(cy, "PERIOD_TAG", stime.AddHours(i * 0.5).ToString("yyyy-MM-dd HH:mm:00")), 3));
             }
             return arrData;
         }
@@ -470,7 +470,7 @@ namespace WebApplication2
             tagsValues = pbll.GetPointVal(tags, time);
             double ss = 0;
             if (tagsValues.Length > 0)
-                ss = Math.Round(tagsValues.Sum(), 2);
+                ss = Math.Round(tagsValues.Sum()/10, 2);
 
             return ss;
         }

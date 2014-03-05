@@ -562,7 +562,7 @@
                                 marker: {
                                     enabled: false
                                 },
-                                pointInterval: 3600000, // one hour
+                                pointInterval: 1800000, // 半小时
                                 pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
                             }
                         },
@@ -633,7 +633,7 @@
                                 marker: {
                                     enabled: false
                                 },
-                                pointInterval: 3600000, // one hour
+                                pointInterval: 1800000, // 半小时
                                 pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
                             }
                         },
@@ -700,7 +700,7 @@
                                 },
                                 //                                pointInterval: 3600000, // one hour
                                 //                                pointStart: Date.UTC(2009, 9, 6, 0, 0, 0)
-                                pointInterval: 3600000, // one hour
+                                pointInterval: 1800000, // 半小时
                                 pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
                             }
                         },
@@ -1035,6 +1035,10 @@
                 $("#gmap").css("display", "none");
 
             }
+        }
+        //跳转到风电
+        function GoToFd() {
+            window.location.href = 'Connect/FDConnect.aspx?tag=1';
         }
     </script>
 </head>
@@ -1448,7 +1452,7 @@
                     </a>
                 </dd>
             </dl>
-            <div style="position:absolute; width: 30%; height: 279px; margin-top:21%; margin-left:69%;">
+            <div style="position:absolute; width: 300px; height: 279px; margin-top:282px; margin-left:930px;">
                 <table style="color: White">
                     <tr>
                         <td align="left">
@@ -1474,12 +1478,12 @@
                     </tr>
                     <tr>
                         <td align="left">
-                         <div style="width: 85px; height: 20px; float: left; border-radius: 5px;  
+                      
+                         <div onclick="GoToFd()" onmousemove=""  style="width: 85px; height: 20px;float: left; border-radius: 5px;  
                                 text-align: left; font-size: 12px; color: #002E5C; padding-top: 2px">
                                 <div id="fdss_progressbar" style="width: 80px; margin: auto">
                                 </div>
                             </div>
-                          
                         </td>
                     </tr>
                     <tr>
