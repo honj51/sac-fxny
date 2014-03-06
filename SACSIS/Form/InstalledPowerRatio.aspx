@@ -181,8 +181,8 @@
                     //发电量比率
                     $('#DivFDLBL').highcharts({
                         chart: {
-                           // plotBackgroundColor: null,
-                           // plotBorderWidth: null,
+                            // plotBackgroundColor: null,
+                            // plotBorderWidth: null,
                             plotShadow: false,
                             margin: [5, 80, 5, 5]
                         },
@@ -230,152 +230,218 @@
                             verticalAlign: 'middle'
                         }
                     });
-
-                    //投产比率
-                    var colors = Highcharts.getOptions().colors;
-                    categories = ['风电', '火电', '水电', '太阳能', '分布式', '生物质'];
-                    name = 'Browser brands';
-                    data = [{
-                        y: $.parseJSON(data.tcRl)[0].y,
-                        color: colors[0],
-                        drilldown: {
-                            name: '风电',
-                            categories: ['风电投产', '风电在建', '风电接入'],
-                            data: $.parseJSON(data.tcRl)[0].data,
-                            color: colors[0]
-                        }
-                    }, {
-                        y: $.parseJSON(data.tcRl)[1].y,
-                        color: colors[1],
-                        drilldown: {
-                            name: '火电',
-                            categories: ['火电投产', '火电在建', '火电接入'],
-                            data: $.parseJSON(data.tcRl)[1].data,
-                            color: colors[1]
-                        }
-                    }, {
-                        y: $.parseJSON(data.tcRl)[2].y,
-                        color: colors[2],
-                        drilldown: {
-                            name: '水电',
-                            categories: ['水电投产', '水电在建', '水电接入'],
-                            data: $.parseJSON(data.tcRl)[2].data,
-                            color: colors[2]
-                        }
-                    }, {
-                        y: $.parseJSON(data.tcRl)[3].y,
-                        color: colors[3],
-                        drilldown: {
-                            name: '太阳能',
-                            categories: ['太阳能投产', '太阳能在建', '太阳能接入'],
-                            data: $.parseJSON(data.tcRl)[3].data,
-                            color: colors[3]
-                        }
-                    }, {
-                        y: $.parseJSON(data.tcRl)[4].y,
-                        color: colors[4],
-                        drilldown: {
-                            name: '分布式',
-                            categories: ['分布式投产', '分布式在建', '分布式接入'],
-                            data: $.parseJSON(data.tcRl)[4].data,
-                            color: colors[4]
-                        }
-                    }, {
-                        y: $.parseJSON(data.tcRl)[5].y,
-                        color: colors[5],
-                        drilldown: {
-                            name: '生物质',
-                            categories: ['生物质投产', '生物质在建', '生物质接入'],
-                            data: $.parseJSON(data.tcRl)[5].data,
-                            color: colors[4]
-                        }
-                    }];
-
-
-                    // Build the data arrays
-                    var browserData = [];
-                    var versionsData = [];
-                    for (var i = 0; i < data.length; i++) {
-
-                        // add browser data
-                        browserData.push({
-                            name: categories[i],
-                            y: data[i].y,
-                            color: data[i].color
-                        });
-
-                        // add version data
-                        for (var j = 0; j < data[i].drilldown.data.length; j++) {
-                            var brightness = 0.2 - (j / data[i].drilldown.data.length) / 5;
-                            versionsData.push({
-                                name: data[i].drilldown.categories[j],
-                                y: data[i].drilldown.data[j],
-                                color: Highcharts.Color(data[i].color).brighten(brightness).get()
-                            });
-                        }
-                    }
-
-                    // Create the chart
-                    $('#DivTCBL').highcharts({
+                    alert($.parseJSON(data.consumeString));
+                    //投产比率柱状图
+                    $('#DivTC').highcharts({
                         chart: {
-                            type: 'pie',
-                            plotShadow: false
-
+                            type: 'column'
                         },
                         title: {
-                            text: '投产情况比率'
+                            text: '投产比率柱状图'
+                        },
+                        xAxis: {
+                            categories: ['风电', '火电', '水电', '太阳能', '分布式', '生物质']
                         },
                         yAxis: {
+                            min: 0,
                             title: {
-                                text: '值'
+                                text: 'MW'
+                            },
+                            stackLabels: {
+                                enabled: true,
+                                style: {
+                                    fontWeight: 'bold',
+                                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                                }
                             }
                         },
-                        //                        plotOptions: {
-                        //                            pie: {
-                        //                                shadow: true,
-                        //                                center: ['50%', '50%']
-                        //                            }
-                        //                        },
-                        plotOptions: {
-                            pie: {
-                                allowPointSelect: true,
-                                cursor: 'pointer',
-                                dataLabels: {
-                                    enabled: true
-                                },
-                                showInLegend: true
-                            }
+                        legend: {
+                            align: 'right',
+                            x: -70,
+                            verticalAlign: 'top',
+                            y: 20,
+                            floating: true,
+                            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
+                            borderColor: '#CCC',
+                            borderWidth: 1,
+                            shadow: false
                         },
                         tooltip: {
-                            valueSuffix: '',
-                            pointFormat: '值:<b>{point.y}<b><br />比例: <b>{point.percentage:.1f}%</b>',
-                            percentageDecimals: 1
+                            formatter: function () {
+                                return '<b>' + this.x + '</b><br/>' +
+                        this.series.name + ': ' + this.y + '<br/>' +
+                        'Total: ' + this.point.stackTotal;
+                            }
+                        },
+                        plotOptions: {
+                            column: {
+                                stacking: 'normal',
+                                dataLabels: {
+                                    enabled: true,
+                                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                                    style: {
+                                        textShadow: '0 0 3px black, 0 0 3px black'
+                                    }
+                                }
+                            }
                         },
                         series: [{
-                            name: '值',
-                            data: browserData,
-                            size: '60%',
-                            dataLabels: {
-                                formatter: function () {
-                                    return this.point.name;
-                                },
-                                color: 'white',
-                                distance: -30
-                            }
+                            name: '投产容量',
+                            data: $.parseJSON(data.consumeString)
                         }, {
-                            name: '值',
-                            data: versionsData,
-                            size: '80%',
-                            innerSize: '60%',
-                            dataLabels: {
-                                formatter: function () {
-                                    // display only if larger than 1
-                                    return '<b>' + this.point.name + ':</b> ' + this.y + '';
-                                }
-                                //enabled:false
-                            }
+                            name: '在建容量',
+                            data: $.parseJSON(data.constructString)
+                        }, {
+                            name: '接入容量',
+                            data: $.parseJSON(data.accessString)
                         }]
                     });
+                    //投产比率（另外一种展现方式）
+//                    var colors = Highcharts.getOptions().colors;
+//                    categories = ['风电', '火电', '水电', '太阳能', '分布式', '生物质'];
+//                    name = 'Browser brands';
+//                    data = [{
+//                        y: $.parseJSON(data.tcRl)[0].y,
+//                        color: colors[0],
+//                        drilldown: {
+//                            name: '风电',
+//                            categories: ['风电投产', '风电在建', '风电接入'],
+//                            data: $.parseJSON(data.tcRl)[0].data,
+//                            color: colors[0]
+//                        }
+//                    }, {
+//                        y: $.parseJSON(data.tcRl)[1].y,
+//                        color: colors[1],
+//                        drilldown: {
+//                            name: '火电',
+//                            categories: ['火电投产', '火电在建', '火电接入'],
+//                            data: $.parseJSON(data.tcRl)[1].data,
+//                            color: colors[1]
+//                        }
+//                    }, {
+//                        y: $.parseJSON(data.tcRl)[2].y,
+//                        color: colors[2],
+//                        drilldown: {
+//                            name: '水电',
+//                            categories: ['水电投产', '水电在建', '水电接入'],
+//                            data: $.parseJSON(data.tcRl)[2].data,
+//                            color: colors[2]
+//                        }
+//                    }, {
+//                        y: $.parseJSON(data.tcRl)[3].y,
+//                        color: colors[3],
+//                        drilldown: {
+//                            name: '太阳能',
+//                            categories: ['太阳能投产', '太阳能在建', '太阳能接入'],
+//                            data: $.parseJSON(data.tcRl)[3].data,
+//                            color: colors[3]
+//                        }
+//                    }, {
+//                        y: $.parseJSON(data.tcRl)[4].y,
+//                        color: colors[4],
+//                        drilldown: {
+//                            name: '分布式',
+//                            categories: ['分布式投产', '分布式在建', '分布式接入'],
+//                            data: $.parseJSON(data.tcRl)[4].data,
+//                            color: colors[4]
+//                        }
+//                    }, {
+//                        y: $.parseJSON(data.tcRl)[5].y,
+//                        color: colors[5],
+//                        drilldown: {
+//                            name: '生物质',
+//                            categories: ['生物质投产', '生物质在建', '生物质接入'],
+//                            data: $.parseJSON(data.tcRl)[5].data,
+//                            color: colors[4]
+//                        }
+//                    }];
+
+
+//                    // Build the data arrays
+//                    var browserData = [];
+//                    var versionsData = [];
+//                    for (var i = 0; i < data.length; i++) {
+
+//                        // add browser data
+//                        browserData.push({
+//                            name: categories[i],
+//                            y: data[i].y,
+//                            color: data[i].color
+//                        });
+
+//                        // add version data
+//                        for (var j = 0; j < data[i].drilldown.data.length; j++) {
+//                            var brightness = 0.2 - (j / data[i].drilldown.data.length) / 5;
+//                            versionsData.push({
+//                                name: data[i].drilldown.categories[j],
+//                                y: data[i].drilldown.data[j],
+//                                color: Highcharts.Color(data[i].color).brighten(brightness).get()
+//                            });
+//                        }
+//                    }
+
+//                    // Create the chart
+//                    $('#DivTCBL').highcharts({
+//                        chart: {
+//                            type: 'pie',
+//                            plotShadow: false
+
+//                        },
+//                        title: {
+//                            text: '投产情况比率'
+//                        },
+//                        yAxis: {
+//                            title: {
+//                                text: '值'
+//                            }
+//                        },
+//                        //                        plotOptions: {
+//                        //                            pie: {
+//                        //                                shadow: true,
+//                        //                                center: ['50%', '50%']
+//                        //                            }
+//                        //                        },
+//                        plotOptions: {
+//                            pie: {
+//                                allowPointSelect: true,
+//                                cursor: 'pointer',
+//                                dataLabels: {
+//                                    enabled: true
+//                                },
+//                                showInLegend: true
+//                            }
+//                        },
+//                        tooltip: {
+//                            valueSuffix: '',
+//                            pointFormat: '值:<b>{point.y}<b><br />比例: <b>{point.percentage:.1f}%</b>',
+//                            percentageDecimals: 1
+//                        },
+//                        series: [{
+//                            name: '值',
+//                            data: browserData,
+//                            size: '60%',
+//                            dataLabels: {
+//                                formatter: function () {
+//                                    return this.point.name;
+//                                },
+//                                color: 'white',
+//                                distance: -30
+//                            }
+//                        }, {
+//                            name: '值',
+//                            data: versionsData,
+//                            size: '80%',
+//                            innerSize: '60%',
+//                            dataLabels: {
+//                                formatter: function () {
+//                                    // display only if larger than 1
+//                                    return '<b>' + this.point.name + ':</b> ' + this.y + '';
+//                                }
+//                                //enabled:false
+//                            }
+//                        }]
+//                    });
+                   
                 }
             })
         }
@@ -395,8 +461,11 @@
     <div id="DivFDLBL" style="width: 350px; height: 180px; float: left; margin: 5px">
     </div>
     <br />
-    <!--投产比率比率-->
+   <%-- <!--投产比率比率-->
     <div id="DivTCBL" style="width: 700px; height: 400px; float: left; margin: 5px">
+    </div>--%>
+     <!--投产比率比率-->
+    <div id="DivTC" style="width: 700px; height: 400px; float: left; margin: 5px">
     </div>
     </div>
     </form>

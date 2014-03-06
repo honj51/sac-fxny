@@ -155,40 +155,59 @@ namespace SACSIS.Form
             #region 投产容量比率
             //string[] colors = new string[9] { "#058DC7", "#50B432", "#ED561B", "#DDDF00", "#24CBE5", "#64E572", "#FF9655", "#FFF263", "#6AF9C4" };
 
-            List<TcRl> list = new List<TcRl>();
+            //List<TcRl> list = new List<TcRl>();
+            //DataTable dt = new DataTable();
+            //dt = GetTcRl("2", "FDRL");
+            //double[] sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            //TcRl sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            //list.Add(sdRl);
+
+            //dt = GetTcRl("2", "HDRL");
+            //sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            //sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            //list.Add(sdRl);
+
+            //dt = GetTcRl("2", "SDRL");
+            //sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            //sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            //list.Add(sdRl);
+
+            //dt = GetTcRl("2", "TYNRL");
+            //sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            //sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            //list.Add(sdRl);
+
+            //dt = GetTcRl("2", "FBSRL");
+            //sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            //sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            //list.Add(sdRl);
+
+            //dt = GetTcRl("2", "SWZRL");
+            //sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
+            //sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
+            //list.Add(sdRl);
+
+            ////投产情况比率
+            //string tcRl = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+
             DataTable dt = new DataTable();
-            dt = GetTcRl("2", "FDRL");
-            double[] sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
-            TcRl sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
-            list.Add(sdRl);
-
-            dt = GetTcRl("2", "HDRL");
-            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
-            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
-            list.Add(sdRl);
-
-            dt = GetTcRl("2", "SDRL");
-            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
-            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
-            list.Add(sdRl);
-
-            dt = GetTcRl("2", "TYNRL");
-            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
-            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
-            list.Add(sdRl);
-
-            dt = GetTcRl("2", "FBSRL");
-            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
-            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
-            list.Add(sdRl);
-
-            dt = GetTcRl("2", "SWZRL");
-            sdArray = new double[3] { dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()), dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()), dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()) };
-            sdRl = new TcRl() { y = (dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString())) + (dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString())) + (dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString())), data = sdArray };
-            list.Add(sdRl);
-
-            //投产情况比率
-            string tcRl = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            //投产
+            ArrayList consume = new ArrayList();
+            //在建
+            ArrayList construct = new ArrayList();
+            //接入
+            ArrayList  access= new ArrayList();
+            List<string> typeCode = new List<string>() { "FDRL", "HDRL", "SDRL", "TYNRL", "FBSRL", "SWZRL" };
+            foreach (string  code in typeCode)
+            {
+                dt = GetTcRl("2", code);
+                consume.Add(dt.Rows[0]["投产容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["投产容量"].ToString()));
+                construct.Add(dt.Rows[0]["在建容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["在建容量"].ToString()));
+                access.Add(dt.Rows[0]["接入容量"] == DBNull.Value ? 0 : double.Parse(dt.Rows[0]["接入容量"].ToString()));
+            }
+            string consumeString = Newtonsoft.Json.JsonConvert.SerializeObject(consume);
+            string constructString = Newtonsoft.Json.JsonConvert.SerializeObject(construct);
+            string accessString = Newtonsoft.Json.JsonConvert.SerializeObject(access);
             
             //ArrayList sdArray = new ArrayList();
             //Hashtable sdHt = new Hashtable();
@@ -210,7 +229,10 @@ namespace SACSIS.Form
             {
                 zjBl = zjBl,
                 fdlBl = fdlBl,
-                tcRl = tcRl
+                //tcRl = tcRl,
+                consumeString = consumeString,
+                constructString = constructString,
+                accessString = accessString
             };
             string result = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
             Response.Write(result);
