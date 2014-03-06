@@ -230,7 +230,6 @@
                             verticalAlign: 'middle'
                         }
                     });
-                    alert($.parseJSON(data.consumeString));
                     //投产比率柱状图
                     $('#DivTC').highcharts({
                         chart: {
