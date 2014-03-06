@@ -50,6 +50,8 @@
   <parment id="26" name="功率风速曲线" pId="16" order="2" visible="1" owner=",1,2," FileName="../Trend/GLFSQX.aspx" />
   <parment id="27" name="标杆风机对比" pId="16" order="3" visible="1" owner=",1,2," FileName="../Trend/BGFJDB.aspx" />
   <parment id="28" name="生产指标同比" pId="16" order="4" visible="1" owner=",1,2," FileName="../Trend/TRadio.aspx" />
+  <parment id="29" name="标杆理论与场站实际发电量" pId="16" order="5" visible="1" owner=",1,2," FileName="../Trend/StatisticDiff.aspx" />
+
   <parment id="17" name="统计报表" pId="1" order="5" visible="1" owner=",1,2," FileName="" />
   <!--<parment id="23" name="数据修正" pId="1" order="11" visible="1" owner=",1,2," FileName="" />
   <parment id="35" name="福新公司" pId="23" order="1" visible="1" owner=",1,2," FileName="" />
