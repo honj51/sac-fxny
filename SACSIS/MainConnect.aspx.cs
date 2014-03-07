@@ -187,7 +187,7 @@ namespace WebApplication2
 
                 //总负荷产业负荷
                 ZFH=ZFH,
-                //FDFH = FDFH,
+                FDFH = FDFH,
                 HDFH = HDFH,
                 SDFH = SDFH,
                 TYNFH =TYNFH,
@@ -225,13 +225,19 @@ namespace WebApplication2
                 FBSWCL = FBSJHDL == 0 ? 0.00 : Math.Round(FBSYDL / FBSJHDL * 100, 2),
                 SRZWCL = SRZJHDL == 0 ? 0.00 : Math.Round(SRZYDL / SRZJHDL * 100, 2),
 
-                //实时负荷率
-                HDSS = HDFH == 0 ? 0.00 : Math.Round(HDFH / HDRL * 100, 2),
-                SDSS = SDFH == 0 ? 0.00 : Math.Round(SDFH / SDRL * 100, 2),
-                FDSS = FDFH == 0 ? 0.00 : Math.Round(FDFH / FDRL * 100, 2),
-                FBSSS = FBSFH == 0 ? 0.00 : Math.Round(FBSFH / FBSRL * 100, 2),
-                TYNSS = TYNFH == 0 ? 0.00 : Math.Round(TYNFH / TYNRL * 100, 2),
-                SRZSS = SRZFH == 0 ? 0.00 : Math.Round(SRZFH / SRZRL * 100, 2)
+                //实时负荷率(地图旁边的负荷进度条)
+                //HDSS = HDFH == 0 ? 0.00 : Math.Round(HDFH / HDRL * 100, 2),
+                //SDSS = SDFH == 0 ? 0.00 : Math.Round(SDFH / SDRL * 100, 2),
+                //FDSS = FDFH == 0 ? 0.00 : Math.Round(FDFH / FDRL * 100, 2),
+                //FBSSS = FBSFH == 0 ? 0.00 : Math.Round(FBSFH / FBSRL * 100, 2),
+                //TYNSS = TYNFH == 0 ? 0.00 : Math.Round(TYNFH / TYNRL * 100, 2),
+                //SRZSS = SRZFH == 0 ? 0.00 : Math.Round(SRZFH / SRZRL * 100, 2)
+                HDSS = Math.Round(GetDlFh("'风电'", "PERIOD_TAG", "") / FDRL * 100, 2),
+                SDSS = Math.Round(GetDlFh("'火电'", "PERIOD_TAG", "") / HDRL * 100, 2),
+                FDSS = Math.Round(GetDlFh("'水电'", "PERIOD_TAG", "") / SDRL * 100, 2),
+                FBSSS = Math.Round(GetDlFh("'太阳能'", "PERIOD_TAG", "") / TYNRL * 100, 2),
+                TYNSS = Math.Round(GetDlFh("'分布式'", "PERIOD_TAG", "") / FBSRL * 100, 2),
+                SRZSS = Math.Round(GetDlFh("'生物质'", "PERIOD_TAG", "") / SRZRL * 100, 2)
             };
 
 

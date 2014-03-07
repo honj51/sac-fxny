@@ -7,6 +7,7 @@
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <link href="../Js/jQueryEasyUI/themes/default/easyui.css" rel="stylesheet" type="text/css" />
     <link href="../Js/jQueryEasyUI/themes/icon.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">        window.onerror = function () { return true; };</script>
     <script src="Js/jquery-1.9.1.js" type="text/javascript"></script>
     <script src="../Js/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="../Js/jquery.easyui.min.js" type="text/javascript"></script>
@@ -413,9 +414,9 @@
         //处理字符串
         function ControlString(tmp) {
             var tmpString = tmp.toString();
-            for (var i = tmp.toString().length; i < 7; i++) {
-                tmpString = "&nbsp;" + tmpString;
-            }
+                for (var i = tmp.toString().length; i < 7; i++) {
+                    tmpString = "&nbsp;&nbsp;" + tmpString;
+                }
             return tmpString;
         }
         function load() {
@@ -436,13 +437,13 @@
                     $("#HDRL").html(json.HDRL);
                     $("#FDRL").html(json.FDRL);
                     $("#SDRL").html(json.SDRL);
-                    $("#TYNRL").html("&nbsp;" + json.TYNRL);
-                    $("#FBSRL").html("&nbsp;" + json.FBSRL);
-                    $("#SRZRL").html("&nbsp;&nbsp;" + json.SRZRL);
+                    $("#TYNRL").html("&nbsp;&nbsp;" + json.TYNRL);
+                    $("#FBSRL").html("&nbsp;&nbsp;" + json.FBSRL);
+                    $("#SRZRL").html("&nbsp;&nbsp;&nbsp;" + json.SRZRL);
 
                     //总负荷 产业负荷
                     $("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
-                    //$("#FDFH").html(json.FDFH);
+                    $("#FDFH").html(ControlString(json.FDFH));
                     $("#HDFH").html(ControlString(json.HDFH));
                     $("#SDFH").html(ControlString(json.SDFH));
                     $("#TYNFH").html(ControlString(json.TYNFH));
@@ -719,25 +720,25 @@
             });
 
 
-            $.ajax({
-                url: "MainConnect.aspx?funCode=GetFDFHValue",
-                type: "POST",
-                beforeSend: function () {
-                    //Handle the beforeSend event
-                },
-                success: function (json) {
-                    //json = eval("("+json+")");
-                    var json = $.parseJSON(json);
-                    $("#FDFH").html(ControlString(json.FDFH));
+//            $.ajax({
+//                url: "MainConnect.aspx?funCode=GetFDFHValue",
+//                type: "POST",
+//                beforeSend: function () {
+//                    //Handle the beforeSend event
+//                },
+//                success: function (json) {
+//                    //json = eval("("+json+")");
+//                    var json = $.parseJSON(json);
+//                    $("#FDFH").html(ControlString(json.FDFH));
 
-                },
-                error: function (x, e) {
-                    alert(x.responseText);
-                },
-                complete: function () {
-                    //Handle the complete event
-                }
-            });
+//                },
+//                error: function (x, e) {
+//                    alert(x.responseText);
+//                },
+//                complete: function () {
+//                    //Handle the complete event
+//                }
+//            });
 
 
         }
@@ -1008,12 +1009,6 @@
             });
         }
 
-
-        function transfor() {
-            alert(1111);
-        }
-
-
         function Jump(p) {
 
             if (p == "map") {
@@ -1228,19 +1223,19 @@
                             <td class="div_table_2" align="center" valign="middle">
                                 火&nbsp;&nbsp;&nbsp;电
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="HDRL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_mw.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="HDDDL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_wkwh.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="HDFH">
                                     123456</div>
                                 <div style="display: inline">
@@ -1255,19 +1250,19 @@
                             <td class="div_table_2" align="center" valign="middle">
                                 水&nbsp;&nbsp;&nbsp;电
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="SDRL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_mw.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="SDDDL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_wkwh.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="SDFH">
                                     123456</div>
                                 <div style="display: inline">
@@ -1282,19 +1277,19 @@
                             <td class="div_table_2" align="center" valign="middle">
                                 风&nbsp;&nbsp;&nbsp;电
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="FDRL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_mw.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="FDDDL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_wkwh.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="FDFH">
                                     123456</div>
                                 <div style="display: inline">
@@ -1309,19 +1304,19 @@
                             <td class="div_table_2" align="center" valign="middle">
                                 太阳能
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="TYNRL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_mw.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="TYNDDL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_wkwh.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="TYNFH">
                                     123456</div>
                                 <div style="display: inline">
@@ -1336,19 +1331,19 @@
                             <td class="div_table_2" align="center" valign="middle">
                                 分布式
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="FBSRL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_mw.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="FBSDDL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_wkwh.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="FBSFH">
                                     123456</div>
                                 <div style="display: inline">
@@ -1363,19 +1358,19 @@
                             <td class="div_table_2" align="center" valign="middle">
                                 其&nbsp;&nbsp;&nbsp;他
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="SRZRL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_mw.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="SRZDDL">
                                     123456</div>
                                 <div style="display: inline">
                                     <img src="img/DataZL_wkwh.jpg" /></div>
                             </td>
-                            <td class="div_table_2_1" align="center" valign="middle">
+                            <td class="div_table_2_1" align="center" valign="right">
                                 <div class="text_2" id="SRZFH">
                                     123456</div>
                                 <div style="display: inline">
