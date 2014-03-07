@@ -439,7 +439,7 @@
                     $("#SDRL").html(json.SDRL);
                     $("#TYNRL").html("&nbsp;&nbsp;" + json.TYNRL);
                     $("#FBSRL").html("&nbsp;&nbsp;" + json.FBSRL);
-                    $("#SRZRL").html("&nbsp;&nbsp;&nbsp;" + json.SRZRL);
+                    $("#SRZRL").html("&nbsp;&nbsp;&nbsp;&nbsp;" + json.SRZRL);
 
                     //总负荷 产业负荷
                     $("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
