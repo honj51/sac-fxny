@@ -80,6 +80,7 @@ namespace SACSIS.Trend
                     dt1 = fb.GetBGStationMonitor(r["T_PERIODID"].ToString());
                     //该工期的标杆风机数量
                     int count = dt1.Rows.Count;
+                    //保存风速，负荷，标杆风机测点的信息
                     string[] Param = new string[2 + count];
                     Param[0] = powerTag;
                     Param[1] = windTag;
@@ -90,21 +91,31 @@ namespace SACSIS.Trend
                     list = pb.GetHistValAndTIme3(Param, DateTime.Today.Date,DateTime.Now, 50);
 
                     Hashtable ht1 = new Hashtable();
-                    //从2开始 取平均值
                     int listCount = list.Count;
-                  
                     ArrayList lt = new ArrayList();
                     for (int f = 0; f < 51; f++)
                     {
+                        //标杆风机的数量
+                        int counts = count;
                         ArrayList ld = new ArrayList();
                         double value = 0;
+                        //从2开始计算的是标杆风机的数据 取平均值
                         for (int c = 2; c < listCount; c++)
                         {
                             ArrayList valueArray = (ArrayList)list[c]["data"];
                             double a = 0;
-                            value += ((valueArray[f]) != null && double.TryParse(((ArrayList)valueArray[f])[1].ToString(),out a)) ? a : 0;
+                            //value += ((valueArray[f]) != null && double.TryParse(((ArrayList)valueArray[f])[1].ToString(),out a)) ? a : 0;
+                            if (((valueArray[f]) != null && double.TryParse(((ArrayList)valueArray[f])[1].ToString(), out a)))
+                            {
+                                value += a;
+                            }
+                            else
+                            {
+                                counts--;
+                            }
+
                         }
-                        double drv =count==0?0: Math.Round(((value / count) * countFJ)/10000,3);
+                        double drv = count == 0 ? 0 : Math.Round(((value / counts) * countFJ) / 10000, 3);
                         //时间
                         ld.Add(((ArrayList)(((ArrayList)list[0]["data"])[f]))[0]);
                         ld.Add(drv);
