@@ -107,13 +107,16 @@ namespace SACSIS.Trend
                             //value += ((valueArray[f]) != null && double.TryParse(((ArrayList)valueArray[f])[1].ToString(),out a)) ? a : 0;
                             if (((valueArray[f]) != null && double.TryParse(((ArrayList)valueArray[f])[1].ToString(), out a)))
                             {
-                                value += a;
+                                double b=double.Parse(((ArrayList)valueArray[f])[1].ToString());
+                                if (b > 0)
+                                {
+                                    value += a;
+                                }
+                                else
+                                {
+                                    counts--;
+                                }
                             }
-                            else
-                            {
-                                counts--;
-                            }
-
                         }
                         double drv = counts == 0 ? 0 : Math.Round(((value / counts) * countFJ) / 1000, 3);
                         //时间
