@@ -115,7 +115,7 @@ namespace SACSIS.Trend
                             }
 
                         }
-                        double drv = count == 0 ? 0 : Math.Round(((value / counts) * countFJ) / 10000, 3);
+                        double drv = counts == 0 ? 0 : Math.Round(((value / counts) * countFJ) / 1000, 3);
                         //时间
                         ld.Add(((ArrayList)(((ArrayList)list[0]["data"])[f]))[0]);
                         ld.Add(drv);
