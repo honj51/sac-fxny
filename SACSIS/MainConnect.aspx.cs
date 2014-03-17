@@ -93,8 +93,11 @@ namespace WebApplication2
             fh =Session["fd"]==null?GetChartsValues("'风电'"): (ArrayList)Session["fd"];
             foreach(var value in fh)
             {
-                tmp+= double.Parse(value.ToString());
-                count++;
+                if (double.Parse(value.ToString()) < 21000)
+                {
+                    tmp += double.Parse(value.ToString());
+                    count++;
+                }
             }
             FDFH = Math.Round((tmp / count)/10, 2);
             tmp=0;
