@@ -58,7 +58,7 @@ namespace WebApplication2
             for (int i = 0; i <= span; i++)
             {
                 doubleList = bm.GetPointVal(points, stime.AddHours(i * 0.5).ToString("yyyy-MM-dd HH:mm:00"));
-                value += doubleList.Sum();
+                value += doubleList.Sum(); 
             }
             value = value / span;
             return value;
