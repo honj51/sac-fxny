@@ -52,12 +52,12 @@ namespace WebApplication2
             double value = 0;
             DateTime stime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
             DateTime etime = DateTime.Now;
-            TimeSpan ts = etime - stime; ;
+            TimeSpan ts = etime - stime; 
             int span = (ts.Hours) * 2;
             List<double> doubleList = new List<double>();
             for (int i = 0; i <= span; i++)
             {
-                doubleList = bm.GetPointVal(points, stime.AddHours(i * 2).ToString("yyyy-MM-dd HH:mm:00"));
+                doubleList = bm.GetPointVal(points, stime.AddHours(i * 0.5).ToString("yyyy-MM-dd HH:mm:00"));
                 value += doubleList.Sum();
             }
             value = value / span;
@@ -100,7 +100,7 @@ namespace WebApplication2
             //tmp=0;
             //count=0;
             List<string> hdPoint = bm.GetTagByKind("火电", "电厂", "功率");
-            HDFH = Math.Round(GetValues(hdPoint),2);
+            HDFH = Math.Round(GetValues(hdPoint)/10,2);
            
             //水电
             double SDFH=0;
@@ -114,7 +114,7 @@ namespace WebApplication2
             //tmp=0;
             //count=0;
             List<string> sdPoint = bm.GetTagByKind("水电", "电厂", "功率");
-            SDFH = Math.Round(GetValues(sdPoint),2);
+            SDFH = Math.Round(GetValues(sdPoint) / 10, 2);
 
             //风电
             double FDFH = 0;
@@ -131,7 +131,7 @@ namespace WebApplication2
             //tmp=0;
             //count=0;
             List<string> fdPoint = bm.GetTagByKind("风电", "电厂", "功率");
-            FDFH = Math.Round(GetValues(fdPoint),2);
+            FDFH = Math.Round(GetValues(fdPoint) / 10, 2);
 
 
             //太阳能
@@ -146,7 +146,7 @@ namespace WebApplication2
             //tmp=0;
             //count=0;
             List<string> tynPoint = bm.GetTagByKind("太阳能", "电厂", "功率");
-            TYNFH = Math.Round(GetValues(tynPoint),2);
+            TYNFH = Math.Round(GetValues(tynPoint) / 10, 2);
 
 
             //分布式
@@ -161,7 +161,7 @@ namespace WebApplication2
             //tmp = 0;
             //count = 0;
             List<string> fbsPoint = bm.GetTagByKind("分布式", "电厂", "功率");
-            FBSFH = Math.Round(GetValues(fbsPoint),2);
+            FBSFH = Math.Round(GetValues(fbsPoint) / 10, 2);
 
             //生物质
             double SRZFH = 0;
@@ -173,7 +173,7 @@ namespace WebApplication2
             //}
             //SRZFH = Math.Round((tmp / count)/10, 2);
             List<string> swzPoint = bm.GetTagByKind("生物质", "电厂", "功率");
-            SRZFH = Math.Round(GetValues(swzPoint),2);
+            SRZFH = Math.Round(GetValues(swzPoint) / 10, 2);
 
             double ZFH = pbll.GetPointVal(new string[] { "HDXN:00CC0001" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0]*10;
             ZFH = Math.Round(ZFH,2);
