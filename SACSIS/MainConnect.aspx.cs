@@ -9,6 +9,7 @@ using BLL;
 using SAC.DBOperations;
 using System.Data;
 using System.Collections;
+using BLL.BLLMainConnect;
 
 namespace WebApplication2
 {
@@ -19,6 +20,7 @@ namespace WebApplication2
 
         DBLink dl = new DBLink();
         PointBLL pbll = new PointBLL();
+        BLLMainConnect bm = new BLLMainConnect();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,6 +40,28 @@ namespace WebApplication2
                     GetFDFHValue();
                 }
             }
+        }
+
+        /// <summary>
+        /// 获得各产业不同场站功率点不同时间断的日均负荷（半小时取一次）
+        /// </summary>
+        /// <param name="points">产业场站测点</param>
+        /// <returns></returns>
+        private double GetValues(List<string> points)
+        {
+            double value = 0;
+            DateTime stime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            DateTime etime = DateTime.Now;
+            TimeSpan ts = etime - stime; ;
+            int span = (ts.Hours) * 2;
+            List<double> doubleList = new List<double>();
+            for (int i = 0; i <= span; i++)
+            {
+                doubleList = bm.GetPointVal(points, stime.AddHours(i * 2).ToString("yyyy-MM-dd HH:mm:00"));
+                value += doubleList.Sum() / doubleList.Count;
+            }
+            value = value / span;
+            return value;
         }
 
         private void init()
@@ -63,80 +87,93 @@ namespace WebApplication2
             double tmp=0;
             int count=0;
 
+            //负荷 获取场站测点，获取实时数据库中的历史值
             //火电
             double HDFH =0;
-            fh =Session["hd"]==null? GetChartsValues("'火电'"):(ArrayList)Session["hd"];
-            foreach(var value in fh)
-            {
-                tmp+= double.Parse(value.ToString());
-                count++;
-            }
-            HDFH=Math.Round((tmp/count)/10,2);
-            tmp=0;
-            count=0;
-             
+            //fh =Session["hd"]==null? GetChartsValues("'火电'"):(ArrayList)Session["hd"];
+            //foreach(var value in fh)
+            //{
+            //    tmp+= double.Parse(value.ToString());
+            //    count++;
+            //}
+            //HDFH=Math.Round((tmp/count)/10,2);
+            //tmp=0;
+            //count=0;
+            List<string> hdPoint = bm.GetTagByKind("火电", "电厂", "功率");
+            HDFH = GetValues(hdPoint);
            
             //水电
             double SDFH=0;
-            fh =Session["sd"]==null? GetChartsValues("'水电'"):(ArrayList)Session["sd"];
-            foreach(var value in fh)
-            {
-                tmp+= double.Parse(value.ToString());
-                count++;
-            }
-            SDFH=Math.Round((tmp/count)/10,2);
-            tmp=0;
-            count=0;
-            
+            //fh =Session["sd"]==null? GetChartsValues("'水电'"):(ArrayList)Session["sd"];
+            //foreach(var value in fh)
+            //{
+            //    tmp+= double.Parse(value.ToString());
+            //    count++;
+            //}
+            //SDFH=Math.Round((tmp/count)/10,2);
+            //tmp=0;
+            //count=0;
+            List<string> sdPoint = bm.GetTagByKind("水电", "电厂", "功率");
+            SDFH = GetValues(sdPoint);
+
             //风电
             double FDFH = 0;
-            fh =Session["fd"]==null?GetChartsValues("'风电'"): (ArrayList)Session["fd"];
-            foreach(var value in fh)
-            {
-                if (double.Parse(value.ToString()) < 2100)
-                {
-                    tmp += double.Parse(value.ToString());
-                    count++;
-                }
-            }
-            FDFH = Math.Round((tmp / count)/10, 2);
-            tmp=0;
-            count=0;
+            //fh =Session["fd"]==null?GetChartsValues("'风电'"): (ArrayList)Session["fd"];
+            //foreach(var value in fh)
+            //{
+            //    if (double.Parse(value.ToString()) < 2100)
+            //    {
+            //        tmp += double.Parse(value.ToString());
+            //        count++;
+            //    }
+            //}
+            //FDFH = Math.Round((tmp / count)/10, 2);
+            //tmp=0;
+            //count=0;
+            List<string> fdPoint = bm.GetTagByKind("风电", "电厂", "功率");
+            FDFH = GetValues(fdPoint);
+
 
             //太阳能
             double TYNFH = 0;
-            fh =Session["tyn"]==null?GetChartsValues("'太阳能'"):(ArrayList)Session["tyn"];
-            foreach(var value in fh)
-            {
-                tmp+= double.Parse(value.ToString());
-                count++;
-            }
-            TYNFH = Math.Round((tmp / count)/10, 2);
-            tmp=0;
-            count=0;
+            //fh =Session["tyn"]==null?GetChartsValues("'太阳能'"):(ArrayList)Session["tyn"];
+            //foreach(var value in fh)
+            //{
+            //    tmp+= double.Parse(value.ToString());
+            //    count++;
+            //}
+            //TYNFH = Math.Round((tmp / count)/10, 2);
+            //tmp=0;
+            //count=0;
+            List<string> tynPoint = bm.GetTagByKind("太阳能", "电厂", "功率");
+            TYNFH = GetValues(tynPoint);
+
 
             //分布式
             double FBSFH = 0;
-            fh =Session["fbs"]==null?GetChartsValues("'分布式'"):(ArrayList)Session["fbs"];
-            foreach(var value in fh)
-            {
-                tmp+= double.Parse(value.ToString());
-                count++;
-            }
-            FBSFH = Math.Round((tmp / count)/10, 2);
-            tmp = 0;
-            count = 0;
+            //fh =Session["fbs"]==null?GetChartsValues("'分布式'"):(ArrayList)Session["fbs"];
+            //foreach(var value in fh)
+            //{
+            //    tmp+= double.Parse(value.ToString());
+            //    count++;
+            //}
+            //FBSFH = Math.Round((tmp / count)/10, 2);
+            //tmp = 0;
+            //count = 0;
+            List<string> fbsPoint = bm.GetTagByKind("分布式", "电厂", "功率");
+            FBSFH = GetValues(fbsPoint);
 
             //生物质
             double SRZFH = 0;
-            fh = Session["swz"]==null?GetChartsValues("'生物质'"):(ArrayList)Session["swz"];
-            foreach (var value in fh)
-            {
-                tmp += double.Parse(value.ToString());
-                count++;
-            }
-            SRZFH = Math.Round((tmp / count)/10, 2);
-             
+            //fh = Session["swz"]==null?GetChartsValues("'生物质'"):(ArrayList)Session["swz"];
+            //foreach (var value in fh)
+            //{
+            //    tmp += double.Parse(value.ToString());
+            //    count++;
+            //}
+            //SRZFH = Math.Round((tmp / count)/10, 2);
+            List<string> swzPoint = bm.GetTagByKind("生物质", "电厂", "功率");
+            SRZFH = GetValues(swzPoint);
 
             double ZFH = pbll.GetPointVal(new string[] { "HDXN:00CC0001" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0]*10;
             ZFH = Math.Round(ZFH,2);

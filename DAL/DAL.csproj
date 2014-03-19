@@ -66,6 +66,7 @@
     <Compile Include="DAL_STATISCS.cs" />
     <Compile Include="FaultDAL.cs" />
     <Compile Include="FormDAL.cs" />
+    <Compile Include="Main\DALMainConnect.cs" />
     <Compile Include="PeriodDAL.cs" />
     <Compile Include="Plink.cs" />
     <Compile Include="PointDAL.cs" />

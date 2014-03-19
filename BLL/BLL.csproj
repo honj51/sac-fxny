@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLGet_chart_Data.cs" />
+    <Compile Include="Main\BLLMainConnect.cs" />
     <Compile Include="BLLRole.cs" />
     <Compile Include="BLL_STATISCS.cs" />
     <Compile Include="Connect\BLLConnect.cs" />
