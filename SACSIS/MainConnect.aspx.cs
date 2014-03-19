@@ -43,7 +43,7 @@ namespace WebApplication2
         }
 
         /// <summary>
-        /// 获得各产业不同场站功率点不同时间断的日均负荷（半小时取一次）
+        /// 获得各产业不同场站功率点不同时间断(至当前)的日均负荷（半小时取一次）
         /// </summary>
         /// <param name="points">产业场站测点</param>
         /// <returns></returns>
@@ -58,9 +58,50 @@ namespace WebApplication2
             for (int i = 0; i <= span; i++)
             {
                 doubleList = bm.GetPointVal(points, stime.AddHours(i * 0.5).ToString("yyyy-MM-dd HH:mm:00"));
-                value += doubleList.Sum(); 
+                value += doubleList.Where(v=>v>0).Sum(); 
             }
             value = value / span;
+            return value;
+        }
+
+        /// <summary>
+        /// 获取各产业实时日发电量
+        /// </summary>
+        /// <param name="companyType">电类型（风电，水电...）</param>
+        /// <param name="type">点所属层次（电厂，机组）</param>
+        /// <param name="pointType">点类型（负荷，风速，日电量，月电量，年电量）</param>
+        /// <returns></returns>
+        private double GetRValue(string companyType, string type, string pointType)
+        {
+            double v = 0;
+            List<string> fdRPoint = bm.GetTagByKind(companyType, type, pointType);
+            string fdRString = string.Empty;
+            foreach (string name in fdRPoint)
+            {
+                fdRString += "'" + name + "'" + ",";
+            }
+            v = Math.Round(bm.GetValueByPoints(fdRString.Remove(fdRString.Length - 1)), 2);
+            return v;
+        }
+
+        /// <summary>
+        /// 获得各产业不同场站功率点不同时间的负荷（半小时取一次）（供趋势图使用）
+        /// </summary>
+        /// <param name="points">产业场站测点</param>
+        /// <returns></returns>
+        private ArrayList GetChartValues(List<string> points)
+        {
+            ArrayList value = new ArrayList ();
+            DateTime stime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            DateTime etime = DateTime.Now;
+            TimeSpan ts = etime - stime;
+            int span = (ts.Hours) * 2;
+            List<double> doubleList = new List<double>();
+            for (int i = 0; i <= span; i++)
+            {
+                doubleList = bm.GetPointVal(points, stime.AddHours(i * 0.5).ToString("yyyy-MM-dd HH:mm:00"));
+                 value.Add(doubleList.Where(v => v > 0).Sum());
+            }
             return value;
         }
 
@@ -75,6 +116,7 @@ namespace WebApplication2
             double SRZRL = GetRl("2", "SWZRL");
             double ZRL = FDRL + HDRL + SDRL + TYNRL + FBSRL + SRZRL;
 
+            #region  产业负荷
             //总负荷 产业负荷
             //double FDFH = GetDlFh("'风电'", "PERIOD_TAG","");
             //double FDFH=GetFDFHValueByTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
@@ -87,7 +129,7 @@ namespace WebApplication2
             double tmp=0;
             int count=0;
 
-            //负荷 获取场站测点，获取实时数据库中的历史值
+            //负荷 获取场站测点，获取实时数据库中的历史平均值
             //火电
             double HDFH =0;
             //fh =Session["hd"]==null? GetChartsValues("'火电'"):(ArrayList)Session["hd"];
@@ -175,36 +217,63 @@ namespace WebApplication2
             List<string> swzPoint = bm.GetTagByKind("生物质", "电厂", "功率");
             SRZFH = Math.Round(GetValues(swzPoint) / 10, 2);
 
-            double ZFH = pbll.GetPointVal(new string[] { "HDXN:00CC0001" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0]*10;
-            ZFH = Math.Round(ZFH,2);
+            //double ZFH = pbll.GetPointVal(new string[] { "HDXN:00CC0001" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0]*10;
+            //ZFH = Math.Round(ZFH,2);
+            double ZFH = Math.Round(HDFH + FDFH + SDFH + TYNFH + FBSFH + SRZFH, 2);
 
-            //日发电量 产业日电量
-            double FDDDL = GetDlFh("'风电'", "DAYDL", "");
-            double HDDDL = GetDlFh("'火电'", "DAYDL", "");
-            double SDDDL = GetDlFh("'水电'", "DAYDL", "");
-            double TYNDDL = GetDlFh("'太阳能'", "DAYDL", "");
-            double FBSDDL = GetDlFh("'分布式'", "DAYDL", "");
-            double SRZDDL = GetDlFh("'生物质'", "DAYDL", "");
-            double DDL = pbll.GetPointVal(new string[] { "HDXN:00CE4000.1.1D" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0];
-            DDL = Math.Round(DDL, 2);
 
-            // 月发电量
-            double MDL = pbll.GetPointVal(new string[] { "HDXN:00CE4000.1.1M" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0];
-            double HDMDL = GetDlFh("'火电'", "MONTHDL", "");
-            double SDMDL = GetDlFh("'水电'", "MONTHDL", "");
+            #endregion
 
+            #region 日发电量
+            //日发电量 产业日电量(实时)
+            //double FDDDL = GetDlFh("'风电'", "DAYDL", "");
+            //double HDDDL = GetDlFh("'火电'", "DAYDL", "");
+            //double SDDDL = GetDlFh("'水电'", "DAYDL", "");
+            //double TYNDDL = GetDlFh("'太阳能'", "DAYDL", "");
+            //double FBSDDL = GetDlFh("'分布式'", "DAYDL", "");
+            //double SRZDDL = GetDlFh("'生物质'", "DAYDL", "");
+            
+            double FDDDL = GetRValue("风电","电厂","日电量");
+            double HDDDL = GetRValue("火电", "电厂", "日电量");
+            double SDDDL = GetRValue("水电", "电厂", "日电量");
+            double TYNDDL = GetRValue("太阳能", "电厂", "日电量");
+            double FBSDDL = GetRValue("分布式", "电厂", "日电量");
+            double SRZDDL = GetRValue("生物质", "电厂", "日电量"); 
+            //double DDL = pbll.GetPointVal(new string[] { "HDXN:00CE4000.1.1D" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0];
+            //DDL = Math.Round(DDL, 2);
+            double DDL = Math.Round(FDDDL + HDDDL + SDDDL + TYNDDL + FBSDDL + SRZDDL, 2);
+
+            #endregion
+            // 月发电量  是各场站累加。总的华电福新PI点废掉
+            //double MDL = pbll.GetPointVal(new string[] { "HDXN:00CE4000.1.1M" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0];
+            //double HDMDL = GetDlFh("'火电'", "MONTHDL", "");
+            //double SDMDL = GetDlFh("'水电'", "MONTHDL", "");
+            double HDMDL = GetRValue("火电", "电厂", "月电量");
+            double SDMDL = GetRValue("水电", "电厂", "月电量");
+            double FDMDL=GetRValue("风电", "电厂", "月电量");
+            double TYNMDL=GetRValue("太阳能", "电厂", "月电量");
+            double FBSMDL=GetRValue("分布式", "电厂", "月电量");
+            double SWZMDL = GetRValue("生物质", "电厂", "月电量");
+            double MDL = HDMDL + SDMDL + FDMDL + TYNMDL+ FBSMDL+ SWZMDL;
 
             MDL = Math.Round(MDL, 2);
 
-            // 年发电量 产业年发电量
-            double FDYDL = GetDlFh("'风电'", "YEARDL", "");
-            double HDYDL = GetDlFh("'火电'", "YEARDL", "");
-            double SDYDL = GetDlFh("'水电'", "YEARDL", "");
-            double TYNYDL = GetDlFh("'太阳能'", "YEARDL", "");
-            double FBSYDL = GetDlFh("'分布式'", "YEARDL", "");
-            double SRZYDL = GetDlFh("'生物质'", "YEARDL", "");
-            double YDL = pbll.GetPointVal(new string[] { "HDXN:00CE4000.1.1Y" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0];
-            YDL = Math.Round(YDL, 2);
+            // 年发电量 产业年发电量 是各场站累加还是直接根据总的PI点取值？
+            //double FDYDL = GetDlFh("'风电'", "YEARDL", "");
+            //double HDYDL = GetDlFh("'火电'", "YEARDL", "");
+            //double SDYDL = GetDlFh("'水电'", "YEARDL", "");
+            //double TYNYDL = GetDlFh("'太阳能'", "YEARDL", "");
+            //double FBSYDL = GetDlFh("'分布式'", "YEARDL", "");
+            //double SRZYDL = GetDlFh("'生物质'", "YEARDL", "");
+            double FDYDL = GetRValue("风电", "电厂", "年电量");
+            double HDYDL = GetRValue("火电", "电厂", "年电量");
+            double SDYDL = GetRValue("水电", "电厂", "年电量");
+            double TYNYDL = GetRValue("太阳能", "电厂", "年电量");
+            double FBSYDL = GetRValue("分布式", "电厂", "年电量");
+            double SRZYDL = GetRValue("生物质", "电厂", "年电量");
+            //double YDL = pbll.GetPointVal(new string[] { "HDXN:00CE4000.1.1Y" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0];
+            //YDL = Math.Round(YDL, 2);
+            double YDL = FDYDL + HDYDL + SDYDL + TYNYDL + FBSYDL + SRZYDL;
 
             //产业发电计划
             double FDJHDL = GetJHDl("'FDRL'", DateTime.Now.ToString("yyyy-01-01 0:00:00"));
@@ -245,8 +314,8 @@ namespace WebApplication2
 
                 //月电量
                 MDL =MDL,
-                HDMDL = HDMDL,
-                SDMDL = SDMDL,
+                //HDMDL = HDMDL,
+                //SDMDL = SDMDL,
 
                 //年电量
                 YDL = YDL,
@@ -272,12 +341,18 @@ namespace WebApplication2
                 //FBSSS = FBSFH == 0 ? 0.00 : Math.Round(FBSFH / FBSRL * 100, 2),
                 //TYNSS = TYNFH == 0 ? 0.00 : Math.Round(TYNFH / TYNRL * 100, 2),
                 //SRZSS = SRZFH == 0 ? 0.00 : Math.Round(SRZFH / SRZRL * 100, 2)
-                HDSS = Math.Round(GetDlFh("'风电'", "PERIOD_TAG", "") / FDRL * 100, 2),
-                SDSS = Math.Round(GetDlFh("'火电'", "PERIOD_TAG", "") / HDRL * 100, 2),
-                FDSS = Math.Round(GetDlFh("'水电'", "PERIOD_TAG", "") / SDRL * 100, 2),
-                FBSSS = Math.Round(GetDlFh("'太阳能'", "PERIOD_TAG", "") / TYNRL * 100, 2),
-                TYNSS = Math.Round(GetDlFh("'分布式'", "PERIOD_TAG", "") / FBSRL * 100, 2),
-                SRZSS = Math.Round(GetDlFh("'生物质'", "PERIOD_TAG", "") / SRZRL * 100, 2)
+                //HDSS = Math.Round(GetDlFh("'风电'", "PERIOD_TAG", "") / FDRL * 100, 2),
+                //SDSS = Math.Round(GetDlFh("'火电'", "PERIOD_TAG", "") / HDRL * 100, 2),
+                //FDSS = Math.Round(GetDlFh("'水电'", "PERIOD_TAG", "") / SDRL * 100, 2),
+                //FBSSS = Math.Round(GetDlFh("'太阳能'", "PERIOD_TAG", "") / TYNRL * 100, 2),
+                //TYNSS = Math.Round(GetDlFh("'分布式'", "PERIOD_TAG", "") / FBSRL * 100, 2),
+                //SRZSS = Math.Round(GetDlFh("'生物质'", "PERIOD_TAG", "") / SRZRL * 100, 2)
+                HDSS = Math.Round(GetRValue("风电", "电厂", "功率") / FDRL * 100, 2),
+                SDSS = Math.Round(GetRValue("火电", "电厂", "功率") / HDRL * 100, 2),
+                FDSS = Math.Round(GetRValue("水电", "电厂", "功率") / SDRL * 100, 2),
+                FBSSS = Math.Round(GetRValue("太阳能", "电厂", "功率") / TYNRL * 100, 2),
+                TYNSS = Math.Round(GetRValue("分布式", "电厂", "功率") / FBSRL * 100, 2),
+                SRZSS = Math.Round(GetRValue("生物质", "电厂", "功率") / SRZRL * 100, 2)
             };
 
 
@@ -299,22 +374,27 @@ namespace WebApplication2
             if (chartNum == "1")
             {
                 ht.Add("name", "火电");
-                tmpSession=GetChartsValues("'火电'");
-                Session["hd"] = tmpSession;
+                //tmpSession=GetChartsValues("'火电'");
+                //Session["hd"] = tmpSession;
+                tmpSession = GetChartValues(bm.GetTagByKind("水电", "电厂", "功率"));
                 ht.Add("data", tmpSession);
 
                 listData.Add(ht);
                 ht = new Hashtable();
                 ht.Add("name", "风电");
-                tmpSession=GetChartsValues("'风电'");
-                ht.Add("data", tmpSession);
-                Session["fd"] = tmpSession;
+                //tmpSession=GetChartsValues("'风电'");
+                //ht.Add("data", tmpSession);
+                tmpSession = GetChartValues(bm.GetTagByKind("风电", "电厂", "功率"));
+
+                //Session["fd"] = tmpSession;
                 listData.Add(ht);
                 ht = new Hashtable();
-                ht.Add("name", "水电");
-                tmpSession = GetChartsValues("'水电'");
+                //ht.Add("name", "水电");
+                //tmpSession = GetChartsValues("'水电'");
+                tmpSession = GetChartValues(bm.GetTagByKind("水电", "电厂", "功率"));
+
                 ht.Add("data",tmpSession );
-                Session["sd"] = tmpSession;
+                //Session["sd"] = tmpSession;
 
                 listData.Add(ht);
             }
@@ -323,23 +403,26 @@ namespace WebApplication2
             {
                 ht = new Hashtable();
                 ht.Add("name", "分布式");
-                tmpSession=GetChartsValues("'分布式'");
+                //tmpSession=GetChartsValues("'分布式'");
+                tmpSession = GetChartValues(bm.GetTagByKind("分布式", "电厂", "功率"));
                 ht.Add("data", tmpSession);
-                Session["fbs"] = tmpSession;
+               // Session["fbs"] = tmpSession;
                 
                 listData.Add(ht);
                 ht = new Hashtable();
                 ht.Add("name", "太阳能");
-                tmpSession = GetChartsValues("'太阳能'");
+                //tmpSession = GetChartsValues("'太阳能'");
+                tmpSession = GetChartValues(bm.GetTagByKind("太阳能", "电厂", "功率"));
                 ht.Add("data", tmpSession);
-                Session["tyn"] = tmpSession;
+               // Session["tyn"] = tmpSession;
 
                 listData.Add(ht);
                 ht = new Hashtable();
                 ht.Add("name", "生物质");
-                tmpSession = GetChartsValues("'生物质'");
+                //tmpSession = GetChartsValues("'生物质'");
+                tmpSession = GetChartValues(bm.GetTagByKind("生物质", "电厂", "功率"));
                 ht.Add("data", tmpSession);
-                Session["swz"] = tmpSession;
+               // Session["swz"] = tmpSession;
 
                 listData.Add(ht);
             }
@@ -429,7 +512,7 @@ namespace WebApplication2
         }
 
 
-        //根据产业获得总电量和负荷
+        //根据产业获得总电量和负荷(机组累加)
         private double GetDlFh(string cye, string cName, string time)
         {
             string searchTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");

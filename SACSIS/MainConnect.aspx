@@ -442,7 +442,8 @@
                     $("#SRZRL").html("&nbsp;&nbsp;&nbsp;&nbsp;" + json.SRZRL);
 
                     //总负荷 产业负荷
-                    $("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
+                    //$("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
+                    $("#ZFH").html("<label>" + json.ZFH.toFixed(2) + "</label>");
                     $("#FDFH").html(ControlString(json.FDFH));
                     $("#HDFH").html(ControlString(json.HDFH));
                     $("#SDFH").html(ControlString(json.SDFH));
@@ -452,7 +453,8 @@
 
 
                     //日发电量
-                    $("#DDL").html("<label>" + (json.DDL + json.HDDDL + json.SDDDL).toFixed(2) + "</label>");
+                    //$("#DDL").html("<label>" + (json.DDL + json.HDDDL + json.SDDDL).toFixed(2) + "</label>");
+                    $("#DDL").html("<label>" + (json.DDL).toFixed(2) + "</label>");
                     $("#FDDDL").html(ControlString(json.FDDDL));
                     $("#HDDDL").html(ControlString(json.HDDDL));
                     $("#SDDDL").html(ControlString(json.SDDDL));
@@ -460,9 +462,12 @@
                     $("#FBSDDL").html(ControlString(json.FBSDDL));
                     $("#SRZDDL").html(ControlString(json.SRZDDL));
 
-                    $("#MDL").html("<label>" + ((json.MDL + json.HDMDL + json.SDMDL) / 10000).toFixed(2) + "</label>");
+                    //月发电量
+                    //$("#MDL").html("<label>" + ((json.MDL + json.HDMDL + json.SDMDL) / 10000).toFixed(2) + "</label>");
+                    $("#MDL").html("<label>" + ((json.MDL) / 10000).toFixed(2) + "</label>");
 
-                    $("#YDL").html("<label>" + ((json.YDL + json.HDYDL + json.SDYDL) / 10000).toFixed(2) + "</label>");
+                    //$("#YDL").html("<label>" + ((json.YDL + json.HDYDL + json.SDYDL) / 10000).toFixed(2) + "</label>");
+                    $("#YDL").html("<label>" + ((json.YDL) / 10000).toFixed(2) + "</label>");
 
                     $("#hd_progressbar").progressbar({
                         value: json.HDWCL

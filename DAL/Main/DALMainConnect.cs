@@ -60,8 +60,24 @@ namespace DAL.Main
 
         #endregion
 
+        #region 根据测点获取T_INFO_VALUE表中指定测点集合的信息
         /// <summary>
-        /// 获取测点最新值
+        /// 根据测点获取T_INFO_VALUE表中指定测点集合的信息
+        /// </summary>
+        /// <param name="pointsName">测点集合的名称</param>
+        /// <returns></returns>
+        public DataTable GetValueByPoints(string pointsName)
+        {
+            sql = "SELECT T_POINT,T_VALUE FROM ADMINISTRATOR.T_INFO_VALUE where T_POINT in (" + pointsName + ")";
+            dt = DBdb2.RunDataTable(sql, out errMsg);
+
+            return dt;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 获取测点指定时间的值
         /// </summary>
         /// <param name="points">测点集合</param>
         /// <param name="time">测点实时时间</param>

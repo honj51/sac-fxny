@@ -63,6 +63,34 @@ namespace BLL.BLLMainConnect
        }
         #endregion
 
+       #region 根据测点获取T_INFO_VALUE表中指定测点集合的信息
+       /// <summary>
+       /// 根据测点获取T_INFO_VALUE表中指定测点集合的信息
+       /// </summary>
+       /// <param name="pointsName">测点集合的名称</param>
+       /// <returns></returns>
+       public double GetValueByPoints(string pointsName)
+       {
+           double pointValue = 0;
+           dt = dm.GetValueByPoints(pointsName);
+           if (dt != null && dt.Rows.Count > 0)
+           {
+               foreach (DataRow d in dt.Rows)
+               {
+                   double value = 0;
+                   if (double.TryParse(d["T_VALUE"].ToString(), out value))
+                   {
+                       if (value > 0)
+                       {
+                           pointValue += value;
+                       }
+                   }
+               }
+           }
+           return pointValue;
+       }
+       #endregion
+
        #region 获取测点实时数据库中的值
        /// <summary>
         /// 获取测点值
