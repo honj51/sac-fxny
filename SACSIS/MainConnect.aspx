@@ -432,6 +432,8 @@
                 success: function (json) {
                     //json = eval("("+json+")");
                     var json = $.parseJSON(json);
+                    
+
                     //总容量 产业容量 
                     $("#ZRL").html("<label>" + json.ZRL + "</label>");
                     $("#HDRL").html(json.HDRL);
@@ -441,15 +443,15 @@
                     $("#FBSRL").html("&nbsp;&nbsp;" + json.FBSRL);
                     $("#SRZRL").html("&nbsp;&nbsp;&nbsp;&nbsp;" + json.SRZRL);
 
-                    //总负荷 产业负荷
-                    //$("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
-                    $("#ZFH").html("<label>" + json.ZFH.toFixed(2) + "</label>");
-                    $("#FDFH").html(ControlString(json.FDFH));
-                    $("#HDFH").html(ControlString(json.HDFH));
-                    $("#SDFH").html(ControlString(json.SDFH));
-                    $("#TYNFH").html(ControlString(json.TYNFH));
-                    $("#FBSFH").html(ControlString(json.FBSFH));
-                    $("#SRZFH").html(ControlString(json.SRZFH));
+//                    //总负荷 产业负荷(运行过慢，优化)
+//                    //$("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
+//                    $("#ZFH").html("<label>" + json.ZFH.toFixed(2) + "</label>");
+//                    $("#FDFH").html(ControlString(json.FDFH));
+//                    $("#HDFH").html(ControlString(json.HDFH));
+//                    $("#SDFH").html(ControlString(json.SDFH));
+//                    $("#TYNFH").html(ControlString(json.TYNFH));
+//                    $("#FBSFH").html(ControlString(json.FBSFH));
+//                    $("#SRZFH").html(ControlString(json.SRZFH));
 
 
                     //日发电量
@@ -514,6 +516,34 @@
                 }
             });
 
+            $.ajax({
+                url: "MainConnect.aspx?funCode=Burden",
+                type: "POST",
+                beforeSend: function () {
+                    //Handle the beforeSend event
+                },
+                success: function (json) {
+                    //json = eval("("+json+")");
+                    var json = $.parseJSON(json);
+                     
+                    //总负荷 产业负荷(优化分别请求)
+                    $("#ZFH").html("<label>" + json.ZFH.toFixed(2) + "</label>");
+                    $("#FDFH").html(ControlString(json.FDFH));
+                    $("#HDFH").html(ControlString(json.HDFH));
+                    $("#SDFH").html(ControlString(json.SDFH));
+                    $("#TYNFH").html(ControlString(json.TYNFH));
+                    $("#FBSFH").html(ControlString(json.FBSFH));
+                    $("#SRZFH").html(ControlString(json.SRZFH));
+
+ 
+                },
+                error: function (x, e) {
+                    alert(x.responseText);
+                },
+                complete: function () {
+                    //Handle the complete event
+                }
+            });
 
             $.ajax({
                 url: "MainConnect.aspx?funCode=initCharts&chartNum=1",
