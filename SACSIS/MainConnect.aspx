@@ -516,6 +516,7 @@
                 }
             });
 
+            //总负荷 产业负荷(优化分别请求)
             $.ajax({
                 url: "MainConnect.aspx?funCode=Burden",
                 type: "POST",
@@ -534,22 +535,6 @@
                     $("#TYNFH").html(ControlString(json.TYNFH));
                     $("#FBSFH").html(ControlString(json.FBSFH));
                     $("#SRZFH").html(ControlString(json.SRZFH));
-
- 
-                },
-                error: function (x, e) {
-                    alert(x.responseText);
-                },
-                complete: function () {
-                    //Handle the complete event
-                }
-            });
-
-            $.ajax({
-                url: "MainConnect.aspx?funCode=initCharts&chartNum=1",
-                type: "POST",
-                success: function (json) {
-                    var json = $.parseJSON(json);
 
                     $('#container1').highcharts({
                         chart: {
@@ -576,7 +561,7 @@
                             title: {
                                 text: ''
                             },
-                            min: 0 
+                            min: 0
                         },
                         tooltip: {
                             valueSuffix: ' MW',
@@ -602,7 +587,7 @@
                                 pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
                             }
                         },
-                        series: json.chart
+                        series: json.chartFirst
 
                         , exporting: {
                             enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
@@ -614,14 +599,7 @@
                             }
                         }
                     });
-                }
-            });
 
-            $.ajax({
-                url: "MainConnect.aspx?funCode=initCharts&chartNum=2",
-                type: "POST",
-                success: function (json) {
-                    var json = $.parseJSON(json);
                     $('#container2').highcharts({
                         chart: {
                             type: 'spline'
@@ -647,7 +625,7 @@
                             title: {
                                 text: ''
                             },
-                            min: 0 
+                            min: 0
                         },
                         tooltip: {
                             valueSuffix: ' MW',
@@ -673,20 +651,19 @@
                                 pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
                             }
                         },
-                        series: json.chart
+                        series: json.chartSecond
+
                         , exporting: {
                             enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
                         }
-
+            ,
+                        navigation: {
+                            menuItemStyle: {
+                                fontSize: '10px'
+                            }
+                        }
                     });
-                }
-            });
 
-            $.ajax({
-                url: "MainConnect.aspx?funCode=initCharts&chartNum=3",
-                type: "POST",
-                success: function (json) {
-                    var json = $.parseJSON(json);
                     $('#container3').highcharts({
                         chart: {
                             type: 'spline'
@@ -712,7 +689,7 @@
                             title: {
                                 text: ''
                             },
-                            min: 0 
+                            min: 0
                         },
                         tooltip: {
                             valueSuffix: ' MW',
@@ -734,13 +711,12 @@
                                 marker: {
                                     enabled: false
                                 },
-                                //                                pointInterval: 3600000, // one hour
-                                //                                pointStart: Date.UTC(2009, 9, 6, 0, 0, 0)
                                 pointInterval: 1800000, // 半小时
                                 pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
                             }
                         },
-                        series: json.chart
+                        series: json.chartThird
+
                         , exporting: {
                             enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
                         }
@@ -751,8 +727,224 @@
                             }
                         }
                     });
+                },
+                error: function (x, e) {
+                    alert(x.responseText);
+                },
+                complete: function () {
+                    //Handle the complete event
                 }
             });
+
+//            $.ajax({
+//                url: "MainConnect.aspx?funCode=initCharts&chartNum=1",
+//                type: "POST",
+//                success: function (json) {
+//                    var json = $.parseJSON(json);
+
+//                    $('#container1').highcharts({
+//                        chart: {
+//                            type: 'spline'
+//                        },
+//                        title: {
+//                            text: ''
+//                        },
+//                        subtitle: {
+//                            text: ''
+//                        },
+//                        colors: [
+//                '#058dc7', '#50b432', '#ed561b'
+//                ],
+//                        xAxis: {
+//                            type: 'datetime',
+//                            labels: {
+//                                formatter: function () {
+//                                    return Highcharts.dateFormat('%H:%M', this.value);
+//                                }
+//                            }
+//                        },
+//                        yAxis: {
+//                            title: {
+//                                text: ''
+//                            },
+//                            min: 0
+//                        },
+//                        tooltip: {
+//                            valueSuffix: ' MW',
+//                            xDateFormat: '<b>时间:' + '%H:%M:%S' + '</b>',
+//                            crosshairs: {
+//                                width: 1,
+//                                color: 'red'
+//                            },
+//                            shared: true
+//                        },
+//                        plotOptions: {
+//                            spline: {
+//                                lineWidth: 0.5,
+//                                states: {
+//                                    hover: {
+//                                        lineWidth: 0.5
+//                                    }
+//                                },
+//                                marker: {
+//                                    enabled: false
+//                                },
+//                                pointInterval: 1800000, // 半小时
+//                                pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
+//                            }
+//                        },
+//                        series: json.chart
+
+//                        , exporting: {
+//                            enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+//                        }
+//            ,
+//                        navigation: {
+//                            menuItemStyle: {
+//                                fontSize: '10px'
+//                            }
+//                        }
+//                    });
+//                }
+//            });
+
+//            $.ajax({
+//                url: "MainConnect.aspx?funCode=initCharts&chartNum=2",
+//                type: "POST",
+//                success: function (json) {
+//                    var json = $.parseJSON(json);
+//                    
+//                    $('#container2').highcharts({
+//                        chart: {
+//                            type: 'spline'
+//                        },
+//                        title: {
+//                            text: ''
+//                        },
+//                        subtitle: {
+//                            text: ''
+//                        },
+//                        colors: [
+//                '#058dc7', '#50b432', '#ed561b'
+//                ],
+//                        xAxis: {
+//                            type: 'datetime',
+//                            labels: {
+//                                formatter: function () {
+//                                    return Highcharts.dateFormat('%H:%M', this.value);
+//                                }
+//                            }
+//                        },
+//                        yAxis: {
+//                            title: {
+//                                text: ''
+//                            },
+//                            min: 0 
+//                        },
+//                        tooltip: {
+//                            valueSuffix: ' MW',
+//                            xDateFormat: '<b>时间:' + '%H:%M:%S' + '</b>',
+//                            crosshairs: {
+//                                width: 1,
+//                                color: 'red'
+//                            },
+//                            shared: true
+//                        },
+//                        plotOptions: {
+//                            spline: {
+//                                lineWidth: 0.5,
+//                                states: {
+//                                    hover: {
+//                                        lineWidth: 0.5
+//                                    }
+//                                },
+//                                marker: {
+//                                    enabled: false
+//                                },
+//                                pointInterval: 1800000, // 半小时
+//                                pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
+//                            }
+//                        },
+//                        series: json.chart
+//                        , exporting: {
+//                            enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+//                        }
+
+//                    });
+//                }
+//            });
+
+//            $.ajax({
+//                url: "MainConnect.aspx?funCode=initCharts&chartNum=3",
+//                type: "POST",
+//                success: function (json) {
+//                    var json = $.parseJSON(json);
+//                    $('#container3').highcharts({
+//                        chart: {
+//                            type: 'spline'
+//                        },
+//                        title: {
+//                            text: ''
+//                        },
+//                        subtitle: {
+//                            text: ''
+//                        },
+//                        colors: [
+//                '#058dc7', '#50b432', '#ed561b'
+//                ],
+//                        xAxis: {
+//                            type: 'datetime',
+//                            labels: {
+//                                formatter: function () {
+//                                    return Highcharts.dateFormat('%H:%M', this.value);
+//                                }
+//                            }
+//                        },
+//                        yAxis: {
+//                            title: {
+//                                text: ''
+//                            },
+//                            min: 0 
+//                        },
+//                        tooltip: {
+//                            valueSuffix: ' MW',
+//                            xDateFormat: '<b>时间:' + '%H:%M:%S' + '</b>',
+//                            crosshairs: {
+//                                width: 1,
+//                                color: 'red'
+//                            },
+//                            shared: true
+//                        },
+//                        plotOptions: {
+//                            spline: {
+//                                lineWidth: 0.5,
+//                                states: {
+//                                    hover: {
+//                                        lineWidth: 0.5
+//                                    }
+//                                },
+//                                marker: {
+//                                    enabled: false
+//                                },
+//                                //                                pointInterval: 3600000, // one hour
+//                                //                                pointStart: Date.UTC(2009, 9, 6, 0, 0, 0)
+//                                pointInterval: 1800000, // 半小时
+//                                pointStart: Date.UTC(new Date().getYear(), new Date().getMonth(), new Date().getDay(), 0, 0, 0)
+//                            }
+//                        },
+//                        series: json.chart
+//                        , exporting: {
+//                            enabled: false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+//                        }
+//            ,
+//                        navigation: {
+//                            menuItemStyle: {
+//                                fontSize: '10px'
+//                            }
+//                        }
+//                    });
+//                }
+//            });
 
 
 //            $.ajax({

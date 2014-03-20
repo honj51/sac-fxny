@@ -47,13 +47,15 @@ namespace WebApplication2
         }
 
         /// <summary>
-        /// 获得各产业不同场站功率点不同时间断(至当前)的日均负荷（半小时取一次）
+        /// 获得各产业不同场站功率点不同时间断(至当前)的日均负荷（半小时取一次）(供日均负荷及趋势图使用)
         /// </summary>
         /// <param name="points">产业场站测点</param>
+        /// <param name="chartLists">产业不同时间的数据集合</param>
         /// <returns></returns>
-        private double GetValues(List<string> points)
+        private double GetValues(List<string> points,out ArrayList chartLists)
         {
             double value = 0;
+            chartLists = new ArrayList();
             DateTime stime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
             DateTime etime = DateTime.Now;
             TimeSpan ts = etime - stime; 
@@ -62,7 +64,8 @@ namespace WebApplication2
             for (int i = 0; i <= span; i++)
             {
                 doubleList = bm.GetPointVal(points, stime.AddHours(i * 0.5).ToString("yyyy-MM-dd HH:mm:00"));
-                value += doubleList.Where(v=>v>0).Sum(); 
+                value += doubleList.Where(v=>v>0).Sum();
+                chartLists.Add(doubleList.Where(v => v > 0).Sum());
             }
             value = value / span;
             return value;
@@ -110,45 +113,102 @@ namespace WebApplication2
         }
 
         /// <summary>
-        /// 获取日平均负荷
+        /// 获取日平均负荷及趋势图
         /// </summary>
         private void GetBurdenValue()
         {
-            #region  产业负荷
+            #region  产业负荷及趋势图
             ArrayList fh = new ArrayList();
-            //负荷 获取场站测点，获取实时数据库中的历史平均值
-            //火电
+            Hashtable ht = new Hashtable();
+
+            //第一幅趋势图
+            List<Hashtable> listDataFirst = new List<Hashtable>();
+            //第二幅趋势图
+            List<Hashtable> listDataSecond = new List<Hashtable>();
+            //第三幅趋势图
+            List<Hashtable> listDataThird = new List<Hashtable>();
+
+            //日均负荷及趋势图 获取场站测点，获取实时数据库中的历史平均值
+            //火电 日均负荷
             double HDFH = 0;
+            ArrayList chart1 = new ArrayList();
             List<string> hdPoint = bm.GetTagByKind("火电", "电厂", "功率");
-            HDFH = Math.Round(GetValues(hdPoint) / 10, 2);
+            HDFH = Math.Round(GetValues(hdPoint, out chart1) / 10, 2);
+            //火电 趋势图
+            ht.Add("name", "火电");
+            ht.Add("data", chart1);
+            listDataFirst.Add(ht);
 
             //水电
             double SDFH = 0;
+            ht = new Hashtable();
+            ArrayList chart2 = new ArrayList();
             List<string> sdPoint = bm.GetTagByKind("水电", "电厂", "功率");
-            SDFH = Math.Round(GetValues(sdPoint) / 10, 2);
+            SDFH = Math.Round(GetValues(sdPoint, out chart2) / 10, 2);
+            //水电 趋势图
+            ht.Add("name", "水电");
+            ht.Add("data", chart2);
+            listDataFirst.Add(ht);
 
             //风电
             double FDFH = 0;
+            ht = new Hashtable();
+            ArrayList chart3 = new ArrayList();
             List<string> fdPoint = bm.GetTagByKind("风电", "电厂", "功率");
-            FDFH = Math.Round(GetValues(fdPoint) / 10, 2);
+            FDFH = Math.Round(GetValues(fdPoint, out chart3) / 10, 2);
+            //风电 趋势图
+            ht.Add("name", "风电");
+            ht.Add("data", chart3);
+            listDataFirst.Add(ht);
+             
 
             //太阳能
             double TYNFH = 0;
+            ht = new Hashtable();
+            ArrayList chart4 = new ArrayList();
             List<string> tynPoint = bm.GetTagByKind("太阳能", "电厂", "功率");
-            TYNFH = Math.Round(GetValues(tynPoint) / 10, 2);
-
+            TYNFH = Math.Round(GetValues(tynPoint, out chart4) / 10, 2);
+            //太阳能 趋势图
+            ht.Add("name", "太阳能");
+            ht.Add("data", chart4);
+            listDataSecond.Add(ht);
+             
             //分布式
             double FBSFH = 0;
+            ht = new Hashtable();
+            ArrayList chart5 = new ArrayList();
             List<string> fbsPoint = bm.GetTagByKind("分布式", "电厂", "功率");
-            FBSFH = Math.Round(GetValues(fbsPoint) / 10, 2);
-
+            FBSFH = Math.Round(GetValues(fbsPoint, out chart5) / 10, 2);
+            //分布式 趋势图
+            ht.Add("name", "分布式");
+            ht.Add("data", chart5);
+            listDataSecond.Add(ht);
+             
             //生物质
             double SRZFH = 0;
+            ht = new Hashtable();
+            ArrayList chart6 = new ArrayList();
             List<string> swzPoint = bm.GetTagByKind("生物质", "电厂", "功率");
-            SRZFH = Math.Round(GetValues(swzPoint) / 10, 2);
+            SRZFH = Math.Round(GetValues(swzPoint, out chart6) / 10, 2);
+            //生物质 趋势图
+            ht.Add("name", "生物质");
+            ht.Add("data", chart6);
+            listDataSecond.Add(ht);
              
+
             //总负荷
             double ZFH = Math.Round(HDFH + FDFH + SDFH + TYNFH + FBSFH + SRZFH, 2);
+            //总趋势图
+            ArrayList allChart = new ArrayList();
+            ht = new Hashtable();
+            for (int i = 0; i < chart1.Count; i++)
+            {
+               double v=double.Parse(chart1[i].ToString()) + double.Parse(chart2[i].ToString()) + double.Parse(chart3[i].ToString()) + double.Parse(chart4[i].ToString()) + double.Parse(chart5[i].ToString()) + double.Parse(chart6[i].ToString());
+               allChart.Add(Math.Round(v, 2));
+            }
+            ht.Add("name", "总负荷");
+            ht.Add("data", allChart); 
+            listDataThird.Add(ht);
              object _obj = new
             {
               //总负荷产业负荷
@@ -158,7 +218,10 @@ namespace WebApplication2
                 SDFH = SDFH,
                 TYNFH =TYNFH,
                 FBSFH =FBSFH,
-                SRZFH =SRZFH
+                SRZFH =SRZFH,
+                chartFirst=listDataFirst,
+                chartSecond=listDataSecond,
+                chartThird=listDataThird
             };
 
              string result = JsonConvert.SerializeObject(_obj);
@@ -168,7 +231,6 @@ namespace WebApplication2
         }
         private void init()
         {
-            string time1 = DateTime.Now.ToString();
             //获得总容量和产业容量
             double FDRL = GetRl("2", "FDRL");
             double HDRL = GetRl("2", "HDRL");
@@ -178,7 +240,6 @@ namespace WebApplication2
             double SRZRL = GetRl("2", "SWZRL");
             double ZRL = FDRL + HDRL + SDRL + TYNRL + FBSRL + SRZRL;
 
-            string time2 = DateTime.Now.ToString();
 
             //#region  产业负荷
             ////总负荷 产业负荷
@@ -287,7 +348,6 @@ namespace WebApplication2
 
 
             //#endregion
-            string time3 = DateTime.Now.ToString();
 
             #region 日发电量
             //日发电量 产业日电量(实时)
@@ -310,8 +370,6 @@ namespace WebApplication2
 
             #endregion
 
-            string time4 = DateTime.Now.ToString();
-
             // 月发电量  是各场站累加。总的华电福新PI点废掉
             //double MDL = pbll.GetPointVal(new string[] { "HDXN:00CE4000.1.1M" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0];
             //double HDMDL = GetDlFh("'火电'", "MONTHDL", "");
@@ -325,7 +383,6 @@ namespace WebApplication2
             double MDL = HDMDL + SDMDL + FDMDL + TYNMDL+ FBSMDL+ SWZMDL;
 
             MDL = Math.Round(MDL, 2);
-            string time5 = DateTime.Now.ToString();
 
             // 年发电量 产业年发电量 是各场站累加 
             //double FDYDL = GetDlFh("'风电'", "YEARDL", "");
@@ -343,7 +400,6 @@ namespace WebApplication2
             //double YDL = pbll.GetPointVal(new string[] { "HDXN:00CE4000.1.1Y" }, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"))[0];
             //YDL = Math.Round(YDL, 2);
             double YDL = FDYDL + HDYDL + SDYDL + TYNYDL + FBSYDL + SRZYDL;
-            string time6 = DateTime.Now.ToString();
 
             //产业发电计划
             double FDJHDL = GetJHDl("'FDRL'", DateTime.Now.ToString("yyyy-01-01 0:00:00"));
@@ -352,17 +408,9 @@ namespace WebApplication2
             double TYNJHDL = GetJHDl("'TYNRL'", DateTime.Now.ToString("yyyy-01-01 0:00:00"));
             double FBSJHDL = GetJHDl("'FBSRL'", DateTime.Now.ToString("yyyy-01-01 0:00:00"));
             double SRZJHDL = GetJHDl("'SWZRL'", DateTime.Now.ToString("yyyy-01-01 0:00:00"));
-            string time7 = DateTime.Now.ToString();
 
             object _obj = new
             {
-                t1=time1,
-                t2 = time2,
-                t3 = time3,
-                t4 = time4,
-                t5 = time5,
-                t6 = time6,
-                t7=time7,
                 //总容量和产业容量
                 ZRL = ZRL,
                 FDRL = FDRL,
@@ -440,7 +488,7 @@ namespace WebApplication2
         }
 
 
-        //加载负荷趋势
+        //加载负荷趋势(废弃)
         private void initCharts(string chartNum)
         {
             List<Hashtable> listData = new List<Hashtable>();
@@ -467,7 +515,7 @@ namespace WebApplication2
                 //Session["fd"] = tmpSession;
                 listData.Add(ht);
                 ht = new Hashtable();
-                //ht.Add("name", "水电");
+                ht.Add("name", "水电");
                 //tmpSession = GetChartsValues("'水电'");
                 tmpSession = GetChartValues(bm.GetTagByKind("水电", "电厂", "功率"));
 
@@ -475,6 +523,7 @@ namespace WebApplication2
                 //Session["sd"] = tmpSession;
 
                 listData.Add(ht);
+
             }
 
             if (chartNum == "2")
@@ -515,7 +564,7 @@ namespace WebApplication2
             
             object _obj = new
             {
-                chart = listData
+                chart = listData 
             };
 
             Response.Write(JsonConvert.SerializeObject(_obj));
