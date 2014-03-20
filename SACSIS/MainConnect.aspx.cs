@@ -197,7 +197,7 @@ namespace WebApplication2
              
 
             //总负荷
-            double ZFH = Math.Round(HDFH + FDFH + SDFH + TYNFH + FBSFH + SRZFH, 2);
+            double ZFH = Math.Round((HDFH + FDFH + SDFH + TYNFH + FBSFH + SRZFH)*10, 2);
             //总趋势图
             ArrayList allChart = new ArrayList();
             ht = new Hashtable();
