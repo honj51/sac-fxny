@@ -1242,10 +1242,12 @@
                 $("#map").hide();
                 $("#top").show();
                 //$("#box").show();
-                $("#div1").height($("#div1").height() + 765);
+                //$("#div1").height($("#div1").height() + 765);
                 //$("#div2").height($("#div2").height() + 765);
                 //$("#gmap").height($("#gmap").height() + 765);
                 $("#gmap").css("display", "block");
+                $("#TabTop").css("display", "none");
+
             }
             if (p == "top") {
                 $("#top").hide();
@@ -1255,6 +1257,7 @@
                 //$("#div2").height($("#div2").height() - 765);
                 //$("#gmap").height($("#gmap").height() - 765);
                 $("#gmap").css("display", "none");
+                $("#TabTop").css("display", "block");
 
             }
         }
@@ -1387,7 +1390,7 @@
                 </div>
             </div>
         </div>--%>
-    <table height="100%" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4">
+    <table height="100%" id="TabTop" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4">
         <tr>
             <td>
                 <div>
