@@ -452,8 +452,8 @@ namespace SACSIS
                 tags[z] = dtTags.Rows[z]["T_WINDTAG"].ToString();
             }
             //实时风速
-            //tagValues = pbll.GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
-            tagValues = bj.GetSelectValue(tags);
+            tagValues = pbll.GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            //tagValues = bj.GetSelectValue(tags);
             for (int y = 0; y < tagValues.Length; y++)
             {
                 if (cyTye == "hd")
