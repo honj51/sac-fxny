@@ -1264,7 +1264,7 @@
         }
     </script>
 </head>
-<body style="background-color: #F7F7FF">
+<body style="background-color: #F7F7FF; width:96%; padding-left:2%;">
     <a name="A0" id="A0"></a>
     <form id="form1" runat="server">
     <%--<div id="div1" style="width: 1000px; height: 600px; background-color: #023668; margin: 5px auto;">
