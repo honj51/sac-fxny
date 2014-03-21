@@ -73,6 +73,7 @@
     <Compile Include="PointsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WppDAL.cs" />
+    <Compile Include="Yyzl\DALJZInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAC.Helper\SAC.Helper.csproj">

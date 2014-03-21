@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using BLL;
 using System.Globalization;
 using BLL.Connect;
-
+using BLL.Yyzl;
 namespace SACSIS
 {
     public partial class JZInfo : System.Web.UI.Page
@@ -23,6 +23,7 @@ namespace SACSIS
         DBLink dl = new DBLink();
         PointBLL pbll = new PointBLL();
         BLLConnect bc = new BLLConnect();
+        BLLJZInfo bj = new BLLJZInfo();
 
         Dictionary<string, double> PointValues = new Dictionary<string, double>();
         Dictionary<string, double> PointValuesPerion = new Dictionary<string, double>();
@@ -451,7 +452,8 @@ namespace SACSIS
                 tags[z] = dtTags.Rows[z]["T_WINDTAG"].ToString();
             }
             //实时风速
-            tagValues = pbll.GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            //tagValues = pbll.GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            tagValues = bj.GetSelectValue(tags);
             for (int y = 0; y < tagValues.Length; y++)
             {
                 if (cyTye == "hd")
