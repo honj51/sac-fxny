@@ -765,7 +765,8 @@ namespace SACSIS.Connect
             if (cye == "'总负荷'")
                 tagValues = pbll.GetPointVal(zfh, searchTime);
             else
-                tagValues = pbll.GetPointVal(tags, searchTime);
+                //tagValues = pbll.GetPointVal(tags, searchTime);
+                tagValues = pbsll.GetSelectValue(tags);
 
             if (tagValues.Length < 1)
                 return 0;
