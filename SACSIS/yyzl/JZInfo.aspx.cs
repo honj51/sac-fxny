@@ -22,6 +22,8 @@ namespace SACSIS
 
         DBLink dl = new DBLink();
         PointBLL pbll = new PointBLL();
+        PointsBLL pbsll = new PointsBLL();
+
         BLLConnect bc = new BLLConnect();
        // BLLJZInfo bj = new BLLJZInfo();
 
@@ -452,7 +454,8 @@ namespace SACSIS
                     tags[z] = "~";
                 }
             }
-            tagValues = GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            //tagValues = GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            tagValues = pbsll.GetSelectValue(tags);
             for (int y = 0; y < tagValues.Length; y++)
             {
                 if (cyTye == "hd")
@@ -495,7 +498,9 @@ namespace SACSIS
                   }
               }
             //实时风速
-            tagValues = pbll.GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            //tagValues = pbll.GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            tagValues = pbsll.GetSelectValue(tags);
+
             //tagValues = bj.GetSelectValue(tags);
             for (int y = 0; y < tagValues.Length; y++)
             {
