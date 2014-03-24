@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using BLL;
 using System.Globalization;
 using BLL.Connect;
-using BLL.Yyzl;
+//using BLL.Yyzl;
 namespace SACSIS
 {
     public partial class JZInfo : System.Web.UI.Page
@@ -23,7 +23,7 @@ namespace SACSIS
         DBLink dl = new DBLink();
         PointBLL pbll = new PointBLL();
         BLLConnect bc = new BLLConnect();
-        BLLJZInfo bj = new BLLJZInfo();
+       // BLLJZInfo bj = new BLLJZInfo();
 
         Dictionary<string, double> PointValues = new Dictionary<string, double>();
         Dictionary<string, double> PointValuesPerion = new Dictionary<string, double>();
@@ -187,11 +187,11 @@ namespace SACSIS
                     //出力合并行
                     if (cyTye == "fd")
                     {
-                        str += "<td style='text-align:left' rowspan=\"" + rowspans + "\"><a type='3' area='" + dtNames.Rows[jj]["T_AREA"].ToString() + "' href='#' onclick='next(this)'>" + dtNames.Rows[jj][0].ToString() + "</a></td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion[dtNames.Rows[jj][0].ToString()], 3) + "</td>";
+                        str += "<td style='text-align:left' rowspan=\"" + rowspans + "\"><a type='3' area='" + dtNames.Rows[jj]["T_AREA"].ToString() + "' href='#' onclick='next(this)'>" + dtNames.Rows[jj][0].ToString() + "</a></td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion.ContainsKey(dtNames.Rows[jj][0].ToString())?PointValuesPerion[dtNames.Rows[jj][0].ToString()]:0, 3) + "</td>";
                     }
                     else
                     {
-                        str += "<td style='text-align:left' rowspan=\"" + rowspans + "\">" + dtNames.Rows[jj][0].ToString() + "</td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion[dtNames.Rows[jj][0].ToString()], 3) + "</td>";
+                        str += "<td style='text-align:left' rowspan=\"" + rowspans + "\">" + dtNames.Rows[jj][0].ToString() + "</td><td  style='text-align:right' rowspan=\"" + rowspans + "\">" + Math.Round(PointValuesPerion.ContainsKey(dtNames.Rows[jj][0].ToString())?PointValuesPerion[dtNames.Rows[jj][0].ToString()]:0, 3) + "</td>";
                     }
 
 
@@ -262,26 +262,26 @@ namespace SACSIS
                                         if (cyTye == "fd")
                                         {
                                             //风速
-                                            double value = PointValues[dtType.Rows[k - 1]["T_WINDTAG"].ToString()];
+                                            double value = PointValues.ContainsKey(dtType.Rows[k - 1]["T_WINDTAG"].ToString())?PointValues[dtType.Rows[k - 1]["T_WINDTAG"].ToString()]:0;
                                             //是否是标杆风机
                                             if (id.Contains(dtType.Rows[k - 1]["ID_KEY"].ToString()))
                                             {
                                                 if (value <= 3)
                                                 {
-                                                    str += "<td  style='width:41px;color:Red;background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a> </td></tr>";
+                                                    str += "<td  style='width:41px;color:Red;background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a> </td></tr>";
 
                                                 }
                                                 else if (value >= 3 && value <= 12)
                                                 {
-                                                    str += "<td  style='width:41px;color:Red;background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                    str += "<td  style='width:41px;color:Red;background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
                                                 }
                                                 else if (value > 12 && value <= 25)
                                                 {
-                                                    str += "<td  style='width:41px;color:Red;background-color: #64C45C;'   title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                    str += "<td  style='width:41px;color:Red;background-color: #64C45C;'   title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
                                                 }
                                                 else if (value > 25)
                                                 {
-                                                    str += "<td  style='width:41px;color:Red;background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                    str += "<td  style='width:41px;color:Red;background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()) ? PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] : 0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
                                                 }
                                                 //str += "<td  style='width:41px;color:Red;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td></tr>";
                                             }
@@ -289,20 +289,20 @@ namespace SACSIS
                                             {
                                                 if (value <= 3)
                                                 {
-                                                    str += "<td  style='width:41px; background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                    str += "<td  style='width:41px; background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
 
                                                 }
                                                 else if (value >= 3 && value <= 12)
                                                 {
-                                                    str += "<td  style='width:41px; background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                    str += "<td  style='width:41px; background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
                                                 }
                                                 else if (value > 12 && value <= 25)
                                                 {
-                                                    str += "<td  style='width:41px; background-color: #64C45C;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                    str += "<td  style='width:41px; background-color: #64C45C;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
                                                 }
                                                 else if (value > 25)
                                                 {
-                                                    str += "<td  style='width:41px; background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
+                                                    str += "<td  style='width:41px; background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()) ? PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] : 0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td></tr>";
                                                 }
                                                 //str += "<td  style='width:41px;'>#" + dtType.Rows[k - 1]["UNIT_ID"].ToString() + "</td></tr>";
                                             }
@@ -311,11 +311,17 @@ namespace SACSIS
                                         {
                                             str += "<td  style='width:41px; ' >#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td></tr>";
                                         }
-                                        if (PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] < 0)
-                                            str2 += "<td style='background-color: yellow;text-align:right'>" + PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] + "</td></tr>";
+                                        if (PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()))
+                                        {
+                                            if (PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] < 0)
+                                                str2 += "<td style='background-color: yellow;text-align:right'>" + PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] + "</td></tr>";
+                                            else
+                                                str2 += "<td >" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "</td></tr>";
+                                        }
                                         else
-                                            str2 += "<td >" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "</td></tr>";
-
+                                        {
+                                            str2 += "<td >0</td></tr>";
+                                        }
                                         htmlTable.Append(str);
                                         htmlTable.Append(str2);
                                         str = "<tr>";
@@ -335,26 +341,26 @@ namespace SACSIS
                                         if (cyTye == "fd")
                                         {
                                             //风速
-                                            double value = PointValues[dtType.Rows[k - 1]["T_WINDTAG"].ToString()];
+                                            double value = PointValues.ContainsKey(dtType.Rows[k - 1]["T_WINDTAG"].ToString())?PointValues[dtType.Rows[k - 1]["T_WINDTAG"].ToString()]:0;
 
                                             if (id.Contains(dtType.Rows[k - 1]["ID_KEY"].ToString()))
                                             {
                                                 if (value <= 3)
                                                 {
-                                                    str += "<td  style='width:41px;color:Red;background-color: #B3D6FD;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                    str += "<td  style='width:41px;color:Red;background-color: #B3D6FD;' title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
 
                                                 }
                                                 else if (value >= 3 && value <= 12)
                                                 {
-                                                    str += "<td  style='width:41px;color:Red;background-color: #ACE066;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                    str += "<td  style='width:41px;color:Red;background-color: #ACE066;' title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
                                                 }
                                                 else if (value > 12 && value <= 25)
                                                 {
-                                                    str += "<td  style='width:41px;color:Red;background-color: #64C45C;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                    str += "<td  style='width:41px;color:Red;background-color: #64C45C;' title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
                                                 }
                                                 else if (value > 25)
                                                 {
-                                                    str += "<td  style='width:41px;color:Red;background-color: #9C7DC1;' title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                    str += "<td  style='width:41px;color:Red;background-color: #9C7DC1;' title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()) ? PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] : 0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;color:Red;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
                                                 }
                                                 //str += "<td  style='width:41px;color:Red;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td>";
 
@@ -363,20 +369,20 @@ namespace SACSIS
                                             {
                                                 if (value <= 3)
                                                 {
-                                                    str += "<td  style='width:41px; background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                    str += "<td  style='width:41px; background-color: #B3D6FD;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
 
                                                 }
                                                 else if (value >= 3 && value <= 12)
                                                 {
-                                                    str += "<td  style='width:41px; background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                    str += "<td  style='width:41px; background-color: #ACE066;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
                                                 }
                                                 else if (value > 12 && value <= 25)
                                                 {
-                                                    str += "<td  style='width:41px; background-color: #64C45C;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                    str += "<td  style='width:41px; background-color: #64C45C;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString())?PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()]:0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
                                                 }
                                                 else if (value > 25)
                                                 {
-                                                    str += "<td  style='width:41px; background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
+                                                    str += "<td  style='width:41px; background-color: #9C7DC1;'  title='风速:" + value + ";负荷:" + Math.Round(PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()) ? PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] : 0, 3) + "'><a type='4' idkey='" + dtType.Rows[k - 1]["ID_KEY"].ToString() + "' href='#' style='text-decoration:none;' onclick='tc(this)'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</a></td>";
                                                 }
                                                 //str += "<td  style='width:41px;'>#" + dtType.Rows[k - 1]["UNIT_ID"] + "</td>";
                                             }
@@ -385,11 +391,18 @@ namespace SACSIS
                                         {
                                             str += "<td  style='width:41px;' > #" + dtType.Rows[k - 1]["UNIT_ID"] + "</td>";
                                         }
-                                        if (PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] < 0)
-                                            str2 += "<td style='background-color: yellow;text-align:right'>" + PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] + "</td>";
+                                        if (PointValues.ContainsKey(dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()))
+                                        {
+                                            if (PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] < 0)
+                                                str2 += "<td style='background-color: yellow;text-align:right'>" + PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()] + "</td>";
+                                            else
+                                                str2 += "<td >" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "</td>";
+                                        }
                                         else
-                                            str2 += "<td >" + Math.Round(PointValues[dtType.Rows[k - 1]["UNIT_GL_TAG"].ToString()], 3) + "</td>";
-                                    }
+                                        {
+                                            str2 += "<td >0</td>";
+                                        }
+                                        }
                                 }
                             }
                         }
@@ -422,7 +435,22 @@ namespace SACSIS
             //添加负荷点
             for (int z = 0; z < dtTags.Rows.Count; z++)
             {
-                tags[z] = dtTags.Rows[z][0].ToString();
+                //tags[z] = dtTags.Rows[z][0]!=DBNull.Value? dtTags.Rows[z][0].ToString():"~";
+                if (dtTags.Rows[z][0] != DBNull.Value)
+                {
+                    if (!string.IsNullOrEmpty(dtTags.Rows[z][0].ToString()))
+                    {
+                        tags[z] = dtTags.Rows[z][0].ToString();
+                    }
+                    else
+                    {
+                        tags[z] = "~";
+                    }
+                }
+                else
+                {
+                    tags[z] = "~";
+                }
             }
             tagValues = GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
             for (int y = 0; y < tagValues.Length; y++)
@@ -447,10 +475,25 @@ namespace SACSIS
             //添加风速点
               tags = new string[dtTags.Rows.Count];
               tagValues = new double[dtTags.Rows.Count];
-            for (int z = 0; z < dtTags.Rows.Count; z++)
-            {
-                tags[z] = dtTags.Rows[z]["T_WINDTAG"].ToString();
-            }
+              for (int z = 0; z < dtTags.Rows.Count; z++)
+              {
+
+                  if (dtTags.Rows[z]["T_WINDTAG"] != DBNull.Value)
+                  {
+                      if (!string.IsNullOrEmpty(dtTags.Rows[z]["T_WINDTAG"].ToString()))
+                      {
+                          tags[z] = dtTags.Rows[z]["T_WINDTAG"].ToString();
+                      }
+                      else
+                      {
+                          tags[z] = "~";
+                      }
+                  }
+                  else
+                  {
+                      tags[z] = "~";
+                  }
+              }
             //实时风速
             tagValues = pbll.GetPointVal(tags, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
             //tagValues = bj.GetSelectValue(tags);
