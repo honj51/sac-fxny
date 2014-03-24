@@ -702,9 +702,9 @@ namespace SACSIS.Connect
 
                 //stime = stime.AddHours(i);
                 //arrData.Add(Convert.ToInt64((etime - stime).TotalMilliseconds));
-                int seconds = Convert.ToInt32((etime - stime).TotalSeconds) / 20;
+                int seconds = Convert.ToInt32((etime - stime).TotalSeconds) / 10;
                 DateTime dtt = stime;
-                while (dtt < etime)
+                while (dtt <= etime)
                 {
                     ArrayList arrData = new ArrayList();
 
@@ -765,8 +765,8 @@ namespace SACSIS.Connect
             if (cye == "'总负荷'")
                 tagValues = pbll.GetPointVal(zfh, searchTime);
             else
-                //tagValues = pbll.GetPointVal(tags, searchTime);
-                tagValues = pbsll.GetSelectValue(tags);
+                tagValues = pbll.GetPointVal(tags, searchTime);
+                //tagValues = pbsll.GetSelectValue(tags);
 
             if (tagValues.Length < 1)
                 return 0;

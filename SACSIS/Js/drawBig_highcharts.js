@@ -151,8 +151,8 @@ Highcharts.theme = {
         borderWidth: 2,
         plotBackgroundColor: 'rgba(255, 255, 255, .9)',
         plotShadow: true,
-        plotBorderWidth: 1,
-        plotBackgroundImage: '../img/skies.jpg'
+        plotBorderWidth: 1
+        //, plotBackgroundImage: '../img/skies.jpg'
     },
     title: {
         style: {
