@@ -19,6 +19,9 @@ namespace SACSIS.Connect
         PointBLL pbll = new PointBLL();
         //FormBLL fb = new FormBLL();
         BLLConnect bc = new BLLConnect();
+        //从T_INFO_VALUE中取值（2014.3.24）
+        PointsBLL pbsll = new PointsBLL();
+
         string errMsg = string.Empty;
         public  string url = string.Empty;
 
@@ -185,15 +188,15 @@ namespace SACSIS.Connect
 
             //标题
             
-            //总负荷
+            //风电或场站总负荷（取场站或机组的功率值之和）
             double FDFH = GetFDFHValueByTime(area, periodName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
-            //日发电量
+            //风电或场站日发电量（取场站或机组的日发电量之和）
             double FDDDL = GetDlFh("'风电'", "DAYDL", area, periodName, "");
-            //月发电量
+            //风电或场站月发电量（取场站或机组的月发电量之和）
             double MDLL = 0;
             string MDL = string.Empty;
 
-            //年发电量
+            //风电或场站年发电量（取场站或机组的年发电量之和）
             double FDYDLL = GetDlFh("'风电'", "YEARDL", area, periodName, "");
             string FDYDL = string.Empty;
 
@@ -493,7 +496,9 @@ namespace SACSIS.Connect
             {
                 tags[s] = dtN.Rows[s][0].ToString();
             }
-            tagsValues = pbll.GetPointVal(tags, time);
+            //tagsValues = pbll.GetPointVal(tags, time);
+            tagsValues = pbsll.GetSelectValue(tags);
+
             double ss = 0;
             if (tagsValues.Length > 0)
                 ss = Math.Round(tagsValues.Sum(), 2);
@@ -529,7 +534,8 @@ namespace SACSIS.Connect
             if (cye == "'总负荷'")
                 tagValues = pbll.GetPointVal(zfh, searchTime);
             else
-                tagValues = GetPointVal(tags, searchTime);
+                //tagValues = GetPointVal(tags, searchTime);
+                tagValues = pbsll.GetSelectValue(tags);
 
             if (tagValues.Length < 1)
                 return 0;
