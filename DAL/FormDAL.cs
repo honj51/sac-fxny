@@ -6,6 +6,7 @@ using System.Data;
 using SAC.DBOperations;
 using System.Text.RegularExpressions;
 using System.Collections;
+using DAL.Connect;
 
 namespace DAL
 {
@@ -19,6 +20,7 @@ namespace DAL
         private bool judge = false;
         private DataTable dt = new DataTable();
         private DBLink dl = new DBLink();
+        private DALConnect dc = new DALConnect();
         private string pJudge = @"^\d+(\.)?\d*$";
         public static PointDAL pd = new PointDAL();
         double drv = 0;
@@ -324,7 +326,8 @@ namespace DAL
                     {
                         a = dd.ToArray();
                     }
-                    double[] b = pd.GetPointVal(a, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+                    //double[] b = pd.GetPointVal(a, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+                    double[] b = dc.GetSelectValue(a);
                     
                     //实时负荷
                     if (b.Length>0)
