@@ -312,9 +312,10 @@
                     //区域数
                     var areaLength = data[length].length;
                     //var s = $.parseJSON(data[0]);
+                    document.getElementById("title").innerHTML += ' &nbsp;';
                     for (var z = 0; z < areaLength; z++) {
                         //玫瑰营公司 添加一个table
-                        document.getElementById("title").innerHTML += '<a href="javascript:void(\'0\');" class="easyui-linkbutton" data-options="iconCls:\'icon-search\'"  onclick="scroller(\'t' + z + '\',100)">' + data[length][z] + '</a><br /><br /><br />' + '&nbsp;';
+                        document.getElementById("title").innerHTML += '<a href="javascript:void(\'0\');" class="easyui-linkbutton" data-options="iconCls:\'icon-search\'"  onclick="scroller(\'t' + z + '\',100)">' + data[length][z] + '</a><br /><br />' + '&nbsp;';
                         var trr;
                         trr = document.getElementById("all").insertRow();
                         var tdd2 = trr.insertCell();
@@ -421,8 +422,9 @@
     <table>
         <tr>
             <td style="width: 100px; float: left">
-                <div id="divTitle" style="height: 99%; width: 10%; display: none; background-color: #F7F7FF;
-                    position: fixed; z-index: 10000; font-size: 14px; font-weight: bold;">
+                <div id="divTitle" style="height: 100%; width: 10%; display: none; background-color: #F7F7FF;
+                    position:  fixed; z-index: 10000; font-size: 14px; font-weight: bold;  ">
+                   
                     <b class="b1"></b><b class="b2 d1"></b><b class="b3 d1"></b><b class="b4 d1"></b>
                     <div class="b d1 k">
                         <div id="title">
