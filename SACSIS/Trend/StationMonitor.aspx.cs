@@ -86,14 +86,18 @@ namespace SACSIS.Trend
                     Param[1] = windTag;
                     for (int d = 0; d < count; d++)
                     {
-                        Param[d + 2] = dt1.Rows[d]["T_POWERTAG"] + "|标杆风机参考值";
+                        //Param[d + 2] =  dt1.Rows[d]["T_POWERTAG"]+ "|标杆风机参考值";
+                        Param[d + 2] = (dt1.Rows[d]["T_POWERTAG"] != DBNull.Value ? dt1.Rows[d]["T_POWERTAG"].ToString() : "~") + "|标杆风机参考值";
+                    
                     }
-                    list = pb.GetHistValAndTIme3(Param, DateTime.Today.Date,DateTime.Now, 50);
+                    //list = pb.GetHistValAndTIme3(Param, DateTime.Today.Date, DateTime.Now, 50);
+                    list = pb.GetHistValAndTIme3(Param, DateTime.Today.Date, DateTime.Now, 10);
 
                     Hashtable ht1 = new Hashtable();
                     int listCount = list.Count;
                     ArrayList lt = new ArrayList();
-                    for (int f = 0; f < 51; f++)
+                    //for (int f = 0; f < 51; f++)
+                    for (int f = 0; f < 11; f++)
                     {
                         //标杆风机的数量
                         int counts = count;
