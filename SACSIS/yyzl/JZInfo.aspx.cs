@@ -249,7 +249,7 @@ namespace SACSIS
                             {
                                 if (k % double.Parse(colrow.ToString()) == 0 && k != 0)
                                 {
-                                    if (dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "南宁华南城" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "嘉峪关" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "天津北辰" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "九江")
+                                    if (dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "南宁华南城" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "天津北辰" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "九江")
                                     {
                                         str += "<td  style='width:41px'>&nbsp;</td></tr>";
                                         str2 += "<td>&nbsp;</td></tr>";
@@ -332,7 +332,7 @@ namespace SACSIS
                                 }
                                 else
                                 {
-                                    if (dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "南宁华南城" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "嘉峪关" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "天津北辰" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "九江")
+                                    if (dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "南宁华南城" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "天津北辰" || dtType.Rows[k - 1]["PERIOD_NAME"].ToString() == "九江")
                                     {
                                         str += "<td  style='width:41px'>&nbsp;</td>";
                                         str2 += "<td>&nbsp;</td>";
