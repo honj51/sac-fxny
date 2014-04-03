@@ -25,6 +25,7 @@ namespace SACSIS
         List<czInfo> czxxList = new List<czInfo>();
         DBLink dl = new DBLink();
         PointBLL pbll = new PointBLL();
+        PointsBLL pbsll = new PointsBLL();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -590,8 +591,8 @@ namespace SACSIS
             {
                 tag[aa] = SSDl.Rows[aa][dlTyp].ToString();
             }
-            double[] tagValues = pbll.GetPointVal(tag, searchTime);
-
+            //double[] tagValues = pbll.GetPointVal(tag, searchTime);
+            double[] tagValues = pbsll.GetSelectValue(tag);
             double v = 0;
             for (int bb = 0; bb < tagValues.Length; bb++)
             {
@@ -738,8 +739,8 @@ namespace SACSIS
             {
                 tag[aa] = dtFS.Rows[aa]["T_WINDTAG"].ToString();
             }
-            double[] tagValues = pbll.GetPointVal(tag, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
-
+            //double[] tagValues = pbll.GetPointVal(tag, DateTime.Now.ToString("yyyy-MM-dd HH:mm:00"));
+            double[] tagValues = pbsll.GetSelectValue(tag);
             double v = 0;
             for (int bb = 0; bb < tagValues.Length; bb++)
             {
