@@ -436,12 +436,12 @@
 
                     //总容量 产业容量 
                     $("#ZRL").html("<label>" + json.ZRL + "</label>");
-                    $("#HDRL").html(json.HDRL);
+                    $("#HDRL").html("&nbsp;&nbsp;&nbsp;" + json.HDRL);
                     $("#FDRL").html(json.FDRL);
-                    $("#SDRL").html(json.SDRL);
-                    $("#TYNRL").html("&nbsp;&nbsp;" + json.TYNRL);
-                    $("#FBSRL").html("&nbsp;&nbsp;" + json.FBSRL);
-                    $("#SRZRL").html("&nbsp;&nbsp;&nbsp;&nbsp;" + json.SRZRL);
+                    $("#SDRL").html("&nbsp;&nbsp;&nbsp;" + json.SDRL);
+                    $("#TYNRL").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + json.TYNRL);
+                    $("#FBSRL").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + json.FBSRL);
+                    $("#SRZRL").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + json.SRZRL);
 
 //                    //总负荷 产业负荷(运行过慢，优化)
 //                    //$("#ZFH").html("<label>" + (json.ZFH + json.SDFH + json.HDFH).toFixed(2) + "</label>");
