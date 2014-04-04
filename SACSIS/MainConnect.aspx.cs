@@ -619,16 +619,16 @@ namespace WebApplication2
         private double GetRl(string typ, string id)
         {
             if (typ == "1")
-                sql = @"SELECT SUM(INT(容量)) FROM            
+                sql = @"SELECT SUM(double(容量)) FROM            
                 (select t.T_ORGID T_PERIODID,(select p.T_ORGID from ADMINISTRATOR.T_BASE_PERIOD p where p.T_PERIODID=t.T_ORGID) T_ORGID,t.容量
                 from ADMINISTRATOR.T_INFO_RL t )
                 where T_ORGID='" + id + "'";
             else if (typ == "2")
-                sql = "select sum(int(容量)) from ADMINISTRATOR.T_INFO_RL  where T_ORGID='" + id + "'";
+                sql = "select sum(double(容量)) from ADMINISTRATOR.T_INFO_RL  where T_ORGID='" + id + "'";
             else if (typ == "3")
-                sql = "select sum(int(容量)) from ADMINISTRATOR.T_INFO_RL where T_ORGID='FDRL'";
+                sql = "select sum(double(容量)) from ADMINISTRATOR.T_INFO_RL where T_ORGID='FDRL'";
             else if (typ == "all")
-                sql = "select sum(int(容量)) from ADMINISTRATOR.T_INFO_RL where T_ORGID in ('FDRL','HDRL','SDRL','TYNRL','FBSRL','SWZRL')";
+                sql = "select sum(double(容量)) from ADMINISTRATOR.T_INFO_RL where T_ORGID in ('FDRL','HDRL','SDRL','TYNRL','FBSRL','SWZRL')";
 
 
             object obj = dl.RunSingle(sql, out errMsg);
