@@ -72,6 +72,34 @@ namespace WebApplication2
         }
 
         /// <summary>
+        /// 获得风电场站功率点不同时间断(至当前)的日均负荷（半小时取一次）(供日均负荷及趋势图使用)，过滤跳变数据
+        /// </summary>
+        /// <param name="points">风电场站测点</param>
+        /// <param name="chartLists">风电不同时间的数据集合</param>
+        /// <returns></returns>
+        private double GetFDValues(List<string> points, out ArrayList chartLists)
+        {
+            double value = 0;
+            chartLists = new ArrayList();
+            DateTime stime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            DateTime etime = DateTime.Now;
+            TimeSpan ts = etime - stime;
+            int span = (ts.Hours) * 2;
+            int count = span;
+            List<double> doubleList = new List<double>();
+            for (int i = 0; i <= span; i++)
+            {
+                doubleList = bm.GetPointVal(points, stime.AddHours(i * 0.5).ToString("yyyy-MM-dd HH:mm:00"));
+                double tmp = doubleList.Where(v => v > 0 & v < 3000).Sum();//3000代表风机的最大功率kw
+                value += tmp;
+                chartLists.Add(tmp);
+
+            }
+            value = value / span;
+            return value;
+        }
+
+        /// <summary>
         /// 获取各产业实时日发电量
         /// </summary>
         /// <param name="companyType">电类型（风电，水电...）</param>
@@ -155,7 +183,7 @@ namespace WebApplication2
             ht = new Hashtable();
             ArrayList chart3 = new ArrayList();
             List<string> fdPoint = bm.GetTagByKind("风电", "电厂", "功率");
-            FDFH = Math.Round(GetValues(fdPoint, out chart3) / 10, 2);
+            FDFH = Math.Round(GetFDValues(fdPoint, out chart3) / 10, 2);
             //风电 趋势图
             ht.Add("name", "风电");
             ht.Add("data", chart3);
