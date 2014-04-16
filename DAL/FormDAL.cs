@@ -512,7 +512,8 @@ namespace DAL
         /// <returns></returns>
         public DataTable GetPointByPeriodID(string id)
         {
-            sql = "select u.T_UNITDESC, p.T_POWERTAG,p.T_WINDTAG,p.T_STATE,p.T_X,p.T_Y,u.I_FLAG from ADMINISTRATOR.T_BASE_POINTS p left join ADMINISTRATOR.T_BASE_UNIT  u on u.T_PERIODID=p.T_PERIODID and p.T_UNITID=u.T_UNITID where p.T_PERIODID='" + id + "'";
+            //sql = "select u.T_UNITDESC, p.T_POWERTAG,p.T_WINDTAG,p.T_STATE,p.T_X,p.T_Y,u.I_FLAG from ADMINISTRATOR.T_BASE_POINTS p left join ADMINISTRATOR.T_BASE_UNIT  u on u.T_PERIODID=p.T_PERIODID and p.T_UNITID=u.T_UNITID where p.T_PERIODID='" + id + "'";
+            sql = "select u.T_UNITDESC, p.T_POWERTAG,p.T_WINDTAG,p.T_STATE,p.T_X,p.T_Y,u.I_FLAG,r.T_PERIODDESC,O.T_ORGDESC  from ADMINISTRATOR.T_BASE_POINTS p left join ADMINISTRATOR.T_BASE_UNIT  u on u.T_PERIODID=p.T_PERIODID and p.T_UNITID=u.T_UNITID left  join ADMINISTRATOR.T_BASE_PERIOD as r on p.T_PERIODID=R.T_PERIODID LEFT JOIN  ADMINISTRATOR.T_BASE_ORG AS O ON R.T_ORGID=O.T_ORGID where p.T_PERIODID='" + id + "'";
             dt = dl.RunDataTable(sql, out errMsg);
             return dt;
         }

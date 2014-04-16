@@ -143,36 +143,27 @@
                 var power = eval(data.power);
                 var state = eval(data.state);
                 var flag = eval(data.flag);
-
-
+                var periodName = data.periodName;
                 var w = 0;
                 var p = 0;
+
                 //玫瑰营一期
                 if (periodid == 'MGYYQ-YQ') {
                     //设置地图的中心坐标.
-                    var loc = new GLatLng(x[9], y[9]);
+                    var loc = new GLatLng(x[0], y[0]);
                     map.setCenter(loc, 15);
                     for (var i = 0; i < x.length; i++) {
-                        //                        var pw = power[i] / 10000;
-                        //                        var pwfixNum = new Number(pw + 1).toFixed(5); //四舍五入之前加1  
-                        //                        var pwfixedNum = new Number(pwfixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
-                        //                        pw = pwfixedNum;
-
+                        
                         if (Number(state[i]) == -1) {
                             //正常
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
                         }
                         else if (Number(state[i]) == 0) {
                             //停机
-                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
- 
                         } else {
                             //通讯中断
-                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
- 
                         }
                         if (flag[i] == 1) {
                             map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
@@ -192,10 +183,10 @@
                     var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
                     p = fixedNum;
                     //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
-                    CreatePoint(x[4], y[6], WindIconSYZ(), '玫瑰营一期', '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：玫瑰营一期<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
 
                     map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
-                        innerHtml: '<div style="color: blue; font-size:15px;">玫瑰营一期</div>'
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
                     }));
                 }
 
@@ -206,30 +197,63 @@
                     map.setCenter(loc, 15);
                     for (var i = 0; i < x.length; i++) {
                         if (Number(state[i]) == 100) {
+                                    //正常
+                                    CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                                } else if (Number(state[i]) == 25) {
+                                    //停机 待机 通讯中断
+                                    CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                                } else if (Number(state[i]) == 50 || Number(state[i]) == 75) {
+                                    //待机 通讯中断
+                                    CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                                } else {
+                                    //通讯中断
+                                    CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                                }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //三胜风场
+                if (periodid == 'SDFDC-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                         if (Number(state[i]) == 4 || Number(state[i]) == 5) {
                             //正常
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
- 
-                        } else if (Number(state[i]) == 25) {
+                 
+                        } else if (Number(state[i]) == 1) {
                             //停机 待机 通讯中断
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
 
-                         
-                        } else if (Number(state[i]) == 50 || Number(state[i]) == 75) {
+                                           
+                        } else if (Number(state[i]) == 0 || Number(state[i]) == 2 || Number(state[i]) == 3 || Number(state[i]) == 9) {
                             //待机 通讯中断
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
-
-                           
                         } else {
                             //通讯中断
-                            //通讯中断
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
-
-                           
-                            p += Number(power[i]);
                         }
                         if (flag[i] == 1) {
                             map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
@@ -241,26 +265,72 @@
                                 innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
                             }));
                         }
-                    }
+                        p += Number(power[i]);
 
+                    }
                     p = p / 10000;
                     var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
                     var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
                     p = fixedNum;
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
 
-                    // CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营二期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
-                    CreatePoint(x[4], y[6], WindIconSYZ(), '玫瑰营二期', '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：玫瑰营二期<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
-
-                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] + 0.0013), {//pointx + 0.005, pointy - 0.003
-                        innerHtml: '<div style="color: blue; font-size:15px;">玫瑰营二期</div>'
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
                     }));
-
                 }
 
-                //三胜风场
-                if (periodid == 'SDFDC-QB') {
+                //富丽达风场
+                if (periodid == 'FLDFDC-QB') {
                     //设置地图的中心坐标.
-                    var loc = new GLatLng(x[8], y[8]);
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == 4 || Number(state[i]) == 5) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                 
+                        } else if (Number(state[i]) == 1 || Number(state[i]) == 9) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                 
+                        } else if (Number(state[i]) == 0 || Number(state[i]) == 3 || Number(state[i]) == 2) {
+                            //待机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                 
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                 
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //辉腾锡勒风电场
+                if (periodid == 'HTXL-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
                     map.setCenter(loc, 15);
                     for (var i = 0; i < x.length; i++) {
                         //                        var pw = power[i] / 10000;
@@ -268,84 +338,21 @@
                         //                        var pwfixedNum = new Number(pwfixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
                         //                        pw = pwfixedNum;
 
-                        if (Number(state[i]) == 4 || Number(state[i]) == 5) {
+                        if (Number(state[i]) == -1) {
                             //正常
                             // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
- 
-                        } else if (Number(state[i]) == 1) {
-                            //停机 待机 通讯中断
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
-                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
-
-                           
-                        } else if (Number(state[i]) == 0 || Number(state[i]) == 2 || Number(state[i]) == 3 || Number(state[i]) == 9) {
-                            //待机 通讯中断
-                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' 千瓦', '', '', '', '', '', '', '');
-                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
-
-                           
-                        } else {
-                            //通讯中断
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
-                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
-
-
                         }
-                        if (flag[i] == 1) {
-                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
-                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
-                            }));
-                        }
-                        else {
-                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
-                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
-                            }));
-                        }
-                        p += Number(power[i]);
-
-                    }
-
-                    p = p / 10000;
-                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
-                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
-                    p = fixedNum;
-
-                    // CreatePointInfo(x[4], y[6], WindIconSYZ(), '三胜风电场 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
-                    CreatePoint(x[4], y[6], WindIconSYZ(), '三胜风电场', '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：三胜风电场<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
-
-                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] + 0.0013), {//pointx + 0.005, pointy - 0.003
-                        innerHtml: '<div style="color: blue; font-size:15px;">三胜风电场</div>'
-                    }));
-                }
-
-                //富丽达风场
-                if (periodid == 'FLDFDC-QB') {
-                    //设置地图的中心坐标.
-                    var loc = new GLatLng(x[20], y[20]);
-                    map.setCenter(loc, 15);
-                    for (var i = 0; i < x.length; i++) {
-
-                        if (Number(state[i]) == 4 || Number(state[i]) == 5) {
-                            //正常
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
-                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
- 
-                        } else if (Number(state[i]) == 1 || Number(state[i]) == 9) {
+                        else if (Number(state[i]) == 0) {
                             //停机
                             //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
- 
-                        } else if (Number(state[i]) == 0 || Number(state[i]) == 3 || Number(state[i]) == 2) {
-                            //待机
-                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
-                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
- 
+
                         } else {
                             //通讯中断
-                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
                             CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
- 
+
                         }
                         if (flag[i] == 1) {
                             map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
@@ -364,15 +371,1598 @@
                     var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
                     var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
                     p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
 
-                    // CreatePointInfo(x[4] + 0.009, y[6] - 0.005, WindIconSYZ(), '富丽达风场 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
-                    CreatePoint(x[4] + 0.009, y[6] - 0.005, WindIconSYZ(), '富丽达风场', '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">富丽达风场&nbsp;：三胜风电场<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
-
-                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] + 0.008, y[6] - 0.006), {//pointx + 0.005, pointy - 0.003
-                        innerHtml: '<div style="color: blue; font-size:15px;">富丽达风场</div>'
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
                     }));
-
                 }
+
+                //库伦一期
+                if (periodid == 'KL-YQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                       
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //库伦二期
+                if (periodid == 'KL-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                    
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //红泥井一期
+                if (periodid == 'HNJ-YQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //红泥井二期
+                if (periodid == 'HNJ-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        //                        var pw = power[i] / 10000;
+                        //                        var pwfixNum = new Number(pw + 1).toFixed(5); //四舍五入之前加1  
+                        //                        var pwfixedNum = new Number(pwfixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                        //                        pw = pwfixedNum;
+
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //街基一期
+                if (periodid == 'JJ-YQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        //                        var pw = power[i] / 10000;
+                        //                        var pwfixNum = new Number(pw + 1).toFixed(5); //四舍五入之前加1  
+                        //                        var pwfixedNum = new Number(pwfixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                        //                        pw = pwfixedNum;
+
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //街基二期
+                if (periodid == 'JJ-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        //                        var pw = power[i] / 10000;
+                        //                        var pwfixNum = new Number(pw + 1).toFixed(5); //四舍五入之前加1  
+                        //                        var pwfixedNum = new Number(pwfixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                        //                        pw = pwfixedNum;
+
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //奈曼秦天吉利风电场
+                if (periodid == 'NMQT-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        //                        var pw = power[i] / 10000;
+                        //                        var pwfixNum = new Number(pw + 1).toFixed(5); //四舍五入之前加1  
+                        //                        var pwfixedNum = new Number(pwfixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                        //                        pw = pwfixedNum;
+
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //福建沙浦
+                if (periodid == 'FJSP-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        //                        var pw = power[i] / 10000;
+                        //                        var pwfixNum = new Number(pw + 1).toFixed(5); //四舍五入之前加1  
+                        //                        var pwfixedNum = new Number(pwfixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                        //                        pw = pwfixedNum;
+
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //甘肃玉门
+                if (periodid == 'GSYM-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //甘肃景泰
+                if (periodid == 'GSJT-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //甘肃瓜州
+                if (periodid == 'GSGZ-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //甘肃阿克塞
+                if (periodid == 'GSAKS-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //尚义二工地
+                if (periodid == 'SY-YQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //尚义王悦粱
+                if (periodid == 'SY-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //虎林风场
+                if (periodid == 'HL-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //华富依兰二期
+                if (periodid == 'HFYL-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //渠首风电
+                if (periodid == 'QS-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //七里噶山二期
+                if (periodid == 'QLGS-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //华富穆棱
+                if (periodid == 'HFML-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //仰天湖
+                if (periodid == 'YTH-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //双辽那木斯
+                if (periodid == 'SLNMS-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //大安一期
+                if (periodid == 'DA-YQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //大安二期
+                if (periodid == 'DA-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //江苏灌云
+                if (periodid == 'JSGY-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //铁岭一期
+                if (periodid == 'TL-YQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //铁岭二期
+                if (periodid == 'TL-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //广灵风场一期
+                if (periodid == 'GL-YQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //广灵风场二期
+                if (periodid == 'GL-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //广灵风场三期
+                if (periodid == 'GL-SQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //新疆布尔津
+                if (periodid == 'XJBEJ-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //新疆雪湖
+                if (periodid == 'XJXH-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //小草湖一期
+                if (periodid == 'XCH-YQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //小草湖二期
+                if (periodid == 'XCH-EQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //小草湖三期
+                if (periodid == 'XCH-SQ') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+
+                //舟山长白
+                if (periodid == 'ZSCB-QB') {
+                    //设置地图的中心坐标.
+                    var loc = new GLatLng(x[0], y[0]);
+                    map.setCenter(loc, 15);
+                    for (var i = 0; i < x.length; i++) {
+                        if (Number(state[i]) == -1) {
+                            //正常
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        else if (Number(state[i]) == 0) {
+                            //停机
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+
+                        } else {
+                            //通讯中断
+                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                        }
+                        if (flag[i] == 1) {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                            }));
+                        }
+                        else {
+                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                            }));
+                        }
+                        p += Number(power[i]);
+
+                    }
+                    p = p / 10000;
+                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                    p = fixedNum;
+                    //CreatePointInfo(x[4], y[6], WindIconSYZ(), '玫瑰营一期 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                    CreatePoint(x[4], y[6], WindIconSYZ(), periodName, '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">风场名称&nbsp;：' + periodName + '<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] - 0.000025, y[6] - 0.005 + 0.0013), {//pointx + 0.005, pointy - 0.003
+                        innerHtml: '<div style="color: blue; font-size:15px;">' + periodName + '</div>'
+                    }));
+                }
+                //                //富丽达风场
+                //                if (periodid == 'FLDFDC-QB') {
+                //                    //设置地图的中心坐标.
+                //                    var loc = new GLatLng(x[20], y[20]);
+                //                    map.setCenter(loc, 15);
+                //                    for (var i = 0; i < x.length; i++) {
+
+                //                        if (Number(state[i]) == 4 || Number(state[i]) == 5) {
+                //                            //正常
+                //                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                //                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconYX(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                // 
+                //                        } else if (Number(state[i]) == 1 || Number(state[i]) == 9) {
+                //                            //停机
+                //                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                //                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconTJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                // 
+                //                        } else if (Number(state[i]) == 0 || Number(state[i]) == 3 || Number(state[i]) == 2) {
+                //                            //待机
+                //                            //CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                //                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconDJ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                // 
+                //                        } else {
+                //                            //通讯中断
+                //                            // CreatePointInfo(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' kW', '', '', '', '', '', '', '');
+                //                            CreatePoint(x[i] + 0.00004, y[i] - 0.00009, WindIconGZ(), title[i], '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">机组名称&nbsp;：' + title[i] + '<br>风&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速&nbsp;：' + win[i] + '&nbsp;&nbsp;m/s<br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + power[i] + '&nbsp;kW</div>');
+                // 
+                //                        }
+                //                        if (flag[i] == 1) {
+                //                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                //                                innerHtml: '<div style="color: #FF0000; font-size:15px;"><br /> ' + title[i] + '</div>'
+                //                            }));
+                //                        }
+                //                        else {
+                //                            map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[i], y[i]), {//pointx + 0.005, pointy - 0.003
+                //                                innerHtml: '<div style="color: blue; font-size:15px;"><br />' + title[i] + '</div>'
+                //                            }));
+                //                        }
+                //                        p += Number(power[i]);
+
+                //                    }
+                //                    p = p / 10000;
+                //                    var fixNum = new Number(p + 1).toFixed(5); //四舍五入之前加1  
+                //                    var fixedNum = new Number(fixNum - 1).toFixed(5); //四舍五入之后减1，再四舍五入一下  
+                //                    p = fixedNum;
+
+                //                    // CreatePointInfo(x[4] + 0.009, y[6] - 0.005, WindIconSYZ(), '富丽达风场 功率: ' + p + ' 万kW', '', '', '', '', '', '', '');
+                //                    CreatePoint(x[4] + 0.009, y[6] - 0.005, WindIconSYZ(), '富丽达风场', '<div style="width:200px;height:70px;font-size:16px;color:blue;font-weight:bold;">富丽达风场&nbsp;：三胜风电场<br><br>功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率&nbsp;：' + p + '&nbsp;万kW</div>');
+
+                //                    map.addOverlay(new google.maps.FocusMarker(new GLatLng(x[4] + 0.008, y[6] - 0.006), {//pointx + 0.005, pointy - 0.003
+                //                        innerHtml: '<div style="color: blue; font-size:15px;">富丽达风场</div>'
+                //                    }));
+
+                //                }
 
 
             }, 'json');

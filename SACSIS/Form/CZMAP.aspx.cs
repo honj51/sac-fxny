@@ -51,7 +51,8 @@ namespace SACSIS.Form
             string x = "";
             string y = "";
             string title = "";
-
+            //场站名称
+            string periodName = string.Empty;
             if (dtmap != null && dtmap.Rows.Count > 0)
             {
                 winval = new double[dtmap.Rows.Count];
@@ -61,17 +62,32 @@ namespace SACSIS.Form
                 powerpoint = new string[dtmap.Rows.Count];
                 statepoint = new string[dtmap.Rows.Count];
                 flag = new int[dtmap.Rows.Count];
-
+                if (dtmap.Rows[0]["T_PERIODDESC"] != DBNull.Value)
+                {
+                    string name = dtmap.Rows[0]["T_PERIODDESC"].ToString();
+                    if (name != "全部")
+                    {
+                        periodName = dtmap.Rows[0]["T_PERIODDESC"].ToString();
+                    }
+                    else
+                    {
+                        periodName = dtmap.Rows[0]["T_ORGDESC"] != DBNull.Value ? dtmap.Rows[0]["T_ORGDESC"].ToString() : string.Empty;
+                    }
+                }
+                else
+                {
+                    periodName = dtmap.Rows[0]["T_ORGDESC"] != DBNull.Value ? dtmap.Rows[0]["T_ORGDESC"].ToString() : string.Empty;
+                }
                 for (int i = 0; i < dtmap.Rows.Count; i++)
                 {
                     winpoint[i] = dtmap.Rows[i][2].ToString();
                     powerpoint[i] = dtmap.Rows[i][1].ToString();
                     statepoint[i] = dtmap.Rows[i][3].ToString();
-                    flag[i] = int.Parse(dtmap.Rows[i][6].ToString());
+                    flag[i] =dtmap.Rows[i][6]!=DBNull.Value?int.Parse(dtmap.Rows[i][6].ToString()):0;
 
                     x += dtmap.Rows[i][4] + ",";
                     y += dtmap.Rows[i][5] + ",";
-                    title += "'" + dtmap.Rows[i][0] + "',";
+                    title += dtmap.Rows[i][0] != DBNull.Value ? "'" + dtmap.Rows[i][0] + "'," : "' ',";
                 }
 
                 x = x.TrimEnd(',');
@@ -98,7 +114,8 @@ namespace SACSIS.Form
                 power = powerval,
                 state = stateval,
                 title = title,
-                flag=flag
+                flag=flag,
+                periodName=periodName
             };
 
             string result = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
