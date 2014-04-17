@@ -22,7 +22,7 @@
   <parment id="20000" name="场站监测" pId="8" order="2" visible="1" owner=",1,2," FileName="../Trend/StationMonitor.aspx" />
   <parment id="20000" name="机组总览" pId="8" order="3" visible="1" owner=",1,2," FileName="../yyzl/JZInfo.aspx?dataType=fd" />
   <parment id="9" name="电子地图" pId="8" order="4" visible="1" owner=",1,2," FileName="" />
-  <parment id="60000" name="内蒙古区域" pId="9" order="4" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="60000" name="内蒙古区域" pId="9" order="4" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10002" />
   <parment id="60001" name="玫瑰营一期" pId="60000" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=MGYYQ-YQ" />
   <parment id="60002" name="玫瑰营二期" pId="60000" order="2" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=MGYEQ-EQ" />
   <parment id="60003" name="三胜风场" pId="60000" order="3" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=SDFDC-QB" />
@@ -35,20 +35,20 @@
   <parment id="600010" name="街基一期" pId="60000" order="10" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=JJ-YQ" />
   <parment id="600011" name="街基二期" pId="60000" order="11" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=JJ-EQ" />
   <parment id="600012" name="奈曼秦天" pId="60000" order="12" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=NMQT-QB" />
-  <parment id="600013" name="福建区域" pId="9" order="5" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600013" name="福建区域" pId="9" order="5" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10003" />
   <parment id="600014" name="福建沙浦" pId="600013" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=FJSP-QB" />
-  <parment id="600015" name="甘肃区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600015" name="甘肃区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10004" />
   <parment id="600016" name="甘肃玉门" pId="600015" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=GSYM-QB" />
   <parment id="600017" name="甘肃景泰" pId="600015" order="2" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=GSJT-QB" />
   <parment id="600018" name="甘肃瓜州" pId="600015" order="3" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=GSGZ-QB" />
   <parment id="600019" name="甘肃阿克塞" pId="600015" order="4" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=GSAKS-QB" />
   
 
-  <parment id="600020" name="河北区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600020" name="河北区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10012" />
   <parment id="6000201" name="尚义二工地" pId="600020" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=SY-YQ" />
   <parment id="6000202" name="尚义王悦粱" pId="600020" order="2" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=SY-EQ" />
 
-  <parment id="600021" name="黑龙江区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600021" name="黑龙江区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10005" />
   <parment id="6000211" name="虎林风场" pId="600021" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=HL-QB" />
   <parment id="6000212" name="华富依兰二期" pId="600021" order="2" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=HFYL-EQ" />
   <parment id="6000213" name="渠首风电" pId="600021" order="3" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=QS-QB" />
@@ -56,36 +56,36 @@
   <parment id="6000215" name="华富穆棱" pId="600021" order="5" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=HFML-QB" />
 
 
-  <parment id="600022" name="湖南区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600022" name="湖南区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10013" />
   <parment id="6000221" name="仰天湖" pId="600022" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=YTH-QB" />
 
 
-  <parment id="600023" name="吉林区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600023" name="吉林区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10006" />
   <parment id="6000231" name="双辽那木斯" pId="600023" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=SLNMS-QB" />
   <parment id="6000232" name="大安一期" pId="600023" order="2" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=DA-YQ" />
   <parment id="6000233" name="大安二期" pId="600023" order="3" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=DA-EQ" />
 
 
-  <parment id="600024" name="江苏区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600024" name="江苏区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10007" />
   <parment id="6000241" name="江苏灌云" pId="600024" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=JSGY-QB" />
 
-  <parment id="600025" name="辽宁区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600025" name="辽宁区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10008" />
   <parment id="6000251" name="铁岭一期" pId="600025" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=TL-YQ" />
   <parment id="6000252" name="铁岭二期" pId="600025" order="2" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=TL-EQ" />
 
-  <parment id="600026" name="山西区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600026" name="山西区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10009" />
   <parment id="6000261" name="广灵风场一期" pId="600026" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=GL-YQ" />
   <parment id="6000262" name="广灵风场二期" pId="600026" order="2" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=GL-EQ" />
   <parment id="6000263" name="广灵风场三期" pId="600026" order="3" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=GL-SQ" />
 
-  <parment id="600027" name="新疆区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600027" name="新疆区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10010" />
   <parment id="6000271" name="新疆布尔津" pId="600027" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=XJBEJ-QB" />
   <parment id="6000272" name="新疆雪湖" pId="600027" order="2" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=XJXH-QB" />
   <parment id="6000273" name="小草湖一期" pId="600027" order="3" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=XCH-YQ" />
   <parment id="6000274" name="小草湖二期" pId="600027" order="4" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=XCH-EQ" />
   <parment id="6000275" name="小草湖三期" pId="600027" order="5" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=XCH-SQ" />
 
-  <parment id="600028" name="浙江区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx" />
+  <parment id="600028" name="浙江区域" pId="9" order="6" visible="1" owner=",1,2," FileName="../Form/Map.aspx?ID=10011" />
   <parment id="6000281" name="舟山长白" pId="600028" order="1" visible="1" owner=",1,2," FileName="../Form/CZMAP.aspx?ID=ZSCB-QB" />
 
 

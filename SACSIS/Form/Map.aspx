@@ -145,9 +145,14 @@
 
             $.post("Map.aspx", { param: 'Init' }, function (data) {
 
-                var cenx = 41.1502870; // site[1];
-                var ceny = 113.3205070; // site[0];
+                var x = eval(data.x);
+                var y = eval(data.y);
+                var title = eval(data.title);
+                var win = eval(data.win);
+                var power = eval(data.power);
 
+                var cenx = x[0]; // site[1];
+                var ceny = y[0]; // site[0];
                 //检查浏览器的兼容性.
                 if (GBrowserIsCompatible()) {
                     map = new GMap2(document.getElementById("map_canvas"));
@@ -164,11 +169,6 @@
                     map.addControl(new GNavLabelControl(), topLeft);
                 }
 
-                var x = eval(data.x);
-                var y = eval(data.y);
-                var title = eval(data.title);
-                var win = eval(data.win);
-                var power = eval(data.power);
 
                 for (var i = 0; i < x.length; i++) {
                     // CreatePointInfo(x[i], y[i], WindIconSYZ(), title[i] + '   风速: ' + win[i] + 'm/s    功率: ' + power[i] + ' 万kW', '', '', '', '', '', '', '');

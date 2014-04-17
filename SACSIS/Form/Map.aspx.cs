@@ -15,22 +15,29 @@ namespace SACSIS.Form
         private FormBLL fbll = new FormBLL();
         private string type = "", param = "";
         private static DataTable dt = new DataTable();
+        //map.xml中区域ID
+       
+
         protected void Page_Load(object sender, EventArgs e)
         {
             param = Request["param"];
+            if (Request.QueryString["ID"] != null)
+            {
+                Session["ID"] = Request.QueryString["ID"];
+            }
             if (param != "")
             {
                 if (param == "Init")
                 {
-                    GetTreeList("风电");
+                    GetTreeList("风电",Session["ID"].ToString());
                 }
-
             }
+           
         }
 
 
         string PTreeNodes = "";
-        private void GetTreeList(string type)
+        private void GetTreeList(string type,string areaId)
         {
             dt = new DataTable();
             GetTreeList();
@@ -39,7 +46,7 @@ namespace SACSIS.Form
             string title = "";
             string id = "";
 
-            DataRow[] dr = dt.Select("TYPE='" + type + "'");
+            DataRow[] dr = dt.Select("TYPE='" + type + "' and PID='"+areaId+"'");
 
             for (int i = 0; i < dr.Length; i++)
             {

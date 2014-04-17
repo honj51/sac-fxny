@@ -1,9 +1,75 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <rquuest>
   <parment id="10001" name="福新公司" pId="0" fullname="总公司" type="风电" x="" y=""/>
-  <parment id="10002" name="玫瑰营公司" pId="10001" fullname="玫瑰营公司" type="风电"  x="" y=""/>
-  <parment id="MGYYQ-YQ" name="玫瑰营一期" pId="10002" fullname="玫瑰营公司"  type="风电" x="41.046213888889" y="113.39663333333"/>
-  <parment id="MGYEQ-EQ" name="玫瑰营二期" pId="10002" fullname="玫瑰营公司"  type="风电" x="41.046213888889" y="113.47663333333"/>
-  <parment id="SDFDC-QB" name="三胜风场" pId="10002" fullname="玫瑰营公司"  type="风电" x="41.5812" y="113.5943"/>
-  <parment id="FLDFDC-QB" name="富丽达风场" pId="10002" fullname="玫瑰营公司"  type="风电" x="41.1618020" y="113.3210650"/>
+  <parment id="10002" name="内蒙区域" pId="10001" fullname="内蒙区域" type="风电"  x="" y=""/>
+  <parment id="MGYYQ-YQ" name="玫瑰营一期" pId="10002" fullname="内蒙区域"  type="风电" x="41.046213888889" y="113.39663333333"/>
+  <parment id="MGYEQ-EQ" name="玫瑰营二期" pId="10002" fullname="内蒙区域"  type="风电" x="41.046213888889" y="113.47663333333"/>
+  <parment id="SDFDC-QB" name="三胜风场" pId="10002" fullname="内蒙区域"  type="风电" x="41.5812" y="113.5943"/>
+  <parment id="FLDFDC-QB" name="富丽达风场" pId="10002" fullname="内蒙区域"  type="风电" x="41.1618020" y="113.3210650"/>
+  <parment id="HTXL-QB" name="辉腾锡勒风场" pId="10002"   fullname="内蒙区域"  type="风电" x="41.156565" y="112.536811"/>
+  <parment id="KL-YQ" name="库伦一期风场" pId="10002"     fullname="内蒙区域"  type="风电" x="41.713546" y="112.636127"/>
+  <parment id="KL-EQ" name="库伦二期风场" pId="10002"     fullname="内蒙区域"  type="风电" x="41.712793" y="112.552936"/>
+  <parment id="HNJ-YQ" name="红泥井风场一期" pId="10002"  fullname="内蒙区域"  type="风电" x="41.446828" y="109.749016"  />
+  <parment id="HNJ-EQ" name="红泥井风场二期" pId="10002"  fullname="内蒙区域"  type="风电" x="41.45452778" y="109.8094167"  />
+  <parment id="JJ-YQ" name="街基一期" pId="10002"        fullname="内蒙区域"  type="风电" x="43.93869555" y="121.4504405" />
+  <parment id="JJ-EQ" name="街基二期" pId="10002"        fullname="内蒙区域"  type="风电" x="43.983201" y="121.491305"  />
+  <parment id="NMQT-QB" name="奈曼秦天" pId="10002"      fullname="内蒙区域"  type="风电" x="42.83133556" y="120.9373611"    />
+
+
+  <parment id="10003" name="福建区域" pId="10001" fullname="福建区域" type="风电"  x="25.39104814" y="119.5256235"/>
+  <parment id="FJSP-QB" name="福建沙浦" pId="10003"  fullname="福建区域"  type="风电" x="25.39104814" y="119.5256235" />
+  <parment id="10004" name="甘肃区域"  pId="10001" fullname="甘肃区域" type="风电"  x="40.05334" y="96.919606" />
+  <parment id="GSYM-QB" name="甘肃玉门" pId="10004"  fullname="甘肃区域"  type="风电" x="40.05334" y="96.919606"  />
+  <parment id="GSJT-QB" name="甘肃景泰" pId="10004"  fullname="甘肃区域"  type="风电" x="37.04638889" y="104.0763889"  />
+  <parment id="GSGZ-QB" name="甘肃瓜州" pId="10004"  fullname="甘肃区域"  type="风电" x="40.626392" y="95.407964"  />
+  <parment id="GSAKS-QB" name="甘肃阿克塞" pId="10004"  fullname="甘肃区域"  type="风电" x="39.222612" y="94.253297"  />
+
+
+
+  <parment id="10012" name="河北区域" pId="10001" fullname="河北区域" type="风电"  x="41.47782222" y="113.9912556" />
+  <parment id="SY-YQ" name="尚义二工地" pId="10012"  fullname="河北区域"  type="风电" x="41.47782222" y="113.9912556"   />
+  <parment id="SY-EQ" name="尚义王悦粱" pId="10012"  fullname="河北区域"  type="风电" x="41.286998" y="114.155953"   />
+
+  <parment id="10005" name="黑龙江区域" pId="10001" fullname="黑龙江区域" type="风电"  x="" y="" />
+  <parment id="HL-QB" name="虎林风场" pId="10005"  fullname="黑龙江区域" type="风电"  x="45.798155" y="132.995231" />
+  <parment id="HFYL-EQ" name="华富依兰二期" pId="10005"  fullname="黑龙江区域" type="风电"  x="46.267229" y="129.76711" />
+  <parment id="QS-QB" name="渠首风电" pId="10005"  fullname="黑龙江区域" type="风电"  x="46.43164236" y="129.4053836"/>
+  <parment id="QLGS-EQ" name="七里噶山二期" pId="10005"  fullname="黑龙江区域" type="风电"  x="45.859532" y="131.366444" />
+  <parment id="HFML-QB" name="华富穆棱" pId="10005"  fullname="黑龙江区域" type="风电"  x="44.69303" y="130.8684" />
+
+
+  <parment id="10013" name="湖南区域" pId="10001" fullname="湖南区域" type="风电"  x="" y=""/>
+  <parment id="YTH-QB" name="仰天湖" pId="10013"  fullname="湖南区域" type="风电"  x="25.50986388" y="112.8429417" />
+
+
+  <parment id="10006" name="吉林区域" pId="10001" fullname="吉林区域" type="风电"  x="" y="" />
+  <parment id="SLNMS-QB" name="双辽那木斯" pId="10006" fullname="吉林区域" type="风电"  x="43.430272" y="123.42611" />
+  <parment id="DA-YQ" name="大安一期" pId="10006" fullname="吉林区域" type="风电"  x="45.25572222" y="123.4347778"  />
+  <parment id="DA-EQ" name="大安二期" pId="10006" fullname="吉林区域" type="风电"  x="45.34383333" y="123.4612778"  />
+
+
+  <parment id="10007" name="江苏区域" pId="10001" fullname="江苏区域" type="风电"  x="" y="" />
+  <parment id="JSGY-QB" name="江苏灌云" pId="10007" fullname="江苏区域" type="风电"  x="34.518213" y="119.668332"  />
+
+  <parment id="10008" name="辽宁区域" pId="10001" fullname="辽宁区域" type="风电"  x="" y="" />
+  <parment id="TL-YQ" name="铁岭一期" pId="10008" fullname="辽宁区域" type="风电"  x="42.355658" y="123.833234"  />
+  <parment id="TL-EQ" name="铁岭二期" pId="10008" fullname="辽宁区域" type="风电"  x="42.412479" y="123.858318"  />
+
+  <parment id="10009" name="山西区域" pId="10001" fullname="山西区域" type="风电"  x="" y="" />
+  <parment id="GL-YQ" name="广灵风场一期" pId="10009"  fullname="山西区域" type="风电"  x="39.82907698" y="113.9199943"  />
+  <parment id="GL-EQ" name="广灵风场二期" pId="10009"  fullname="山西区域" type="风电"  x="39.84069306" y="113.8840435"  />
+  <parment id="GL-SQ" name="广灵风场三期" pId="10009"  fullname="山西区域" type="风电"  x="39.83883436" y="113.9711238"  />
+
+  <parment id="10010" name="新疆区域" pId="10001" fullname="新疆区域" type="风电"  x="" y=""/>
+  <parment id="XJBEJ-QB" name="新疆布尔津" pId="10010"  fullname="新疆区域" type="风电"  x="47.605856" y="86.942408" />
+  <parment id="XJXH-QB" name="新疆雪湖" pId="10010"   fullname="新疆区域" type="风电"  x="43.55024167" y="87.96149361" />
+  <parment id="XCH-YQ" name="小草湖一期" pId="10010"  fullname="新疆区域" type="风电"  x="43.08602778" y="88.71591667" />
+  <parment id="XCH-EQ" name="小草湖二期" pId="10010"  fullname="新疆区域" type="风电"  x="43.05402778" y="88.71822222" />
+  <parment id="XCH-SQ" name="小草湖三期" pId="10010"  fullname="新疆区域" type="风电"  x="" y="" />
+
+  <parment id="10011" name="浙江区域" pId="10001" fullname="浙江区域" type="风电"  x="" y=""/>
+  <parment id="ZSCB-QB" name="舟山长白" pId="10011" fullname="浙江区域" type="风电"  x="30.191134" y="122.051639"  />
+
+     
+
 </rquuest>
