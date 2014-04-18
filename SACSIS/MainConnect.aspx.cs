@@ -90,7 +90,7 @@ namespace WebApplication2
             for (int i = 0; i <= span; i++)
             {
                 doubleList = bm.GetPointVal(points, stime.AddHours(i * 0.5).ToString("yyyy-MM-dd HH:mm:00"));
-                double tmp = doubleList.Where(v => v > 0 & v < 3000).Sum();//3000代表风机的最大功率kw
+                double tmp = doubleList.Where(v => v > 0 & v < 2000).Sum();//2000代表风机的最大功率kw
                 value += tmp;
                 chartLists.Add(tmp);
 
