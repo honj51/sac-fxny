@@ -141,10 +141,11 @@ namespace SACSIS
                         }
                         else
                         {
-                            sql = "select * from ADMINISTRATOR.T_INFO_UNIT " + dataType + " and T_AREA='" + dtArea.Rows[a][0].ToString() + "' and PERIOD_NAME='" + dtNamesa.Rows[jj][0].ToString() + "' and UNIT_FACTORY IS NULL order by INT(UNIT_ID)";
+                            sql = "select * from ADMINISTRATOR.T_INFO_UNIT " + dataType + " and T_AREA='" + dtArea.Rows[a][0].ToString() + "' and PERIOD_NAME='" + dtNamesa.Rows[jj][0].ToString() + "' and UNIT_FACTORY IS NULL ";//order by INT(UNIT_ID)";
 
                         }
-                        DataTable dtType = dl.RunDataTable(sql, out errMsg);
+                        DataTable dtType = new DataTable();
+                        dtType = dl.RunDataTable(sql, out errMsg);
 
                         areaRows += (Math.Ceiling((double)dtType.Rows.Count / double.Parse(colrow.ToString()))) * 2;
                     }
@@ -177,7 +178,7 @@ namespace SACSIS
                         }
                         else
                         {
-                            sql = "select * from ADMINISTRATOR.T_INFO_UNIT " + dataType + " and T_AREA='" + dtArea.Rows[a][0].ToString() + "' and PERIOD_NAME='" + dtNames.Rows[jj][0].ToString() + "' and UNIT_FACTORY IS NULL order by INT(UNIT_ID)";
+                            sql = "select * from ADMINISTRATOR.T_INFO_UNIT " + dataType + " and T_AREA='" + dtArea.Rows[a][0].ToString() + "' and PERIOD_NAME='" + dtNames.Rows[jj][0].ToString() + "' and UNIT_FACTORY IS NULL ";// order by INT(UNIT_ID)";
 
                         }
                         DataTable dtType = dl.RunDataTable(sql, out errMsg);
